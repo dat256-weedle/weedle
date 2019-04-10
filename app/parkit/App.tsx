@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import data from "./assets/temp.json";
 import { IParkingSpot } from "./types/ParkingSpots.js";
+import BookingButton from "./common/BookingButton";
 
 export default class App extends React.Component {
     constructor(props: any) {
@@ -13,7 +14,7 @@ export default class App extends React.Component {
     public render() {
         return (
             <View style={styles.container}>
-                <Text>Open up App.tsx to start working on your app!</Text>
+                <BookingButton id={3}></BookingButton>
             </View>
         );
     }
