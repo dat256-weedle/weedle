@@ -1,0 +1,16 @@
+node_modules
+.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+.vscode
+
+
+
+#I have no idea if this should be ignored
+.expo
+.watchmanconfig
+#OSX
+.DS_Store
