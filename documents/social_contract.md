@@ -17,6 +17,12 @@ The communication in the group is done through Slack and through the meetings of
 
 All turn-ins (Group and individual) is turned in on Thursdays. The SCRUM master will make sure that the members have turned in their parts.
 
+## Workload
+
+We respect that the group members should only work 20 hours per week, and we won't
+force people to work on weekends to get done with an unfinished user story. All course
+activities counts, including meetings, lectures and lecture feedback.
+
 ## Group structure
 
 The group has a SCRUM master / group leader and a secretary.
@@ -37,7 +43,7 @@ At least 5 members of the group need to be present in order to make a group deci
 
 ## Personal- and group-conflicts
 
-If a personal conflict arises it should be resolved by the involved parties if possible. If the conflict is a problem for the group it will be resolved with the whole group.
+If a personal conflict arises it should be resolved by the involved parties if possible. If the conflict is a problem for the group it will be resolved with the group where at least 5 people participate, including the involved persons.
 
 ## Daily Scrum
 
@@ -64,4 +70,8 @@ Language library: React Native
 
 ## Roles
 
-- The group decided to make **Pontus Lindblom** the SCRUM master and **Oscar Östberg** the secretary.
+The group decided to make **Pontus Lindblom** the SCRUM master and **Oscar Östberg** the secretary.
+
+## How the social contract is changed
+
+The person who bring up a change to the social contract is responsible to implement it into the contract, as long as the group agree.
