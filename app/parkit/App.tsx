@@ -1,28 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import List from "./use-cases/main/list/List";
 import data from "./assets/temp.json";
-
-export interface IPosition {
-  longitude: Number;
-  latitude: Number;
-}
-
-export class ParkingSpot {
-  position?: IPosition;
-  name?: String;
-  distance?: Number;
-  city?: String;
-  owner?: String;
-}
-
-export interface IParkingSpot {
-  position: IPosition;
-  name: String;
-  distance: Number;
-  city: String;
-  owner: String;
-}
+import { IParkingSpot } from "./types/ParkingSpots.js";
 
 export default class App extends React.Component {
   constructor(props: any) {
