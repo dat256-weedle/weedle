@@ -8,6 +8,7 @@ interface IState {
 
 }
 
+@observer  
 export default class BookingButton extends React.Component<IProps, IState> {
 
     constructor(props: IProps) {
