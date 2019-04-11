@@ -12,7 +12,7 @@ interface IState {
 }
 
 @observer  
-@inject('Store')
+@inject('store')
 export default class BookingButton extends React.Component<IProps, IState> {
 
     constructor(props: IProps) {

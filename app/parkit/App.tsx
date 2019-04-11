@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import data from "./assets/temp.json";
-import { IParkingSpot } from "./types/ParkingSpots";
+import { IParkingSpot } from "./types/ParkingSpots.js";
 import BookingButton from "./common/BookingButton";
-import { Store, store } from './Store';
-import { InjectionProvider } from './utils/InjectionProvider';
+import { Provider } from 'mobx-react';
+import { Store } from './Store';
 
 export default class App extends React.Component {
 
@@ -18,9 +18,11 @@ export default class App extends React.Component {
 
     public render() {
         return (
-            <InjectionProvider Store ={store}>
+            <Provider store={this.store}>
+                <View style={styles.container}>
                     <BookingButton id={3}></BookingButton>
-            </InjectionProvider>
+                </View>
+            </Provider>
         );
     }
 }
