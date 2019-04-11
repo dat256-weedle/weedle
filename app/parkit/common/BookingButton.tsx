@@ -1,14 +1,18 @@
 import React from "react";
-import {Text, Button} from "react-native";
+import {Text, Button, View} from "react-native";
+import {Store} from "../Store"
+import { inject, observer } from 'mobx-react';
 
 interface IProps {
     id: number;
+    store?: Store;
 }
 interface IState {
-
+    store: Store;
 }
 
 @observer  
+@inject('Store')
 export default class BookingButton extends React.Component<IProps, IState> {
 
     constructor(props: IProps) {
@@ -16,11 +20,13 @@ export default class BookingButton extends React.Component<IProps, IState> {
     };
 
     public render() {
-        return (<Button title="Book" onPress={this.onPress}><Text>Rent</Text></Button>)
-    };
+        return (
+            <View>
+                <Button title="Book" onPress={this.onPress}><Text>Rent</Text></Button>
+            </View>
+        )};
 
-    onPress(){
-
+    private onPress(){
     }
 
 }
