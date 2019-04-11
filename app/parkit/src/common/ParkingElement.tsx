@@ -24,13 +24,23 @@ export default class ParkingElement extends React.Component<IProps> {
     public render() {
         const { distance, price, id } = this.props;
         return (<View style={{ backgroundColor: "skyblue", flex: 1, flexDirection: "row", maxHeight: 50 }}>
-            {RowItem(<Text>Distance: {distance}</Text>)}
-            {RowItem(<Text>Price:{price}</Text>)}
-            {RowItem(<Text>ID: {id}</Text>)}
-            {RowItem(<Image source={require("../../assets/carpark.png")} style={{ maxHeight: 50, maxWidth: 50 }} />)}
+            {RowItem(<Image source={require("../../assets/carpark.png")} style={{ maxHeight: 40, maxWidth: 40, marginLeft: 15}} />)}
+            {RowItem(<Text style={{marginTop: 15, fontWeight: 'bold'}}>ID: {id} </Text>)} 
+            {RowItem(<Text style={{marginTop: 15, fontWeight: 'bold'}}>Distance: {distance} km</Text>)}
+            {RowItem(<Text style={{marginTop: 15, fontWeight: 'bold'}}>Price: {price} kr/h</Text>)}
         </View>);
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 /*                 {distance ?
                     }
