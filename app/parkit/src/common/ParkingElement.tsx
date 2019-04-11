@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 interface IProps {
     distance: number;
@@ -23,24 +22,18 @@ export default class ParkingElement extends React.Component<IProps> {
 
     public render() {
         const { distance, price, id } = this.props;
+        const style = StyleSheet.create({
+            Image: { maxHeight: 40, maxWidth: 40, marginLeft: 15},
+            TextStyle: {marginTop: 15, fontWeight: "bold"},
+        });
         return (<View style={{ backgroundColor: "skyblue", flex: 1, flexDirection: "row", maxHeight: 50 }}>
-            {RowItem(<Image source={require("../../assets/carpark.png")} style={{ maxHeight: 40, maxWidth: 40, marginLeft: 15}} />)}
-            {RowItem(<Text style={{marginTop: 15, fontWeight: 'bold'}}>ID: {id} </Text>)} 
-            {RowItem(<Text style={{marginTop: 15, fontWeight: 'bold'}}>Distance: {distance} km</Text>)}
-            {RowItem(<Text style={{marginTop: 15, fontWeight: 'bold'}}>Price: {price} kr/h</Text>)}
+            {RowItem(<Image source={require("../../assets/carpark.png")} style={style.Image} />)}
+            {RowItem(<Text style={style.TextStyle}>ID: {id} </Text>)}
+            {RowItem(<Text style={style.TextStyle}>Distance: {distance} km</Text>)}
+            {RowItem(<Text style={style.TextStyle}>Price: {price} kr/h</Text>)}
         </View>);
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 /*                 {distance ?
                     }
