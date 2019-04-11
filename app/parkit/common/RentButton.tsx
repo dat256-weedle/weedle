@@ -2,6 +2,7 @@ import React from "react";
 import {Button, View} from "react-native";
 import {Store, store} from "../Store"
 import { inject, observer } from 'mobx-react';
+import { number } from 'prop-types';
 
 /**
  * id: id of the parking spot
@@ -25,7 +26,7 @@ export default class RentButton extends React.Component<IProps, {}> {
 
     public render() {
         //If the parkingspot is not rented return a 'rent' button
-        if (store.bookedParkingSpots.find((item) => {return(item == this.props.id)}) == undefined) {
+        if (store.bookedParkingSpots.find((item: Number) => {return(item == this.props.id)}) == undefined) {
             return (
                 <View>
                     <Button title="Rent" onPress={this.rent}/>
