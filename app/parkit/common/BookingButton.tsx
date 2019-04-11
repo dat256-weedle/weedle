@@ -1,6 +1,6 @@
 import React from "react";
 import {Text, Button, View} from "react-native";
-import {Store} from "../Store"
+import {Store, store} from "../Store"
 import { inject, observer } from 'mobx-react';
 
 interface IProps {
@@ -11,22 +11,41 @@ interface IState {
     store: Store;
 }
 
-@observer  
 @inject('store')
+@observer  
 export default class BookingButton extends React.Component<IProps, IState> {
 
     constructor(props: IProps) {
         super(props);
+        console.log('test')
     };
 
     public render() {
-        return (
-            <View>
-                <Button title="Book" onPress={this.onPress}><Text>Rent</Text></Button>
-            </View>
-        )};
+        if (store.bookedParkingSpots.find((item) => {return(item == this.props.id)}) == undefined) {
+            console.log(store.bookedParkingSpots.find((item) => {return(item == this.props.id)}));
+            return (
+                <View>
+                    <Button title="Book" onPress={this.book}></Button>
+                </View>
+            )
+        }
+        else {
+            return (
+                <View>
+                    <Button title="Unbook" onPress={this.unBook}></Button>
+                </View>
+            )
 
-    private onPress(){
+        }
+    };
+
+    private book = () =>{
+        store.bookParkingSpot(this.props.id);
+        console.log(store.bookedParkingSpots);        
     }
 
+    private unBook = () =>{
+        store.unBookParkingSpot(this.props.id);
+        console.log(store.bookedParkingSpots);        
+    }
 }

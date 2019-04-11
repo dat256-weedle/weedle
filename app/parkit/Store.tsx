@@ -1,8 +1,6 @@
 import { observable, action } from "mobx"
+import { IParkingSpot } from './types/ParkingSpots'
 
-interface IParkingSpot {
-    id: number; 
-}
 
 export class Store {
 
@@ -11,16 +9,16 @@ export class Store {
     }
 
     @observable 
-    public bookedParkingSpots: IParkingSpot[] = new Array();
+    public bookedParkingSpots: Number[] = new Array();
 
     @action
-    public bookParkingSpot (parkingSpot: IParkingSpot) {
+    public bookParkingSpot (parkingSpot: Number) {
         this.bookedParkingSpots.push(parkingSpot)
     }
 
     @action
-    public unBookParkingSpot (parkingSpot: IParkingSpot) {
-        this.bookedParkingSpots.filter((item) => {return (parkingSpot != item)})
+    public unBookParkingSpot (parkingSpot: Number) {
+        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => {return (parkingSpot !== item)})
     }
 }
 export const store = new Store()

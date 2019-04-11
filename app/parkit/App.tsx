@@ -14,6 +14,8 @@ export default class App extends React.Component {
         super(props);
         this.store = new Store();
         let spots = data.parkingspots as Array<IParkingSpot>;
+
+        console.log(this.store);
     }
 
     public render() {
