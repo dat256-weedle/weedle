@@ -1,21 +1,18 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, ViewProps } from "react-native";
 
-interface IProps {
+interface IProps extends ViewProps {
     distance: number;
-    address?: string;
     price: number;
-    rules?: string;
-    provider?: string;
-    image?: string;
     id: string;
 }
 
-const RowItem = (props: any) => {
-    return (<View style={{ flexGrow: 1 }}>{props}</View>);
+const RowItem = (element: React.ReactElement) => {
+    return (<View style={{ flexGrow: 1 }}>{element}</View>);
 };
 
 export default class ParkingElement extends React.Component<IProps> {
+
     constructor(props: IProps) {
         super(props);
     }
