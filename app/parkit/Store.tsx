@@ -14,18 +14,26 @@ export class Store {
     /**
      * Adds a parking spot to the bookedParkingSpots list
      * @param parkingSpot The parking spot to rent
+     * @throws If parking spot with the same id is already booked by user
      */
     @action
     public bookParkingSpot (parkingSpot: Number) {
-        this.bookedParkingSpots.push(parkingSpot)
+        if (this.bookedParkingSpots.includes(parkingSpot)) {
+            throw "Parking spot already booked";
+        }
+        this.bookedParkingSpots.push(parkingSpot);
     }
 
     /**
-     * Removes a parking spot from the bookedParkingsPots list
+     * Removes a parking spot from the bookedParkingsPots list.
      * @param parkingSpot The parking spot to finish renting
+     * @throws If the parking spot is not already booked
      */
     @action
     public unBookParkingSpot (parkingSpot: Number) {
-        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => {return (parkingSpot !== item)})
+        if (!this.bookedParkingSpots.includes(parkingSpot)) {
+            throw "Parking spot is not booked"
+        }
+        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => {return (parkingSpot !== item)});
     }
 }

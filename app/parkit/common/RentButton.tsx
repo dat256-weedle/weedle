@@ -1,12 +1,12 @@
 import React from "react";
 import {Button, View} from "react-native";
-import {Store, store} from "../Store"
+import {Store} from "../Store"
 import { inject, observer } from 'mobx-react';
 import { number } from 'prop-types';
 
 /**
  * id: id of the parking spot
- * store: the store
+ * store: the store, injected with @inject
  */
 interface IProps {
     id: number;
@@ -14,19 +14,23 @@ interface IProps {
 }
 
 /**
- * Button for renting a parking spot
+ * Button for renting a parking spot.
+ * Text will change between 'Rent' and 'Finish' based on if the parking spot with id = props.id is rented or not.
  */
 @inject('store')
 @observer  
 export default class RentButton extends React.Component<IProps, {}> {
 
+    private store : Store;
+
     constructor(props: IProps) {
         super(props);
+        this.store = this.props.store!; // Since store is injected it should never be undefined
     };
 
     public render() {
         //If the parkingspot is not rented return a 'rent' button
-        if (store.bookedParkingSpots.find((item: Number) => {return(item == this.props.id)}) == undefined) {
+        if (this.store.bookedParkingSpots.find((item: Number) => {return(item == this.props.id)}) == undefined) {
             return (
                 <View>
                     <Button title="Rent" onPress={this.rent}/>
@@ -45,13 +49,16 @@ export default class RentButton extends React.Component<IProps, {}> {
     };
 
     /**
-     * 
+     * Push parking spot to store
      */
     private rent = () =>{
-        store.bookParkingSpot(this.props.id);
+        this.store.bookParkingSpot(this.props.id);
     }
 
+    /**
+     * Remove the parking spot from store
+     */
     private finish = () =>{
-        store.unBookParkingSpot(this.props.id);
+        this.store.unBookParkingSpot(this.props.id);
     }
 }
