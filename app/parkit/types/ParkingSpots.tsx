@@ -1,12 +1,12 @@
 export interface IPosition {
-    longitude: Number;
-    latitude: Number;
+    longitude: number;
+    latitude: number;
 }
 
 export interface IParkingSpot {
     position: IPosition;
-    name: String;
-    distance: Number;
-    city: String;
-    owner: String;
+    name: string;
+    distance: number;
+    city: string;
+    owner: string;
 }

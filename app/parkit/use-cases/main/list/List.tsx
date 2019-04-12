@@ -3,7 +3,6 @@ import { View } from "react-native";
 import { IParkingSpot } from "../../../types/ParkingSpots";
 import ParkingElement from '../../../src/common/ParkingElement';
 
-
 interface IProps {
     array: Array<IParkingSpot>
 }
@@ -20,13 +19,13 @@ export default class List extends React.Component<IProps> {
             {
                 array.map((parkingspot, index) => (
                     <ParkingElement key={index}
-                    distance={2}
-                    address="guld 2"
-                    price={20}
+                    distance={parkingspot.distance}
+                    address={"" + parkingspot.position.longitude + ", " + parkingspot.position.latitude}
+                    price={0}
                     rules="max 2h"
-                    provider="gbg park"
+                    provider={parkingspot.owner}
                     image="any src"
-                    id="PA5252"
+                    id={"" + index}
                 />
                 ))
             }
