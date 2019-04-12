@@ -1,15 +1,15 @@
 import React from "react";
-import {Button, View} from "react-native";
+import {Button} from "react-native-material-ui";
 import {Store} from "../Store"
 import { inject, observer } from 'mobx-react';
-import { number } from 'prop-types';
+import { View } from 'react-native';
 
 /**
  * id: id of the parking spot
  * store: the store, injected with @inject
  */
 interface IProps {
-    id: number;
+    id: Number;
     store?: Store;
 }
 
@@ -29,19 +29,19 @@ export default class RentButton extends React.Component<IProps, {}> {
     };
 
     public render() {
-        //If the parkingspot is not rented return a 'rent' button
+        //if the parking spot is not rented return a 'rent' button
         if (this.store.bookedParkingSpots.find((item: Number) => {return(item == this.props.id)}) == undefined) {
             return (
                 <View>
-                    <Button title="Rent" onPress={this.rent}/>
+                    <Button text="Rent" onPress={this.rent}/>
                 </View>
             )
         }
-        //Else return a 'finish renting' button
+        //else return a 'finish renting' button
         else {
             return (
                 <View>
-                    <Button title="Finish" onPress={this.finish}/>
+                    <Button text="Finish" onPress={this.finish}/>
                 </View>
             )
 
