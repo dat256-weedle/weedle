@@ -27,12 +27,12 @@ export default class ParkingElement extends React.Component<IProps> {
             TextStyle: { marginTop: 15, fontWeight: "bold" },
         });
         return (<View style={{
+            borderBottomWidth: 1,
+            borderColor: "gray",
+            borderStyle: "solid",
             flex: 1,
             flexDirection: "row",
             maxHeight: 50,
-            borderStyle: "solid",
-            borderColor: "gray",
-            borderBottomWidth: 1,
         }} >
             {RowItem(<Image source={require("../../assets/carpark.png")} style={style.Image} />)}
             {RowItem(<Text style={style.TextStyle}>ID: {id} </Text>)}

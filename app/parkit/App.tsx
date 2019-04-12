@@ -5,12 +5,12 @@ import { IParkingSpot } from "./types/ParkingSpots.js";
 import List from "./use-cases/main/list/List";
 
 export default class App extends React.Component {
-    private spots: Array<IParkingSpot>;
+    private spots: IParkingSpot[];
 
     constructor(props: any) {
         super(props);
 
-        this.spots = data.parkingspots as Array<IParkingSpot>;
+        this.spots = data.parkingspots as IParkingSpot[];
     }
 
     public render() {
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#fff",
         flex: 1,
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 });

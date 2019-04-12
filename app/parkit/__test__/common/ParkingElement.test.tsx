@@ -1,6 +1,6 @@
 import { render } from "enzyme";
 import React from "react";
-import ParkingElement from '../../src/common/ParkingElement';
+import ParkingElement from "../../src/common/ParkingElement";
 
 it("Should render correctly", () => {
     const app = render(<ParkingElement distance={10} price={20} id={"id"}/>);
