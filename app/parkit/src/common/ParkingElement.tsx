@@ -3,11 +3,11 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 interface IProps {
     distance: number;
-    address: string;
+    address?: string;
     price: number;
-    rules: string;
-    provider: string;
-    image: string;
+    rules?: string;
+    provider?: string;
+    image?: string;
     id: string;
 }
 
@@ -23,15 +23,22 @@ export default class ParkingElement extends React.Component<IProps> {
     public render() {
         const { distance, price, id } = this.props;
         const style = StyleSheet.create({
-            Image: { maxHeight: 40, maxWidth: 40, marginLeft: 15},
-            TextStyle: {marginTop: 15, fontWeight: "bold"},
+            Image: { maxHeight: 40, maxWidth: 40, marginLeft: 15 },
+            TextStyle: { marginTop: 15, fontWeight: "bold" },
         });
-        return (<View style={{ backgroundColor: "skyblue", flex: 1, flexDirection: "row", maxHeight: 50 }}>
+        return (<View style={{
+            flex: 1,
+            flexDirection: "row",
+            maxHeight: 50,
+            borderStyle: "solid",
+            borderColor: "gray",
+            borderBottomWidth: 1,
+        }} >
             {RowItem(<Image source={require("../../assets/carpark.png")} style={style.Image} />)}
             {RowItem(<Text style={style.TextStyle}>ID: {id} </Text>)}
             {RowItem(<Text style={style.TextStyle}>Distance: {distance} km</Text>)}
             {RowItem(<Text style={style.TextStyle}>Price: {price} kr/h</Text>)}
-        </View>);
+        </View >);
     }
 }
 
