@@ -1,10 +1,10 @@
+import { Provider } from "mobx-react";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import data from "./assets/temp.json";
-import { IParkingSpot } from "./types/ParkingSpots.js";
 import RentButton from "./common/RentButton";
-import { Provider } from 'mobx-react';
-import { Store } from './Store';
+import { Store } from "./Store";
+import { IParkingSpot } from "./types/ParkingSpots.js";
 
 export default class App extends React.Component {
 
@@ -13,7 +13,7 @@ export default class App extends React.Component {
     constructor(props: any) {
         super(props);
         this.store = new Store();
-        let spots = data.parkingspots as Array<IParkingSpot>;
+        const spots = data.parkingspots as IParkingSpot[];
 
         console.log(this.store);
     }
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#fff",
         flex: 1,
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 });

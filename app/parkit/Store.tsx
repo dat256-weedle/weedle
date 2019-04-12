@@ -1,4 +1,4 @@
-import { observable, action } from "mobx"
+import { action, observable } from "mobx";
 
 /**
  * Store which contains the state of the whole application
@@ -8,8 +8,8 @@ export class Store {
     /**
      * List of all parking spots which are being rented by the user
      */
-    @observable 
-    public bookedParkingSpots: Number[] = new Array();
+    @observable
+    public bookedParkingSpots: number[] = new Array();
 
     /**
      * Adds a parking spot to the bookedParkingSpots list
@@ -17,9 +17,9 @@ export class Store {
      * @throws If parking spot with the same id is already booked by user
      */
     @action
-    public bookParkingSpot (parkingSpot: Number) {
+    public bookParkingSpot(parkingSpot: number) {
         if (this.bookedParkingSpots.includes(parkingSpot)) {
-            throw "Parking spot already booked";
+            throw new Error("Parking spot already booked");
         }
         this.bookedParkingSpots.push(parkingSpot);
     }
@@ -30,10 +30,10 @@ export class Store {
      * @throws If the parking spot is not already booked
      */
     @action
-    public unBookParkingSpot (parkingSpot: Number) {
+    public unBookParkingSpot(parkingSpot: number) {
         if (!this.bookedParkingSpots.includes(parkingSpot)) {
-            throw "Parking spot is not booked"
+            throw new Error("Parking spot is not booked");
         }
-        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => {return (parkingSpot !== item)});
+        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => parkingSpot !== item);
     }
 }
