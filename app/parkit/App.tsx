@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import ParkingElement from "./src/common/ParkingElement";
 import data from "./assets/temp.json";
 import { IParkingSpot } from "./types/ParkingSpots.js";
-import List from "./use-cases/main/list/List.js";
+import List from "./use-cases/main/list/List";
 
 export default class App extends React.Component {
     private spots: Array<IParkingSpot>;
@@ -18,16 +17,7 @@ export default class App extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Open up App.tsx to start working on your app!</Text>
-                <ParkingElement
-                    distance={2}
-                    address="guld 2"
-                    price={20}
-                    rules="max 2h"
-                    provider="gbg park"
-                    image="any src"
-                    id="PA5252"
-                />
-                <List props={this.spots} />
+                <List array={this.spots} />
             </View>
         );
     }
