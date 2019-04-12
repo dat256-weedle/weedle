@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface IPosition {
     longitude: Number;
     latitude: Number;
