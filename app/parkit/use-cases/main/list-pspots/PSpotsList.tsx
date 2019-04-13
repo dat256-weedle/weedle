@@ -1,5 +1,4 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { IParkingSpot } from "../../../types/ParkingSpots";
 import ParkingElement from "../../../src/common/ParkingElement";
 import List from '../../../common/list/List';
@@ -38,13 +37,3 @@ export default class PSpotsList extends React.Component<IProps> {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    listContainer: {
-        display: "flex",
-        flexDirection: "column",
-        margin: 0,
-        flexGrow: 1,
-        width: "100%"
-    }
-});
