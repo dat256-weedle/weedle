@@ -19,3 +19,11 @@ notifications:
 
     rooms: 
       - dat256-weedle:JPzdFMBfxuzUxd1dl5ss9Tnj#travis
+
+      
+  slack: 
+    on_success: always
+    on_failure: always
+
+    rooms: 
+      - dat256-weedle:JPzdFMBfxuzUxd1dl5ss9Tnj#travis-v
