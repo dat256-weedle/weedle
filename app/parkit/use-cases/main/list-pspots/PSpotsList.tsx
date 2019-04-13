@@ -2,12 +2,13 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { IParkingSpot } from "../../../types/ParkingSpots";
 import ParkingElement from "../../../src/common/ParkingElement";
+import List from '../../../common/list/List';
 
 interface IProps {
     array: Array<IParkingSpot>;
 }
 
-export default class List extends React.Component<IProps> {
+export default class PSpotsList extends React.Component<IProps> {
     constructor(props: IProps) {
         super(props);
     }
@@ -15,7 +16,7 @@ export default class List extends React.Component<IProps> {
     public render() {
         const array = this.props.array;
         return (
-            <View style={styles.listContainer}>
+            <List>
                 {array.map((parkingspot, index) => (
                     <ParkingElement
                         key={index}
@@ -33,7 +34,7 @@ export default class List extends React.Component<IProps> {
                         id={"" + index}
                     />
                 ))}
-            </View>
+            </List>
         );
     }
 }
