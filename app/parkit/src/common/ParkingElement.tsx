@@ -2,17 +2,25 @@ import React from "react";
 import { Image, StyleSheet, Text, View, ViewProps } from "react-native";
 
 interface IProps extends ViewProps {
+    /** The distance to the parking space */
     distance: number;
+    /** The price of the parking space */
     price: number;
+    /** The id of the parking space */
     id: string;
 }
 
 const RowItem = (element: React.ReactElement) => {
     return (<View style={{ flexGrow: 1 }}>{element}</View>);
 };
-
+/**
+ * ParkingElement is a component that shows parking space information
+ */
 export default class ParkingElement extends React.Component<IProps> {
 
+    /**
+     * @param props the props of the parking element
+     */
     constructor(props: IProps) {
         super(props);
     }
