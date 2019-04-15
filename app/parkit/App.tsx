@@ -1,8 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import data from "./assets/temp.json";
-import { IParkingSpot } from "./types/ParkingSpots.js";
-import PSpotsList from "./use-cases/main/list-pspots/PSpotsList";
 
 export default class App extends React.Component {
     constructor(props: any) {
