@@ -16,6 +16,7 @@ interface IProps {
 /**
  * Button for renting a parking spot.
  * Text will change between 'Rent' and 'Finish' based on if the parking spot with id = props.id is rented or not.
+ * @param IProps id of the parking spot.
  */
 @inject("store")
 @observer

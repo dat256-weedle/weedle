@@ -8,6 +8,7 @@
     "start": "expo start",
     "validate": "yarn run lint && yarn run check-types",
     "test": "yarn jest --silent",
+    "test-loud": "yarn jest",
     "tunnel": "expo start --tunnel"
   },
   "dependencies": {
@@ -41,7 +42,9 @@
     "enzyme-adapter-react-16": "^1.12.1",
     "jest": "^24.7.1",
     "jest-enzyme": "^7.0.2",
+    "jest-expo": "^32.0.0",
     "jest-fetch-mock": "^2.1.2",
+    "jest-transform-stub": "^2.0.0",
     "jsdom": "^14.0.0",
     "tslint": "^5.15.0",
     "tslint-eslint-rules": "5.4.0",
