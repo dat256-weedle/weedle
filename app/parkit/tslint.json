@@ -1,8 +1,8 @@
 {
     "defaultSeverity": "warning",
-    "extends": [
-        "tslint:recommended"
-    ],
+    "extends": ["tslint:recommended"],
     "rules": {
+        "indent": [true, "spaces", 4],
+        "trailing-comma": false
     }
 }
