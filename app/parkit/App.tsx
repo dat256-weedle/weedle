@@ -5,19 +5,14 @@ import { IParkingSpot } from "./types/ParkingSpots.js";
 import PSpotsList from "./use-cases/main/list-pspots/PSpotsList";
 
 export default class App extends React.Component {
-    private spots: Array<IParkingSpot>;
-
     constructor(props: any) {
         super(props);
-
-        this.spots = data.parkingspots as Array<IParkingSpot>;
     }
 
     public render() {
         return (
             <View style={styles.container}>
                 <Text>Open up App.tsx to start working on your app!</Text>
-                <PSpotsList array={this.spots} />
             </View>
         );
     }
