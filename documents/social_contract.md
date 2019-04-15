@@ -15,7 +15,9 @@ The communication in the group is done through Slack and through the meetings of
 
 ## Deadlines
 
-All turn-ins (Group and individual) is turned in on Thursdays. The SCRUM master will make sure that the members have turned in their parts.
+All turn-ins (Group and individual) is turned in on Thursdays.
+
+
 
 ## Workload
 
@@ -45,9 +47,31 @@ At least 5 members of the group need to be present in order to make a group deci
 
 If a personal conflict arises it should be resolved by the involved parties if possible. If the conflict is a problem for the group it will be resolved with the group where at least 5 people participate, including the involved persons.
 
-## Daily Scrum
+## Scrum
 
-Each day (from course-week 3) a daily SCRUMB meeting will be held over Slack. Each morning (on work-days) before 10:00 each member of the group will write a message containing the following:
+#### DoD
+The code should
+ - compile
+ - have tests
+ - satisfies acceptance criteria
+ - approved by product owner 
+ - be merged into develope
+ 
+#### Responsibilities of Scrum master
+
+The SCRUM master will make sure that the members have turned in their parts for the teams deadlines.
+
+Create the agenda for and lead the groups meetings. 
+
+#### Responsibilities of Product- and Vice Product Owner
+Prioritize and pick out user stories for each sprint. Approve and critisize user stories with their acceptance criterias as basis during sprint demo
+
+Vice product owner is in charge when the product owner is the one delivering a user story.
+
+If the product owner and the vice product owner are unable to agree, the product owner has the final word.
+
+#### Daily scrum
+Each day (from course-week 3) a daily SCRUM meeting will be held over Slack. Each morning (on work-days) before 10:00 each member of the group will write a message containing the following:
 
 - What you have done since yesterday.
 - Problems you might need help with.
@@ -61,6 +85,15 @@ Each day (from course-week 3) a daily SCRUMB meeting will be held over Slack. Ea
 - No force pushes to master / develop should be made.
 - The person who created a pull request is also the person that merges it.
 - TODO:s are not allowed.
+
+#### branch naming
+When creating a branch in git follow the naming scheme below
+
+ - feature/user-story-title
+ - fix/bug-fix-title
+ - test/test-title
+ - docs/document-title
+
 
 ## Frameworks
 
