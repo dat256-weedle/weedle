@@ -1,13 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import data from "./assets/temp.json";
-import { IParkingSpot } from "./types/ParkingSpots.js";
 
 export default class App extends React.Component {
     constructor(props: any) {
         super(props);
-
-        let spots = data.parkingspots as Array<IParkingSpot>;
     }
 
     public render() {
