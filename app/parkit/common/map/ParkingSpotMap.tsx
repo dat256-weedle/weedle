@@ -11,16 +11,6 @@ interface IState {
     width: string;
 }
 
-/**
- * Region interface which matches MapViews region objects
- */
-interface IRegion {
-    latitude: number;
-    longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
-}
-
 @inject("store")
 @observer
 export default class ParkingSpotMap extends React.Component<IProps, IState> {
@@ -54,7 +44,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 showsMyLocationButton={true}
                 /**
                  * Stupid hack to make the 'show user location' button appear on android
-                 *  from https://github.com/react-native-community/react-native-maps/issues/1033
+                 * from https://github.com/react-native-community/react-native-maps/issues/1033
                  */
                 onMapReady={() => this.setState({ width: "100%" })}>
                 {this.store.allParkingSpots.map((pSpot) => (
@@ -72,8 +62,8 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         navigator.geolocation.getCurrentPosition((position) => {
             this.theMap.current!.animateToRegion({
                     latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
                     latitudeDelta: this.defaultLatLong,
+                    longitude: position.coords.longitude,
                     longitudeDelta: this.defaultLatLong,
             }, 1);
         });
