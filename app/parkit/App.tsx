@@ -1,7 +1,7 @@
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Map from "./common/map/Map";
+import ParkingSpotMap from "./common/map/ParkingSpotMap";
 import { Store } from "./Store";
 
 export default class App extends React.Component {
@@ -18,7 +18,7 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <Map></Map>
+                    <ParkingSpotMap></ParkingSpotMap>
                 </View>
             </Provider>
         );

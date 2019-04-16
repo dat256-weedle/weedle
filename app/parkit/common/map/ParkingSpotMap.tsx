@@ -9,7 +9,7 @@ interface IProps {
 
 @inject("store")
 @observer
-export default class Map extends React.Component<IProps, {}> {
+export default class ParkingSpotMap extends React.Component<IProps, {}> {
 
     private store: Store;
 
