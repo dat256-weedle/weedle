@@ -1,16 +1,29 @@
+import { Provider } from "mobx-react";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+// import data from "./assets/temp.json";
+import RentButton from "./common/RentButton";
+import { Store } from "./Store";
+// import { IParkingSpot } from "./types/ParkingSpots.js";
 
 export default class App extends React.Component {
+
+    private store: Store;
+
     constructor(props: any) {
         super(props);
+        this.store = new Store();
+        // const spots = data.parkingspots as IParkingSpot[];
     }
 
     public render() {
         return (
-            <View style={styles.container}>
-                <Text>Open up App.tsx to start working on your app!</Text>
-            </View>
+            // Makes it possible to inject any child components with the store object using @inject from mobx-react
+            <Provider store={this.store}>
+                <View style={styles.container}>
+                    <RentButton id={3}></RentButton>
+                </View>
+            </Provider>
         );
     }
 }
@@ -20,6 +33,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#fff",
         flex: 1,
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 });

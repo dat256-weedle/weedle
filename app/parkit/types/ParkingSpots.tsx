@@ -4,6 +4,7 @@ export interface IPosition {
 }
 
 export interface IParkingSpot {
+    id: Number;
     position: IPosition;
     name: string;
     distance: number;
