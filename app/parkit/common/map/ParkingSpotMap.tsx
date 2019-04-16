@@ -27,7 +27,8 @@ export default class ParkingSpotMap extends React.Component<IProps, {}> {
                     latitudeDelta: 0.0922,
                     longitude: -122.4324,
                     longitudeDelta: 0.0421,
-                }}>
+                }}
+                showsUserLocation = {true}>
                 {this.store.allParkingSpots.map(pSpot => (
                     <Marker
                         coordinate={pSpot.position}
