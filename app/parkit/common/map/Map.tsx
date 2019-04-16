@@ -1,6 +1,5 @@
 import React from "react";
-// import MapView from "react-native-maps";
-import { MapView } from 'expo';
+import MapView from "react-native-maps";
 import { Store } from "../../Store";
 
 interface IProps {
