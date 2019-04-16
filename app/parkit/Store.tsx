@@ -1,9 +1,17 @@
 import { action, observable } from "mobx";
+import data from "./assets/temp.json";
+import { IParkingSpot } from "./types/ParkingSpots.js";
+
 
 /**
  * Store which contains the state of the whole application
  */
 export class Store {
+
+    /**
+     * All parking spots which have been loaded by the application
+     */
+    public allParkingSpots = data.parkingspots as IParkingSpot[];
 
     /**
      * List of all parking spots which are being rented by the user

@@ -1,11 +1,14 @@
 import React from "react";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { Store } from "../../Store";
+import { observer, inject } from "mobx-react";
 
 interface IProps {
     store?: Store;
 }
 
+@inject("store")
+@observer
 export default class Map extends React.Component<IProps, {}> {
 
     private store: Store;
@@ -17,14 +20,22 @@ export default class Map extends React.Component<IProps, {}> {
 
     public render() {
         return (
-            <MapView 
-            style={{ flex: 1 }}
-            initialRegion={{
-                latitude: 37.78825,
-                latitudeDelta: 0.0922,
-                longitude: -122.4324,
-                longitudeDelta: 0.0421,
-              }}/>
+            <MapView
+                style={{ flex: 1 }}
+                initialRegion={{
+                    latitude: 37.78825,
+                    latitudeDelta: 0.0922,
+                    longitude: -122.4324,
+                    longitudeDelta: 0.0421,
+                }}>
+                {this.store.allParkingSpots.map(pSpot => (
+                    <Marker
+                        coordinate={pSpot.position}
+                        key={pSpot.id}
+                    />
+                ))}
+
+            </MapView>
         );
     }
 

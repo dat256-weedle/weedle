@@ -2,9 +2,7 @@ import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Map from "./common/map/Map";
-// import data from "./assets/temp.json";
 import { Store } from "./Store";
-// import { IParkingSpot } from "./types/ParkingSpots.js";
 
 export default class App extends React.Component {
 
@@ -13,7 +11,6 @@ export default class App extends React.Component {
     constructor(props: any) {
         super(props);
         this.store = new Store();
-        // const spots = data.parkingspots as IParkingSpot[];
     }
 
     public render() {
