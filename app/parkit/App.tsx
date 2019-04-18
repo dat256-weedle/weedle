@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { getData } from "./backend/DataGatherer.js";
+import { getData } from "./backend/DataGatherer";
 
 export default class App extends React.Component {
     constructor(props: any) {
