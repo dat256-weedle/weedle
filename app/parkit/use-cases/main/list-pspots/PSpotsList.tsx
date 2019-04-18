@@ -20,16 +20,7 @@ export default class PSpotsList extends React.Component<IProps> {
                     <ParkingElement
                         key={index}
                         distance={parkingspot.distance}
-                        address={
-                            "" +
-                            parkingspot.position.longitude +
-                            ", " +
-                            parkingspot.position.latitude
-                        }
                         price={0}
-                        rules="max 2h"
-                        provider={parkingspot.owner}
-                        image="any src"
                         id={"" + index}
                     />
                 ))}
