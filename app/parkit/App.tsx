@@ -1,9 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { getData } from "./backend/DataGatherer.js";
 
 export default class App extends React.Component {
     constructor(props: any) {
         super(props);
+        getData();
     }
 
     public render() {
