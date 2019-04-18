@@ -1,17 +1,16 @@
-import React from "react";
-
 export interface IPosition {
     longitude: number;
     latitude: number;
 }
 
 export interface IParkingSpot {
+    id: number;
     position: IPosition;
-    name: String;
-    description: String;
+    name: string;
+    description: string;
     parkingSpots: number;
     distance: number;
-    provider: String;
+    provider: string;
     price: number;
     specialPrice: number;
 }
