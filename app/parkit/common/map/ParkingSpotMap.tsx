@@ -5,6 +5,7 @@ import { Store } from '../../Store';
 
 interface IProps {
 	store?: Store;
+	nightmode?: boolean;
 }
 
 interface IState {
@@ -17,6 +18,8 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 	private store: Store;
 	private theMap = React.createRef<MapView>();
 	private defaultLatLong = 0.092;
+	private daymodeStyle = require('./MapStyleDay.json');
+	private nightmodeStyle = require('./MapStyleNight.json');
 
 	constructor(props: IProps) {
 		super(props);
@@ -40,10 +43,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 				mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
 				showsUserLocation={true}
 				showsMyLocationButton={true}
-				showsBuildings={false}
-				showsIndoorLevelPicker={false}
-				showsPointsOfInterest={false}
-				showsTraffic={false}
+				customMapStyle={this.props.nightmode ? this.nightmodeStyle : this.daymodeStyle}
 				/**
                  * Stupid hack to make the 'show user location' button appear on android
                  * from https://github.com/react-native-community/react-native-maps/issues/1033
