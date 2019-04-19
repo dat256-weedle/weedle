@@ -16,39 +16,39 @@ interface IProps {
 
 class ParkingSpotMarker extends React.Component<IProps, {}> {
 
-  private selected: AnimatedValue = new Animated.Value(0);
+  private selectedAnimation: AnimatedValue = new Animated.Value(0);
 
   componentDidUpdate() {
     if (this.props.isSelected) {
-      Animated.timing(this.selected, {
+      Animated.timing(this.selectedAnimation, {
         toValue: 1,
         duration: 600,
       }).start()
-    }else{
-      this.selected.setValue(0);
+    } else {
+      this.selectedAnimation.setValue(0);
     }
   }
 
 
   render() {
 
-    let background = this.selected.interpolate({
+    let background = this.selectedAnimation.interpolate({
       inputRange: [0, 1],
       outputRange: ['#FFFFFF', '#4da2ab'],
     });
 
-    let border = this.selected.interpolate({
+    let border = this.selectedAnimation.interpolate({
       outputRange: ['#D23F44', '#007a87'],
-      inputRange: [0,  1],
+      inputRange: [0, 1],
     });
 
-    let paddingHorizontal = this.selected.interpolate({
-      outputRange: [4, 10*1.1, 4*2],
+    let paddingHorizontal = this.selectedAnimation.interpolate({
+      outputRange: [4, 10 * 1.1, 4 * 2],
       inputRange: [0, 0.7, 1],
     });
 
-    let paddingVertical = this.selected.interpolate({
-      outputRange: [2, 4*1.1, 4],
+    let paddingVertical = this.selectedAnimation.interpolate({
+      outputRange: [2, 4 * 1.1, 4],
       inputRange: [0, 0.7, 1],
     });
 
@@ -57,6 +57,8 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
       <Marker
         coordinate={position}
         identifier={id.toString()}
+        zIndex={this.props.isSelected? 1 : 0}
+
       >
         <Animated.View style={[styles.container]}>
           <Animated.View
