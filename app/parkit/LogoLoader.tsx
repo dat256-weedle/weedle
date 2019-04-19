@@ -4,6 +4,8 @@
  */
 const logos = {
     qpark: require("./assets/parking-providers/logo/qpark.png"),
+    easypark: require("./assets/parking-providers/logo/easypark.png"),
+    gothenburg: require("./assets/parking-providers/logo/gothenburg.png"),
     default: require("./assets/carpark.png")
 }
 
@@ -15,6 +17,10 @@ export function getLogo(owner: string) {
     switch(owner.toLowerCase()){
         case "q-park":
             return(logos.qpark);
+        case "easypark":
+            return(logos.easypark);
+        case "parking gothenburg":
+            return(logos.gothenburg);
         default:
             return(logos.default);
     }
