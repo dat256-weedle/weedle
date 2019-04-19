@@ -1,8 +1,9 @@
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import MapView from 'react-native-maps';
+import MapView, { MapEvent } from 'react-native-maps';
 import { Store } from '../../Store';
 import ParkingSpotMarker from './ParkingSpotMarker';
+import { IPosition } from '../../types/ParkingSpots';
 
 interface IProps {
 	store?: Store;
@@ -11,6 +12,7 @@ interface IProps {
 
 interface IState {
 	width: string;
+	selected: number;
 }
 
 @inject('store')
@@ -26,8 +28,26 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 		super(props);
 		this.store = this.props.store!; // Since store is injected it should never be undefined
 		this.state = {
-			width: '99%'
+			width: '99%',
+			selected: -1,
 		};
+	}
+
+	public selectMarker(id: number, coordinates: IPosition) {
+		this.theMap.current!.animateToCoordinate(coordinates)
+		this.setState({ selected: id })
+
+	}
+
+	private onPressEvent = (e: MapEvent<{ action: 'marker-press', id: string }>) => {
+
+		const { id, coordinate } = e.nativeEvent
+
+		if (id) {
+			const numId = Number.parseInt(id)
+			this.selectMarker(numId, coordinate);
+		}
+
 	}
 
 	public render() {
@@ -44,14 +64,19 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 				mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
 				showsUserLocation={true}
 				showsMyLocationButton={true}
+				onPress={(e) => this.onPressEvent(e as any)}
 				customMapStyle={this.props.nightmode ? this.nightmodeStyle : this.daymodeStyle}
 				/**
-                 * Stupid hack to make the 'show user location' button appear on android
-                 * from https://github.com/react-native-community/react-native-maps/issues/1033
-                 */
+				 * Stupid hack to make the 'show user location' button appear on android
+				 * from https://github.com/react-native-community/react-native-maps/issues/1033
+				 */
 				onMapReady={() => this.setState({ width: '100%' })}
 			>
-				{this.store.allParkingSpots.map((parkingSpot) => <ParkingSpotMarker parkingSpot={parkingSpot} key={parkingSpot.id} />)}
+				{this.store.allParkingSpots.map((parkingSpot) =>
+					<ParkingSpotMarker
+						parkingSpot={parkingSpot}
+						key={parkingSpot.id}
+						isSelected={this.state.selected === parkingSpot.id} />)}
 			</MapView>
 		);
 	}
