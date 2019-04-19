@@ -1,10 +1,12 @@
-import { action, observable } from 'mobx';
+import { action, observable, configure, computed, ObservableMap } from 'mobx';
 import data from './assets/temp.json';
 import { IParkingSpot } from './types/ParkingSpots.js';
 
 /**
  * Store which contains the state of the whole application
  */
+configure({ enforceActions: "always" })
+
 export class Store {
 	/**
      * All parking spots which have been loaded by the application
@@ -12,14 +14,32 @@ export class Store {
 	public allParkingSpots = data.parkingspots as IParkingSpot[];
 
 	/**
+	 * The currently selected parking spot
+	 */
+	@observable public selected: number = -1;
+
+	/**
      * List of all parking spots which are being rented by the user
      */
 	@observable public bookedParkingSpots: number[] = new Array();
 
 	/**
-     * Number of actions executed on the store
-     */
-	@observable public numActions: number = 0;
+	 *@returns the coordinates of the currently selected parking spot
+	 */
+	@computed
+	get selectedPosition() {
+
+		const parkingSpot = this.allParkingSpots.find((parkingSpot) => parkingSpot.id === this.selected)
+		if (parkingSpot !== undefined) {
+			return (parkingSpot.position);
+		}
+
+		return {
+			latitude: 0,
+			longitude: 0,
+		};
+
+	}
 
 	/**
      * Adds a parking spot to the bookedParkingSpots list
@@ -32,7 +52,6 @@ export class Store {
 			throw new Error('Parking spot already booked');
 		}
 		this.bookedParkingSpots.push(parkingSpot);
-		this.numActions++;
 	}
 
 	/**
@@ -46,6 +65,6 @@ export class Store {
 			throw new Error('Parking spot is not booked');
 		}
 		this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => parkingSpot !== item);
-		this.numActions++;
 	}
+
 }

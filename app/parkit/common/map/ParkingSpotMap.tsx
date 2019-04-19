@@ -4,6 +4,7 @@ import MapView, { MapEvent } from 'react-native-maps';
 import { Store } from '../../Store';
 import ParkingSpotMarker from './ParkingSpotMarker';
 import { IPosition } from '../../types/ParkingSpots';
+import { autorun, action, reaction } from 'mobx';
 
 interface IProps {
 	store?: Store;
@@ -33,19 +34,19 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 		};
 	}
 
-	public selectMarker(id: number, coordinates: IPosition) {
+	public selectMarker(coordinates: IPosition) {
 		this.theMap.current!.animateToCoordinate(coordinates)
-		this.setState({ selected: id })
 
 	}
 
+	@action
 	private onPressEvent = (e: MapEvent<{ action: 'marker-press', id: string }>) => {
 
 		const { id, coordinate } = e.nativeEvent
 
 		if (id) {
 			const numId = Number.parseInt(id)
-			this.selectMarker(numId, coordinate);
+			this.store.selected = numId;
 		}
 
 	}
@@ -76,7 +77,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 					<ParkingSpotMarker
 						parkingSpot={parkingSpot}
 						key={parkingSpot.id}
-						isSelected={this.state.selected === parkingSpot.id} />)}
+						isSelected={this.store.selected === parkingSpot.id} />)}
 			</MapView>
 		);
 	}
@@ -94,5 +95,10 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 				1
 			);
 		});
+
+		const moveToSelected = reaction(
+			() => this.store.selectedPosition,
+			(position) => this.theMap.current!.animateToCoordinate(position)
+		)
 	}
 }

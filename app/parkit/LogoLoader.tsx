@@ -14,15 +14,15 @@ const logos = {
  * @param owner name of the owner
  */
 export function getLogo(owner: string) {
-    switch(owner.toLowerCase()){
+    switch (owner.toLowerCase()) {
         case "q-park":
-            return(logos.qpark);
+            return (logos.qpark);
         case "easypark":
-            return(logos.easypark);
+            return (logos.easypark);
         case "parking gothenburg":
-            return(logos.gothenburg);
+            return (logos.gothenburg);
         default:
-            return(logos.default);
+            return (logos.default);
     }
 
 }

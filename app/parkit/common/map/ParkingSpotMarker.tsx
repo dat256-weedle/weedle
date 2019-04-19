@@ -43,7 +43,7 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
     });
 
     let paddingHorizontal = this.selectedAnimation.interpolate({
-      outputRange: [4, 10 * 1.1, 4 * 2],
+      outputRange: [4, 8 * 1.1, 4 * 2],
       inputRange: [0, 0.7, 1],
     });
 
@@ -57,7 +57,7 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
       <Marker
         coordinate={position}
         identifier={id.toString()}
-        zIndex={this.props.isSelected? 1 : 0}
+        zIndex={this.props.isSelected ? 1 : 0}
 
       >
         <Animated.View style={[styles.container]}>
