@@ -31,5 +31,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         flex: 1,
         justifyContent: "center",
+        flexDirection: "column",
+        width: "100%",
+        height: "100%",
+        paddingTop: 20,
+        paddingRight: 0
     },
+    listContainer: {}
 });

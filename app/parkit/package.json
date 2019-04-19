@@ -55,5 +55,18 @@
   "private": true,
   "name": "parkit",
   "version": "1.0.0",
-  "license": "MIT"
+  "license": "MIT",
+  "expo": {
+    "name": "ParkIt",
+    "icon": "./assets/icon.png",
+    "version": "1.0.0",
+    "slug": "your-app-slug",
+    "sdkVersion": "XX.0.0",
+    "ios": {
+      "bundleIdentifier": "chalmers.dat-256-weedle.parkit"
+    },
+    "android": {
+      "package": "chalmers.dat-256-weedle.parkit"
+    }
+  }
 }
