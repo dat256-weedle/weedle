@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import ParkingSpotMap from "./common/map/ParkingSpotMap";
 import { Store } from "./Store";
+import { ScreenOrientation } from 'expo';
 
 export default class App extends React.Component {
 
@@ -11,6 +12,7 @@ export default class App extends React.Component {
     constructor(props: any) {
         super(props);
         this.store = new Store();
+        ScreenOrientation.allow("ALL");
     }
 
     public render() {
@@ -18,7 +20,7 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <ParkingSpotMap nightmode={true}></ParkingSpotMap>
+                    <ParkingSpotMap nightmode={false}></ParkingSpotMap>
                 </View>
             </Provider>
         );
