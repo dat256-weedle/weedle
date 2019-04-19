@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
         // alignItems: "center",
         backgroundColor: "#fff",
         flex: 1,
-        justifyContent: "center",
         flexDirection: "column",
-        width: "100%",
         height: "100%",
+        justifyContent: "center",
+        paddingRight: 0,
         paddingTop: 20,
-        paddingRight: 0
+        width: "100%",
     },
-    listContainer: {}
+    listContainer: {},
 });

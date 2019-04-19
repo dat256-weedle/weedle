@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import React, { RefObject } from "react";
+import React from "react";
 import MapView, { Marker } from "react-native-maps";
 import { Store } from "../../Store";
 

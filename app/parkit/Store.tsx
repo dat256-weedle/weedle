@@ -2,7 +2,6 @@ import { action, observable } from "mobx";
 import data from "./assets/temp.json";
 import { IParkingSpot } from "./types/ParkingSpots.js";
 
-
 /**
  * Store which contains the state of the whole application
  */
