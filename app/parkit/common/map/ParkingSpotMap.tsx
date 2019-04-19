@@ -1,7 +1,8 @@
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import { Store } from '../../Store';
+import ParkingSpotMarker from './ParkingSpotMarker';
 
 interface IProps {
 	store?: Store;
@@ -50,12 +51,13 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                  */
 				onMapReady={() => this.setState({ width: '100%' })}
 			>
-				{this.store.allParkingSpots.map((pSpot) => <Marker coordinate={pSpot.position} key={pSpot.id} />)}
+				{this.store.allParkingSpots.map((parkingSpot) => <ParkingSpotMarker parkingSpot={parkingSpot} key={parkingSpot.id} />)}
 			</MapView>
 		);
 	}
 
 	public componentDidMount() {
+		// Move view to user's current location
 		navigator.geolocation.getCurrentPosition((position) => {
 			this.theMap.current!.animateToRegion(
 				{
