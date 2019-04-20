@@ -11,6 +11,7 @@ configure({ enforceActions: "always" })
 export class Store {
 	/**
      * All parking spots which have been loaded by the application mapped by their id
+	* When this is made dynamic it should probably be made @observable
      */
 	public allParkingSpots = new Map<number, IParkingSpot>((data.parkingspots as IParkingSpot[]).map((item) => [item.id, item]))
 
