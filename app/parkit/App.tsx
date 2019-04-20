@@ -1,9 +1,9 @@
+import { ScreenOrientation } from 'expo';
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import ParkingSpotMap from "./common/map/ParkingSpotMap";
 import { Store } from "./Store";
-import { ScreenOrientation } from 'expo';
 
 export default class App extends React.Component {
 

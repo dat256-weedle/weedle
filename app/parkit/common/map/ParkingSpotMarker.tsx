@@ -1,13 +1,9 @@
 import React from 'react';
+import { Animated,Image, StyleSheet } from 'react-native';
 import { Marker } from 'react-native-maps';
-import { getLogo } from '../../LogoLoader'
-import {
-  StyleSheet,
-  Animated,
-  Image,
-} from 'react-native';
-import { IParkingSpot } from '../../types/ParkingSpots';
 import { AnimatedValue } from 'react-navigation';
+import { getLogo } from '../../LogoLoader'
+import { IParkingSpot } from '../../types/ParkingSpots';
 
 interface IProps {
   parkingSpot: IParkingSpot;
@@ -18,11 +14,11 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
 
   private selectedAnimation: AnimatedValue = new Animated.Value(0);
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     if (this.props.isSelected) {
       Animated.timing(this.selectedAnimation, {
-        toValue: 1,
         duration: 600,
+        toValue: 1,
       }).start()
     } else {
       this.selectedAnimation.setValue(0);
@@ -30,29 +26,29 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
   }
 
 
-  render() {
+  public render() {
 
-    let background = this.selectedAnimation.interpolate({
+    const background = this.selectedAnimation.interpolate({
       inputRange: [0, 1],
       outputRange: ['#FFFFFF', '#4da2ab'],
     });
 
-    let border = this.selectedAnimation.interpolate({
-      outputRange: ['#D23F44', '#007a87'],
+    const border = this.selectedAnimation.interpolate({
       inputRange: [0, 1],
+      outputRange: ['#D23F44', '#007a87'],
     });
 
-    let paddingHorizontal = this.selectedAnimation.interpolate({
+    const paddingHorizontal = this.selectedAnimation.interpolate({
+      inputRange: [0, 0.7, 1],
       outputRange: [4, 8 * 1.1, 4 * 2],
-      inputRange: [0, 0.7, 1],
     });
 
-    let paddingVertical = this.selectedAnimation.interpolate({
+    const paddingVertical = this.selectedAnimation.interpolate({
+      inputRange: [0, 0.7, 1],
       outputRange: [2, 4 * 1.1, 4],
-      inputRange: [0, 0.7, 1],
     });
 
-    let { position, owner, id } = this.props.parkingSpot;
+    const { position, owner, id } = this.props.parkingSpot;
     return (
       <Marker
         coordinate={position}
@@ -67,8 +63,8 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
               {
                 backgroundColor: background,
                 borderColor: border,
-                paddingHorizontal: paddingHorizontal,
-                paddingVertical: paddingVertical,
+                paddingHorizontal,
+                paddingVertical,
               },
             ]}
           >
@@ -87,48 +83,48 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    alignSelf: 'flex-start',
-  },
-  image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" },
-  bubble: {
-    flex: 0,
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 2,
-    paddingHorizontal: 4,
-    borderRadius: 4,
-    borderColor: '#000000',
-    borderWidth: 0.5,
-  },
   arrow: {
+    alignSelf: 'center',
     backgroundColor: 'transparent',
     borderColor: 'transparent',
-    borderWidth: 4,
     borderTopColor: '#FFFFFF',
-    alignSelf: 'center',
+    borderWidth: 4,
     marginTop: -9,
   },
   arrowBorder: {
+    alignSelf: 'center',
     backgroundColor: 'transparent',
     borderColor: 'transparent',
-    borderWidth: 4,
     borderTopColor: '#000000',
-    alignSelf: 'center',
+    borderWidth: 4,
     marginTop: -0.5,
   },
-  selectedBubble: {
-    backgroundColor: '#4da2ab',
-    borderColor: '#007a87',
+  bubble: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#000000',
+    borderRadius: 4,
+    borderWidth: 0.5,
+    flex: 0,
+    flexDirection: 'row',
+    paddingHorizontal: 4,
+    paddingVertical: 2,
   },
+  container: {
+    alignSelf: 'flex-start',
+    flexDirection: 'column',
+  },
+  image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" },
   selectedArrow: {
     borderTopColor: '#4da2ab',
 
   },
   selectedArrowBorder: {
     borderTopColor: '#007a87',
+  },
+  selectedBubble: {
+    backgroundColor: '#4da2ab',
+    borderColor: '#007a87',
   },
 });
 

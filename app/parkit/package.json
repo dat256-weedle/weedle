@@ -48,6 +48,7 @@
     "jest-transform-stub": "^2.0.0",
     "jsdom": "^14.0.0",
     "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "3.6.0",
     "typescript": "3.3.3333"
