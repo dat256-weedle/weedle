@@ -56,7 +56,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 // from https://github.com/react-native-community/react-native-maps/issues/1033
                 onMapReady={() => this.setState({ width: '100%' })}
             >
-                {this.store.allParkingSpots.map((parkingSpot) =>
+                {this.store.allParkingSpotsList.map((parkingSpot) =>
                     <ParkingSpotMarker
                         parkingSpot={parkingSpot}
                         key={parkingSpot.id}
@@ -80,10 +80,10 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         });
 
         reaction(
-            () => this.store.selectedPosition,
-            (position) => {
-                if (!this.positionIsInCurrentRegion(position)) {
-                    this.theMap.current!.animateToCoordinate(position);
+            () => this.store.selectedParkingSpot,
+            (parkingSpot) => {
+                if (parkingSpot && !this.positionIsInCurrentRegion(parkingSpot.position)) {
+                    this.theMap.current!.animateToCoordinate(parkingSpot.position);
                 }
             }
 

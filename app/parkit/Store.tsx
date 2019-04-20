@@ -1,6 +1,7 @@
 import { action, observable, configure, computed, ObservableMap } from 'mobx';
 import data from './assets/temp.json';
 import { IParkingSpot } from './types/ParkingSpots.js';
+import { number } from 'prop-types';
 
 /**
  * Store which contains the state of the whole application
@@ -9,9 +10,9 @@ configure({ enforceActions: "always" })
 
 export class Store {
 	/**
-     * All parking spots which have been loaded by the application
+     * All parking spots which have been loaded by the application mapped by their id
      */
-	public allParkingSpots = data.parkingspots as IParkingSpot[];
+	public allParkingSpots = new Map<number, IParkingSpot>((data.parkingspots as IParkingSpot[]).map((item) => [item.id, item]))
 
 	/**
 	 * The currently selected parking spot
@@ -27,18 +28,16 @@ export class Store {
 	 *@returns the coordinates of the currently selected parking spot
 	 */
 	@computed
-	get selectedPosition() {
+	get selectedParkingSpot() {
+		return this.allParkingSpots.get(this.selected)	
+	}
 
-		const parkingSpot = this.allParkingSpots.find((parkingSpot) => parkingSpot.id === this.selected)
-		if (parkingSpot !== undefined) {
-			return (parkingSpot.position);
-		}
-
-		return {
-			latitude: 0,
-			longitude: 0,
-		};
-
+	/**
+	 * Unmapped version of the 'allParkingSpots' map
+	 */
+	@computed
+	get allParkingSpotsList() {
+		return Array.from(this.allParkingSpots.values())
 	}
 
 	/**
