@@ -1,7 +1,7 @@
 import { action, reaction } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import MapView, { MapEvent } from 'react-native-maps';
+import MapView, { MapEvent, Region } from 'react-native-maps';
 import { Store } from '../../Store';
 import { IPosition } from '../../types/ParkingSpots';
 import ParkingSpotMarker from './ParkingSpotMarker';
@@ -13,7 +13,6 @@ interface IProps {
 
 interface IState {
     width: string;
-    selected: number;
 }
 
 @inject('store')
@@ -24,12 +23,13 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     private defaultLatLong = 0.092;
     private daymodeStyle = require('./MapStyleDay.json');
     private nightmodeStyle = require('./MapStyleNight.json');
+    private currentRegion?: Region;
+
 
     constructor(props: IProps) {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
         this.state = {
-            selected: -1,
             width: '99%',
         };
     }
@@ -54,6 +54,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 showsUserLocation={true}
                 showsMyLocationButton={true}
                 pitchEnabled={false}
+                onRegionChangeComplete={(region) => this.currentRegion = region}
                 onPress={(e) => this.onPressEvent(e as any)}
                 customMapStyle={this.props.nightmode ? this.nightmodeStyle : this.daymodeStyle}
                 // Stupid hack to make the 'show user location' button appear on android
@@ -85,7 +86,11 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         reaction(
             () => this.store.selectedPosition,
-            (position) => this.theMap.current!.pointForCoordinate(position).then(e => console.log(e))
+            (position) => {
+                if (!this.positionIsInCurrentRegion(position)) {
+                    this.theMap.current!.animateToCoordinate(position);
+                }
+            }
 
         )
     }
@@ -99,6 +104,22 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
             const numId = Number.parseInt(id, 10)
             this.store.selected = numId;
         }
+
+    }
+
+    private positionIsInCurrentRegion = (position: IPosition) => {
+
+        if (!this.currentRegion) { return false; }
+
+        const { latitude, longitude, latitudeDelta, longitudeDelta } = this.currentRegion;
+        const latMax = latitude + (latitudeDelta / 4);
+        const latMin = latitude - (latitudeDelta / 4);
+        const lonMax = longitude + (longitudeDelta / 4);
+        const lonMin = longitude - (longitudeDelta / 4);
+
+        if (position.latitude > latMax || position.latitude < latMin) { return false; }
+        if (position.longitude > lonMax || position.longitude < lonMin) { return false; }
+        return true;
 
     }
 }
