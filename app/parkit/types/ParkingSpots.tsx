@@ -11,6 +11,6 @@ export interface IParkingSpot {
     parkingSpots: number;
     distance: number;
     provider: string;
-    price: number;
-    specialPrice: number;
+    price: string;
+    specialPrice: string;
 }

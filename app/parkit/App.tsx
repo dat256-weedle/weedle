@@ -6,7 +6,6 @@ import RentButton from "./common/RentButton";
 import { Store } from "./Store";
 
 export default class App extends React.Component {
-
     private store: Store;
 
     constructor(props: any) {
@@ -19,7 +18,7 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <RentButton id={3}></RentButton>
+                    <RentButton id={3} />
                 </View>
             </Provider>
         );
