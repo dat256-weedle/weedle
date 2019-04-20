@@ -4,11 +4,11 @@ export interface IPosition {
 }
 
 export interface IParkingSpot {
-    id: number;
+    id: string;
     position: IPosition;
     name: string;
     description: string;
-    parkingSpots: number;
+    parkingSpots: string;
     distance: number;
     provider: string;
     price: string;
