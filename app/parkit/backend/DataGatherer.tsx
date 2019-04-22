@@ -7,8 +7,8 @@ const defaultPosition: IPosition = {
 };
 
 export async function getData(
-    currentPosition: IPosition = defaultPosition,
-    store: Store
+    store: Store,
+    currentPosition: IPosition = defaultPosition
 ) {
     let completeArray: IParkingSpot[] = Array<IParkingSpot>();
     await Promise.all([
@@ -18,6 +18,9 @@ export async function getData(
         result.forEach((data: IParkingSpot[] | void) => {
             completeArray = tryConcat(data, completeArray);
         });
+        console.log(
+            "Assigning " + completeArray.length + " parking spots to store."
+        );
         store.assignParkingSpots(completeArray);
     });
 }
