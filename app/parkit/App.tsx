@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import RentButton from "./common/RentButton";
 import { Store } from "./Store";
-import { getData } from "./backend/DataGatherer.tsx";
+import { getData } from "./backend/DataGatherer";
 
 export default class App extends React.Component {
     private store: Store;
