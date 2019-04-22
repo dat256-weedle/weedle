@@ -1,6 +1,38 @@
 import { IParkingSpot, IPosition } from "../types/ParkingSpots";
 import { Store } from "../Store";
 
+/**
+ * Converts degrees to radians.
+ * @param degrees The degrees to be converted.
+ * @returns The radian conversion of the given degrees.
+ */
+function degToRad(degrees: number): number {
+    return (degrees * Math.PI) / 180;
+}
+
+/**
+ * Calculates the distance between two positions
+ * @param pos1 an IPosition coordinate
+ * @param pos2 another IPosition coordinate
+ * @returns The distance in meters
+ */
+export function getDistance(pos1: IPosition, pos2: IPosition): number {
+    let earthRadius = 6371000; // The earths average radius in meters.
+    if (pos1.latitude == pos2.latitude && pos1.longitude == pos2.longitude) {
+        return 0;
+    }
+
+    let deltaLat = degToRad(Math.abs(pos1.latitude - pos2.latitude));
+    let deltaLon = degToRad(Math.abs(pos1.longitude - pos2.longitude));
+    let a =
+        Math.pow(Math.sin(deltaLat / 2), 2) +
+        Math.cos(degToRad(pos1.latitude)) *
+            Math.cos(degToRad(pos2.latitude)) *
+            Math.pow(Math.sin(deltaLon / 2), 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return c * earthRadius;
+}
+
 const defaultPosition: IPosition = {
     latitude: 57.7078,
     longitude: 11.9845
@@ -22,6 +54,10 @@ export async function getData(
             "Assigning " + completeArray.length + " parking spots to store."
         );
         store.assignParkingSpots(completeArray);
+
+        store.parkingSpots.forEach(obj => {
+            console.log("");
+        });
     });
 }
 
