@@ -1,11 +1,15 @@
 import { IParkingSpot, IPosition } from "../types/ParkingSpots";
+import { Store } from "../Store";
 
 const defaultPosition: IPosition = {
     latitude: 57.7078,
     longitude: 11.9845
 };
 
-export async function getData(currentPosition: IPosition = defaultPosition) {
+export async function getData(
+    currentPosition: IPosition = defaultPosition,
+    store: Store
+) {
     let completeArray: IParkingSpot[] = Array<IParkingSpot>();
     await Promise.all([
         getParkingGothenburgData(),
@@ -14,6 +18,7 @@ export async function getData(currentPosition: IPosition = defaultPosition) {
         result.forEach((data: IParkingSpot[] | void) => {
             completeArray = tryConcat(data, completeArray);
         });
+        store.assignParkingSpots(completeArray);
     });
 }
 

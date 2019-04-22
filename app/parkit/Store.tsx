@@ -1,9 +1,15 @@
 import { action, observable } from "mobx";
+import { IParkingSpot } from "./types/ParkingSpots";
 
 /**
  * Store which contains the state of the whole application
  */
 export class Store {
+    /**
+     * List of all the parkingspots
+     */
+    @observable
+    public parkingSpots: IParkingSpot[] = Array<IParkingSpot>();
 
     /**
      * List of all parking spots which are being rented by the user
@@ -41,7 +47,14 @@ export class Store {
         if (!this.bookedParkingSpots.includes(parkingSpot)) {
             throw new Error("Parking spot is not booked");
         }
-        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => parkingSpot !== item);
+        this.bookedParkingSpots = this.bookedParkingSpots.filter(
+            item => parkingSpot !== item
+        );
         this.numActions++;
+    }
+
+    @action
+    public assignParkingSpots(parkingSpots: IParkingSpot[]) {
+        this.parkingSpots = parkingSpots;
     }
 }

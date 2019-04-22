@@ -1,16 +1,17 @@
 import { Provider } from "mobx-react";
 import React from "react";
-import { getData } from "./backend/DataGatherer";
 import { StyleSheet, View } from "react-native";
 import RentButton from "./common/RentButton";
 import { Store } from "./Store";
+import { getData } from "./backend/DataGatherer.tsx";
 
 export default class App extends React.Component {
     private store: Store;
 
     constructor(props: any) {
         super(props);
-        getData();
+        this.store = new Store();
+        getData(this.store);
     }
 
     public render() {
