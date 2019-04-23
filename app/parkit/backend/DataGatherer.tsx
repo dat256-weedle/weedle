@@ -38,43 +38,38 @@ const defaultPosition: IPosition = {
     longitude: 11.9845
 };
 
-export async function getData(
+/**
+ * Gathers parkingspotdata from different sources and adds them to the given store.
+ * @param store The programs mobx store.
+ * @param currentPosition The current position of the user.
+ */
+export function getData(
     store: Store,
     currentPosition: IPosition = defaultPosition
 ) {
-    let completeArray: IParkingSpot[] = Array<IParkingSpot>();
-    await Promise.all([
-        getParkingGothenburgData(),
-        getQParkData(currentPosition)
-    ]).then((result: (IParkingSpot[] | void)[]) => {
-        result.forEach((data: IParkingSpot[] | void) => {
-            completeArray = tryConcat(data, completeArray);
-        });
-        console.log(
-            "Assigning " + completeArray.length + " parking spots to store."
-        );
-        store.assignParkingSpots(completeArray);
+    assignToStore(getParkingGothenburgData(), store);
+    assignToStore(getQParkData(currentPosition), store);
+}
 
-        store.parkingSpots.forEach(obj => {
-            console.log("");
-        });
+/**
+ * Tries to extract the relevant data from the promise and assign it to the store.
+ * @param data The parkingspots to be assigned to the store.
+ * @param store The projects shared store.
+ */
+function assignToStore(data: Promise<IParkingSpot[] | void>, store: Store) {
+    data.then((result: IParkingSpot[] | void) => {
+        if (result instanceof Array) {
+            store.assignParkingSpots(result);
+        }
+    }).catch(error => {
+        console.log(error);
     });
 }
 
-function tryConcat(
-    data: IParkingSpot[] | void,
-    completeArray: IParkingSpot[]
-): IParkingSpot[] {
-    try {
-        if (typeof data === "object") {
-            return completeArray.concat(data as IParkingSpot[]);
-        }
-    } catch (error) {
-        console.log(error);
-    }
-    return completeArray;
-}
-
+/**
+ * Tries to retrieve parkingspot-data from parkingGothenburg.
+ * @returns A promise of either a IParkingSpot[] or void if an error occured.
+ */
 function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
     console.log("Gathering data from parking gothenburg...");
     return fetch(
@@ -118,6 +113,10 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
         });
 }
 
+/**
+ * Tries to retrieve parkingspot-data from Q-Park.
+ * @returns A promise of either a IParkingSpot[] or void if an error occured.
+ */
 function getQParkData(
     currentPosition: IPosition
 ): Promise<IParkingSpot[] | void> {
