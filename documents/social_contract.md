@@ -15,7 +15,7 @@ The communication in the group is done through Slack and through the meetings of
 
 ## Deadlines
 
-All turn-ins (Group and individual) is turned in on Thursdays.
+All turn-ins (Group and individual) is turned in on mondays.
 
 
 
