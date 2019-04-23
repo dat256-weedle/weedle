@@ -53,8 +53,28 @@ export class Store {
         this.numActions++;
     }
 
+    /**
+     * Adds / updates parking spots to the store.
+     * @param newParkingSpots parkingSpots to be added to the store.
+     */
     @action
-    public assignParkingSpots(parkingSpots: IParkingSpot[]) {
-        this.parkingSpots = parkingSpots;
+    public assignParkingSpots(newParkingSpots: IParkingSpot[]) {
+        let numNew: number = newParkingSpots.length;
+        let newIds = newParkingSpots.map(obj => {
+            return obj.id;
+        });
+        this.parkingSpots.forEach(spot => {
+            if (newIds.includes(spot.id) == false) {
+                newParkingSpots.push(spot);
+            }
+        });
+
+        this.parkingSpots = newParkingSpots;
+        console.log(
+            "added/updated " +
+                numNew +
+                " parkingSpots, total number of parkingSpots now at " +
+                this.parkingSpots.length
+        );
     }
 }
