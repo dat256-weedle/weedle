@@ -1,9 +1,9 @@
-import React from 'react';
-import { Animated,Image, StyleSheet } from 'react-native';
-import { Marker } from 'react-native-maps';
-import { AnimatedValue } from 'react-navigation';
-import { getLogo } from '../../LogoLoader'
-import { IParkingSpot } from '../../types/ParkingSpots';
+import React from "react";
+import { Animated, Image, StyleSheet } from "react-native";
+import { Marker } from "react-native-maps";
+import { AnimatedValue } from "react-navigation";
+import { getLogo } from "../../LogoLoader";
+import { IParkingSpot } from "../../types/ParkingSpots";
 
 interface IProps {
   parkingSpot: IParkingSpot;
@@ -17,25 +17,24 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
   public componentDidUpdate() {
     if (this.props.isSelected) {
       Animated.timing(this.selectedAnimation, {
-        duration: 600,
+        duration: 100,
         toValue: 1,
-      }).start()
+      }).start();
     } else {
       this.selectedAnimation.setValue(0);
     }
   }
 
-
   public render() {
 
     const background = this.selectedAnimation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#FFFFFF', '#4da2ab'],
+      outputRange: ["#FFFFFF", "#4da2ab"],
     });
 
     const border = this.selectedAnimation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['#D23F44', '#007a87'],
+      outputRange: ["#D23F44", "#007a87"],
     });
 
     const paddingHorizontal = this.selectedAnimation.interpolate({
@@ -84,47 +83,47 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
 
 const styles = StyleSheet.create({
   arrow: {
-    alignSelf: 'center',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#FFFFFF',
+    alignSelf: "center",
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#FFFFFF",
     borderWidth: 4,
     marginTop: -9,
   },
   arrowBorder: {
-    alignSelf: 'center',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#000000',
+    alignSelf: "center",
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#000000",
     borderWidth: 4,
     marginTop: -0.5,
   },
   bubble: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#FFFFFF',
-    borderColor: '#000000',
+    alignSelf: "flex-start",
+    backgroundColor: "#FFFFFF",
+    borderColor: "#000000",
     borderRadius: 4,
     borderWidth: 0.5,
     flex: 0,
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 4,
     paddingVertical: 2,
   },
   container: {
-    alignSelf: 'flex-start',
-    flexDirection: 'column',
+    alignSelf: "flex-start",
+    flexDirection: "column",
   },
   image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" },
   selectedArrow: {
-    borderTopColor: '#4da2ab',
+    borderTopColor: "#4da2ab",
 
   },
   selectedArrowBorder: {
-    borderTopColor: '#007a87',
+    borderTopColor: "#007a87",
   },
   selectedBubble: {
-    backgroundColor: '#4da2ab',
-    borderColor: '#007a87',
+    backgroundColor: "#4da2ab",
+    borderColor: "#007a87",
   },
 });
 
