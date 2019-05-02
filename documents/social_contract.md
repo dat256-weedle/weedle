@@ -17,8 +17,6 @@ The communication in the group is done through Slack and through the meetings of
 
 All turn-ins (Group and individual) is turned in on mondays.
 
-
-
 ## Workload
 
 We respect that the group members should only work 20 hours per week, and we won't
@@ -49,28 +47,32 @@ If a personal conflict arises it should be resolved by the involved parties if p
 
 ## Scrum
 
-#### DoD
+### Definition of Done
+
 The code should
- - compile
- - have tests
- - satisfies acceptance criteria
- - approved by product owner 
- - be merged into develope
- 
-#### Responsibilities of Scrum master
+
+- compile
+- have tests
+- satisfies acceptance criteria
+- approved by product owner
+- be merged into develope
+
+### Responsibilities of Scrum master
 
 The SCRUM master will make sure that the members have turned in their parts for the teams deadlines.
 
-Create the agenda for and lead the groups meetings. 
+Create the agenda for and lead the groups meetings.
 
-#### Responsibilities of Product- and Vice Product Owner
+### Responsibilities of Product- and Vice Product Owner
+
 Prioritize and pick out user stories for each sprint. Approve and critisize user stories with their acceptance criterias as basis during sprint demo
 
 Vice product owner is in charge when the product owner is the one delivering a user story.
 
 If the product owner and the vice product owner are unable to agree, the product owner has the final word.
 
-#### Daily scrum
+### Daily scrum
+
 Each day (from course-week 3) a daily SCRUM meeting will be held over Slack. Each morning (on work-days) before 10:00 each member of the group will write a message containing the following:
 
 - What you have done since yesterday.
@@ -86,14 +88,34 @@ Each day (from course-week 3) a daily SCRUM meeting will be held over Slack. Eac
 - The person who created a pull request is also the person that merges it.
 - TODO:s are not allowed.
 
-#### branch naming
+### Branch Naming
+
 When creating a branch in git follow the naming scheme below
 
- - feature/user-story-title
- - fix/bug-fix-title
- - test/test-title
- - docs/document-title
+- feature/user-story-title
+- fix/bug-fix-title
+- test/test-title
+- docs/document-title
 
+### Folder Structure
+
+For the project we should put all source files in a folder called ``src`` and structure said them depending on the function of said source files. GUI components get individual folders under a folder called ``usage`` depending on geatures. Backend components get individual folders under a folder called ``backend`` based on component. Common
+components get individual folders under ``common``. Types are defined in a single file in the root of the ``src`` folder and should be named ``types.ts``. An example of said structure is as follows.
+
+```Filesystem
+src
+├─┬ backend
+│ └─┬ database
+│   └── database.ts
+├─┬ common
+│ └─┬ button
+│   └── Button.tsx
+├─┬ usage
+│ └─┬ map
+│   ├── MapButton.tsx
+│   └── Map.tsx
+└─types.ts
+```
 
 ## Frameworks
 
