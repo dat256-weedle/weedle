@@ -5,6 +5,7 @@ import { StyleSheet, View } from "react-native";
 import RentButton from "./common/RentButton";
 import { Store } from "./Store";
 // import { IParkingSpot } from "./types/ParkingSpots.js";
+import Menu from "./src/common/Menu"
 
 export default class App extends React.Component {
 
@@ -22,6 +23,7 @@ export default class App extends React.Component {
             <Provider store={this.store}>
                 <View style={styles.container}>
                     <RentButton id={3}></RentButton>
+                    <Menu/>
                 </View>
             </Provider>
         );
