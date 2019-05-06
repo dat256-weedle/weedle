@@ -63,11 +63,14 @@ export class Store {
         let newIds = newParkingSpots.map(obj => {
             return obj.id;
         });
-        this.parkingSpots.forEach(spot => {
-            if (newIds.includes(spot.id) == false) {
-                newParkingSpots.push(spot);
-            }
-        });
+
+        if (this.parkingSpots) {
+            this.parkingSpots.forEach(spot => {
+                if (newIds.includes(spot.id) == false) {
+                    newParkingSpots.push(spot);
+                }
+            });
+        }
 
         this.parkingSpots = newParkingSpots;
         console.log(
