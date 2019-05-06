@@ -1,43 +1,55 @@
 import React from 'react';
-// import { BottomNavigation, Text } from "react-native-paper";
-import { Button } from "react-native-elements" // For old code
+import { BottomNavigation, Text } from "react-native-paper";
+// import { Button } from "react-native-elements" // For old code
 
-/* Code that works with JavaScript but not TypeScript
+// Code that works with JavaScript but not TypeScript
 const Route1 = () => <Text>Placeholder1</Text>;
 const Route2 = () => <Text>Placeholder2</Text>;
 const Profile = () => <Text>Profile</Text>;
 
-export default class App extends React.Component {
-  state = {
-    index: 0,
-    routes: [
-      { key: 'heart', title: 'Placeholder1', icon: 'favorite' },
-      { key: 'star', title: 'Placeholder2', icon: 'grade' },
-      { key: 'profile', title: 'Profile', icon: 'person' },
-    ],
-  };
+interface IState {
+  index: number,
+  routes: Array<{key: string, title: string, icon: string}>
+}
 
-  _handleIndexChange = index => this.setState({ index });
+export default class Menu extends React.Component<any,IState> {
 
-  _renderScene = BottomNavigation.SceneMap({
-    heart: Route1,
-    star: Route2,
-    profile: Profile,
-  });
+  constructor(props: any){
+    super(props)
+    this.state = {
+      index: 0,
+      routes: [
+        { key: 'heart', title: 'Placeholder1', icon: 'favorite' },
+        { key: 'star', title: 'Placeholder2', icon: 'grade' },
+        { key: 'profile', title: 'Profile', icon: 'person' },
+      ],
+    };
+  }
 
-  render() {
+  public render() {
     return (
       <BottomNavigation
+        style={{width: "100%"
+      }}
         navigationState={this.state}
         onIndexChange={this._handleIndexChange}
         renderScene={this._renderScene}
       />
     );
   }
-}
-*/
 
-// Old code that renders a button (WORKS)
+  private _handleIndexChange = (index: number) => this.setState({ index });
+
+  private _renderScene = BottomNavigation.SceneMap({
+    heart: Route1,
+    star: Route2,
+    profile: Profile,
+  });
+
+  
+}
+
+/* Old code that renders a button (WORKS)
 export default class Menu extends React.Component<any> {
 
     public render() {
@@ -46,3 +58,4 @@ export default class Menu extends React.Component<any> {
             )
         }
     }
+*/
