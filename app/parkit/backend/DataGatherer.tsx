@@ -83,29 +83,35 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
         })
         .then(data => {
             let arr = new Array<IParkingSpot>();
+            if (data) {
+                data.forEach((obj: any) => {
+                    let pos: IPosition = {
+                        longitude: obj.lng as number,
+                        latitude: obj.lat as number
+                    };
 
-            data.forEach((obj: any) => {
-                let pos: IPosition = {
-                    longitude: obj.lng as number,
-                    latitude: obj.lat as number
-                };
+                    // The distance should possibly be calculated in the future.
+                    let newObj: IParkingSpot = {
+                        name: obj.title,
+                        position: pos,
+                        id: obj.id,
+                        description: obj.id,
+                        distance: -1,
+                        provider: "ParkeringGothenburg",
+                        price: obj.regularPrice,
+                        specialPrice: obj.otherPrice,
+                        parkingSpots: obj.amountOfSpots
+                    };
 
-                // The distance should possibly be calculated in the future.
-                let newObj: IParkingSpot = {
-                    name: obj.title,
-                    position: pos,
-                    id: obj.id,
-                    description: obj.id,
-                    distance: -1,
-                    provider: "ParkeringGothenburg",
-                    price: obj.regularPrice,
-                    specialPrice: obj.otherPrice,
-                    parkingSpots: obj.amountOfSpots
-                };
+                    arr.push(newObj);
+                });
+            }
 
-                arr.push(newObj);
-            });
-
+            console.log(
+                "Loaded:: " +
+                    arr.length +
+                    " parkingspots from Parking Gothenburg"
+            );
             return arr;
         })
         .catch(error => {
@@ -140,26 +146,32 @@ function getQParkData(
         })
         .then(data => {
             let formattedArray = Array<IParkingSpot>();
-            data.ParkingFacilities.forEach((obj: any) => {
-                let pos: IPosition = {
-                    longitude: obj.Longitude,
-                    latitude: obj.Latitude
-                };
 
-                let parkingSpot: IParkingSpot = {
-                    name: obj.Title,
-                    position: pos,
-                    id: obj.ID,
-                    description: obj.Description,
-                    distance: obj.Distance,
-                    provider: "Q-Park",
-                    price: "unknown",
-                    specialPrice: "unknown",
-                    parkingSpots: "unknown"
-                };
+            if (data) {
+                data.ParkingFacilities.forEach((obj: any) => {
+                    let pos: IPosition = {
+                        longitude: obj.Longitude,
+                        latitude: obj.Latitude
+                    };
 
-                formattedArray.push(parkingSpot);
-            });
+                    let parkingSpot: IParkingSpot = {
+                        name: obj.Title,
+                        position: pos,
+                        id: obj.ID,
+                        description: obj.Description,
+                        distance: obj.Distance,
+                        provider: "Q-Park",
+                        price: "unknown",
+                        specialPrice: "unknown",
+                        parkingSpots: "unknown"
+                    };
+
+                    formattedArray.push(parkingSpot);
+                });
+            }
+            console.log(
+                "Loaded:: " + formattedArray.length + " parkingspots from QPark"
+            );
             return formattedArray;
         })
         .catch(error => {
