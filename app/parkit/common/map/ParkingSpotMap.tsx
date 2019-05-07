@@ -73,7 +73,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     public componentDidMount() {
         // Move view to user's current location
         navigator.geolocation.getCurrentPosition((position) => {
-            /*this.theMap.current!.animateToRegion(
+            this.theMap.current!.animateToRegion(
                 {
                     latitude: position.coords.latitude,
                     latitudeDelta: defaultLatLong,
@@ -81,7 +81,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     longitudeDelta: defaultLatLong
                 },
                 1
-            );*/
+            );
         });
 
         reaction(
