@@ -1,7 +1,7 @@
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Store from "./Store";
+import { Store } from "./Store";
 
 export default class App extends React.Component {
 
