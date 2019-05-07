@@ -2,8 +2,8 @@
   "parkingspots": [
     {
       "position": {
-        "longitude": 57.68972,
-        "latitude": 11.97321
+        "longitude": 11.97321,
+        "latitude": 57.68972
       },
       "id": 1,
       "name": "Chalmers",
@@ -13,8 +13,8 @@
     },
     {
       "position": {
-        "longitude": 57.69658,
-        "latitude": 11.98844
+        "longitude": 11.98844,
+        "latitude": 57.69658
       },
       "id": 2,
       "name": "Lisseberg",
@@ -24,14 +24,14 @@
     },
     {
       "position": {
-        "longitude": 57.7058,
-        "latitude": 11.9875
+        "longitude": 11.9875,
+        "latitude": 57.7058
       },
       "id": 3,
       "name": "Ullevi",
       "distance": 1.05,
       "city": "Gothenburg",
-      "owner": "Easy park"
+      "owner": "Easypark"
     }
   ]
 }

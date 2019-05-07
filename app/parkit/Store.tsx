@@ -1,21 +1,50 @@
-import { action, observable } from "mobx";
+import { action, computed, observable } from "mobx";
+import data from "./assets/temp.json";
+import { IParkingSpot } from "./types/ParkingSpots.js";
 
 /**
  * Store which contains the state of the whole application
  */
+// configure({ enforceActions: "always" });
+
 export class Store {
+
+    /**
+     * All parking spots which have been loaded by the application mapped by their id
+     * When this is made dynamic it should probably be made @observable
+     */
+    public allParkingSpots: Map<number, IParkingSpot> = new Map<number, IParkingSpot>();
+
+    /**
+     * The currently selected parking spot
+     */
+    @observable public selected: number;
 
     /**
      * List of all parking spots which are being rented by the user
      */
-    @observable
-    public bookedParkingSpots: number[] = new Array();
+    @observable public bookedParkingSpots: number[] = new Array();
+
+    constructor() {
+        (data.parkingspots as IParkingSpot[])
+        .forEach((parkingSpot) => this.allParkingSpots.set(parkingSpot.id, parkingSpot));
+        this.selected = -1;
+    }
+    /**
+     * @returns the coordinates of the currently selected parking spot
+     */
+    @computed
+    get selectedParkingSpot() {
+        return this.allParkingSpots.get(this.selected);
+    }
 
     /**
-     * Number of actions executed on the store
+     * * Unmapped version of the 'allParkingSpots' map
      */
-    @observable
-    public numActions: number = 0;
+    @computed
+    get allParkingSpotsList() {
+        return Array.from(this.allParkingSpots.values());
+    }
 
     /**
      * Adds a parking spot to the bookedParkingSpots list
@@ -28,7 +57,6 @@ export class Store {
             throw new Error("Parking spot already booked");
         }
         this.bookedParkingSpots.push(parkingSpot);
-        this.numActions++;
     }
 
     /**
@@ -42,6 +70,6 @@ export class Store {
             throw new Error("Parking spot is not booked");
         }
         this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => parkingSpot !== item);
-        this.numActions++;
     }
+
 }
