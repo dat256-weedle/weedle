@@ -1,3 +1,5 @@
+### *Enligt diskussion med Håkan, bestämdes det att fortsätta med reflektionerna efter omtentavecka och påskledighet.*
+
 # First weeks reflection.
 
 ## What do I want to learn or understand better?

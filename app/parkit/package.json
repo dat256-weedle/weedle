@@ -25,7 +25,8 @@
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "3.3.2",
     "ts-jest": "^24.0.2",
-    "tslib": "1.9.3"
+    "tslib": "1.9.3",
+    "tslint-config-prettier": "^1.18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
