@@ -1,5 +1,4 @@
 import { action, computed, observable } from "mobx";
-import data from "./assets/temp.json";
 import { IParkingSpot } from "./types/ParkingSpots.js";
 
 /**
@@ -8,27 +7,28 @@ import { IParkingSpot } from "./types/ParkingSpots.js";
 // configure({ enforceActions: "always" });
 
 export class Store {
-
     /**
      * All parking spots which have been loaded by the application mapped by their id
      * When this is made dynamic it should probably be made @observable
      */
-    public allParkingSpots: Map<number, IParkingSpot> = new Map<number, IParkingSpot>();
+    @observable
+    public allParkingSpots: Map<string, IParkingSpot> = new Map<
+        string,
+        IParkingSpot
+    >();
 
     /**
      * The currently selected parking spot
      */
-    @observable public selected: number;
+    @observable public selected: string;
 
     /**
      * List of all parking spots which are being rented by the user
      */
-    @observable public bookedParkingSpots: number[] = new Array();
+    @observable public bookedParkingSpots: string[] = new Array();
 
     constructor() {
-        (data.parkingspots as IParkingSpot[])
-        .forEach((parkingSpot) => this.allParkingSpots.set(parkingSpot.id, parkingSpot));
-        this.selected = -1;
+        this.selected = "-1";
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -52,7 +52,7 @@ export class Store {
      * @throws If parking spot with the same id is already booked by user
      */
     @action
-    public bookParkingSpot(parkingSpot: number) {
+    public bookParkingSpot(parkingSpot: string) {
         if (this.bookedParkingSpots.includes(parkingSpot)) {
             throw new Error("Parking spot already booked");
         }
@@ -65,11 +65,45 @@ export class Store {
      * @throws If the parking spot is not already booked
      */
     @action
-    public unBookParkingSpot(parkingSpot: number) {
+    public unBookParkingSpot(parkingSpot: string) {
         if (!this.bookedParkingSpots.includes(parkingSpot)) {
             throw new Error("Parking spot is not booked");
         }
-        this.bookedParkingSpots = this.bookedParkingSpots.filter((item) => parkingSpot !== item);
+        this.bookedParkingSpots = this.bookedParkingSpots.filter(
+            item => parkingSpot !== item
+        );
+        this.bookedParkingSpots = this.bookedParkingSpots.filter(
+            item => parkingSpot !== item
+        );
     }
 
+    /**
+     * Adds / updates parking spots to the store.
+     * @param newParkingSpots parkingSpots to be added to the store.
+     */
+    @action
+    public assignParkingSpots(newParkingSpots: IParkingSpot[]) {
+        let numNew: number = newParkingSpots.length;
+        let newAllParkingSpots = new Map<string, IParkingSpot>();
+
+        newParkingSpots.forEach((obj: IParkingSpot) => {
+            newAllParkingSpots.set(obj.id, obj);
+        });
+
+        if (this.allParkingSpots) {
+            this.allParkingSpots.forEach((value: IParkingSpot, key: string) => {
+                if (newAllParkingSpots.has(key) == false) {
+                    newAllParkingSpots.set(key, value);
+                }
+            });
+        }
+
+        this.allParkingSpots = newAllParkingSpots;
+        console.log(
+            "added/updated " +
+                numNew +
+                " parkingSpots, total number of parkingSpots now at " +
+                this.allParkingSpots.size
+        );
+    }
 }

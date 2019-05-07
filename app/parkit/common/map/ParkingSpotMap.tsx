@@ -51,28 +51,31 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 showsUserLocation={true}
                 showsMyLocationButton={true}
                 pitchEnabled={false}
-                onRegionChangeComplete={(region) => this.currentRegion = region}
-                onPress={(e) => this.onPressEvent(e as any)}
-                customMapStyle={this.props.nightmode ? nightmodeStyle : daymodeStyle}
+                onRegionChangeComplete={region => (this.currentRegion = region)}
+                onPress={e => this.onPressEvent(e as any)}
+                customMapStyle={
+                    this.props.nightmode ? nightmodeStyle : daymodeStyle
+                }
                 // Stupid hack to make the 'show user location' button appear on android
                 // from https://github.com/react-native-community/react-native-maps/issues/1033
                 onMapReady={() => this.setState({ width: 0 })}
             >
-                {this.store.allParkingSpotsList.map((parkingSpot) => {
-                    return (<ParkingSpotMarker
-                        parkingSpot={parkingSpot}
-                        key={parkingSpot.id}
-                        isSelected={this.store.selected === parkingSpot.id} />
-                        );
-                    })
-                }
+                {this.store.allParkingSpotsList.map(parkingSpot => {
+                    return (
+                        <ParkingSpotMarker
+                            parkingSpot={parkingSpot}
+                            key={parkingSpot.id}
+                            isSelected={this.store.selected === parkingSpot.id}
+                        />
+                    );
+                })}
             </MapView>
         );
     }
 
     public componentDidMount() {
         // Move view to user's current location
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition(position => {
             this.theMap.current!.animateToRegion(
                 {
                     latitude: position.coords.latitude,
@@ -86,43 +89,55 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         reaction(
             () => this.store.selectedParkingSpot,
-            (parkingSpot) => {
-                if (parkingSpot && !this.positionIsInCurrentRegion(parkingSpot.position)) {
-                    this.theMap.current!.animateToCoordinate(parkingSpot.position);
+            parkingSpot => {
+                if (
+                    parkingSpot &&
+                    !this.positionIsInCurrentRegion(parkingSpot.position)
+                ) {
+                    this.theMap.current!.animateToCoordinate(
+                        parkingSpot.position
+                    );
                 }
             }
-
         );
     }
 
     @action
-    private onPressEvent = (e: MapEvent<{ action: "marker-press", id: string }>) => {
-
+    private onPressEvent = (
+        e: MapEvent<{ action: "marker-press"; id: string }>
+    ) => {
         const { id } = e.nativeEvent;
 
         if (id) {
-            const numId = Number.parseInt(id, 10);
-            this.store.selected = numId;
+            this.store.selected = id;
         }
-
-    }
+    };
 
     /**
      * Checks if
      */
     private positionIsInCurrentRegion = (position: IPosition) => {
+        if (!this.currentRegion) {
+            return false;
+        }
 
-        if (!this.currentRegion) { return false; }
+        const {
+            latitude,
+            longitude,
+            latitudeDelta,
+            longitudeDelta
+        } = this.currentRegion;
+        const latMax = latitude + latitudeDelta / 2;
+        const latMin = latitude - latitudeDelta / 2;
+        const lonMax = longitude + longitudeDelta / 2;
+        const lonMin = longitude - longitudeDelta / 2;
 
-        const { latitude, longitude, latitudeDelta, longitudeDelta } = this.currentRegion;
-        const latMax = latitude + (latitudeDelta / 2);
-        const latMin = latitude - (latitudeDelta / 2);
-        const lonMax = longitude + (longitudeDelta / 2);
-        const lonMin = longitude - (longitudeDelta / 2);
-
-        if (position.latitude > latMax || position.latitude < latMin) { return false; }
-        if (position.longitude > lonMax || position.longitude < lonMin) { return false; }
+        if (position.latitude > latMax || position.latitude < latMin) {
+            return false;
+        }
+        if (position.longitude > lonMax || position.longitude < lonMin) {
+            return false;
+        }
         return true;
-
-    }
+    };
 }
