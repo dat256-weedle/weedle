@@ -1,27 +1,50 @@
-import { action, observable } from "mobx";
-import { IParkingSpot } from "./types/ParkingSpots";
+import { action, computed, observable } from "mobx";
+import { IParkingSpot } from "./types/ParkingSpots.js";
 
 /**
  * Store which contains the state of the whole application
  */
+// configure({ enforceActions: "always" });
+
 export class Store {
     /**
-     * List of all the parkingspots
+     * All parking spots which have been loaded by the application mapped by their id
+     * When this is made dynamic it should probably be made @observable
      */
     @observable
-    public parkingSpots: IParkingSpot[] = Array<IParkingSpot>();
+    public allParkingSpots: Map<string, IParkingSpot> = new Map<
+        string,
+        IParkingSpot
+    >();
+
+    /**
+     * The currently selected parking spot
+     */
+    @observable public selected: string;
 
     /**
      * List of all parking spots which are being rented by the user
      */
-    @observable
-    public bookedParkingSpots: number[] = new Array();
+    @observable public bookedParkingSpots: string[] = new Array();
+
+    constructor() {
+        this.selected = "-1";
+    }
+    /**
+     * @returns the coordinates of the currently selected parking spot
+     */
+    @computed
+    get selectedParkingSpot() {
+        return this.allParkingSpots.get(this.selected);
+    }
 
     /**
-     * Number of actions executed on the store
+     * * Unmapped version of the 'allParkingSpots' map
      */
-    @observable
-    public numActions: number = 0;
+    @computed
+    get allParkingSpotsList() {
+        return Array.from(this.allParkingSpots.values());
+    }
 
     /**
      * Adds a parking spot to the bookedParkingSpots list
@@ -29,12 +52,11 @@ export class Store {
      * @throws If parking spot with the same id is already booked by user
      */
     @action
-    public bookParkingSpot(parkingSpot: number) {
+    public bookParkingSpot(parkingSpot: string) {
         if (this.bookedParkingSpots.includes(parkingSpot)) {
             throw new Error("Parking spot already booked");
         }
         this.bookedParkingSpots.push(parkingSpot);
-        this.numActions++;
     }
 
     /**
@@ -43,14 +65,16 @@ export class Store {
      * @throws If the parking spot is not already booked
      */
     @action
-    public unBookParkingSpot(parkingSpot: number) {
+    public unBookParkingSpot(parkingSpot: string) {
         if (!this.bookedParkingSpots.includes(parkingSpot)) {
             throw new Error("Parking spot is not booked");
         }
         this.bookedParkingSpots = this.bookedParkingSpots.filter(
             item => parkingSpot !== item
         );
-        this.numActions++;
+        this.bookedParkingSpots = this.bookedParkingSpots.filter(
+            item => parkingSpot !== item
+        );
     }
 
     /**
@@ -60,24 +84,26 @@ export class Store {
     @action
     public assignParkingSpots(newParkingSpots: IParkingSpot[]) {
         let numNew: number = newParkingSpots.length;
-        let newIds = newParkingSpots.map(obj => {
-            return obj.id;
+        let newAllParkingSpots = new Map<string, IParkingSpot>();
+
+        newParkingSpots.forEach((obj: IParkingSpot) => {
+            newAllParkingSpots.set(obj.id, obj);
         });
 
-        if (this.parkingSpots) {
-            this.parkingSpots.forEach(spot => {
-                if (newIds.includes(spot.id) == false) {
-                    newParkingSpots.push(spot);
+        if (this.allParkingSpots) {
+            this.allParkingSpots.forEach((value: IParkingSpot, key: string) => {
+                if (newAllParkingSpots.has(key) == false) {
+                    newAllParkingSpots.set(key, value);
                 }
             });
         }
 
-        this.parkingSpots = newParkingSpots;
+        this.allParkingSpots = newAllParkingSpots;
         console.log(
             "added/updated " +
                 numNew +
                 " parkingSpots, total number of parkingSpots now at " +
-                this.parkingSpots.length
+                this.allParkingSpots.size
         );
     }
 }

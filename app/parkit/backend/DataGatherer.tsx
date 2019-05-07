@@ -147,7 +147,7 @@ function getQParkData(
         .then(data => {
             let formattedArray = Array<IParkingSpot>();
 
-            if (data) {
+            if (data && data.ParkingFacilities) {
                 data.ParkingFacilities.forEach((obj: any) => {
                     let pos: IPosition = {
                         longitude: obj.Longitude,
@@ -169,9 +169,7 @@ function getQParkData(
                     formattedArray.push(parkingSpot);
                 });
             }
-            console.log(
-                "Loaded:: " + formattedArray.length + " parkingspots from QPark"
-            );
+            console.log();
             return formattedArray;
         })
         .catch(error => {
