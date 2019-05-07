@@ -14,7 +14,7 @@ interface IProps {
 }
 
 interface IState {
-    width: string;
+    width: number;
 }
 
 const defaultLatLong = 0.092;
@@ -30,7 +30,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
         this.state = {
-            width: "99%",
+            width: 1,
         };
     }
 
@@ -40,7 +40,9 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 style={{
                     alignItems: "center",
                     flex: 1,
-                    width: this.state.width
+                    marginBottom: this.state.width,
+                    //position: 'absolute',
+                    justifyContent: 'center',
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
                 provider={"google"}
@@ -54,7 +56,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 customMapStyle={this.props.nightmode ? nightmodeStyle : daymodeStyle}
                 // Stupid hack to make the 'show user location' button appear on android
                 // from https://github.com/react-native-community/react-native-maps/issues/1033
-                onMapReady={() => this.setState({ width: "100%" })}
+                onMapReady={() => this.setState({ width: 0 })}
             >
                 {this.store.allParkingSpotsList.map((parkingSpot) => {
                     return (<ParkingSpotMarker
@@ -71,7 +73,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     public componentDidMount() {
         // Move view to user's current location
         navigator.geolocation.getCurrentPosition((position) => {
-            this.theMap.current!.animateToRegion(
+            /*this.theMap.current!.animateToRegion(
                 {
                     latitude: position.coords.latitude,
                     latitudeDelta: defaultLatLong,
@@ -79,7 +81,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     longitudeDelta: defaultLatLong
                 },
                 1
-            );
+            );*/
         });
 
         reaction(
