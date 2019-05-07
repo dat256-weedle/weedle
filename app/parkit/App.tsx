@@ -1,17 +1,19 @@
-import { ScreenOrientation } from 'expo';
+import { ScreenOrientation } from "expo";
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import RentButton from "./common/RentButton";
 import ParkingSpotMap from "./common/map/ParkingSpotMap";
 import { Store } from "./Store";
+import { getData } from "./backend/DataGatherer";
 
 export default class App extends React.Component {
-
     private store: Store;
 
     constructor(props: any) {
         super(props);
         this.store = new Store();
+        getData(this.store);
         ScreenOrientation.allow("ALL");
     }
 
@@ -20,7 +22,7 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <ParkingSpotMap nightmode={false}></ParkingSpotMap>
+                    <ParkingSpotMap nightmode={false} />
                 </View>
             </Provider>
         );
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         paddingRight: 0,
         paddingTop: 20,
-        width: "100%",
+        width: "100%"
     },
-    listContainer: {},
+    listContainer: {}
 });
