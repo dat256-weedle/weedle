@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from "react-native";
 
 export const List: React.FunctionComponent<any> = ({children}) => (
     <View style={styles.listContainer}>

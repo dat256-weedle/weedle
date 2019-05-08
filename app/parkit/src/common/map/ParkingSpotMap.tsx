@@ -42,7 +42,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     flex: 1,
                     marginBottom: this.state.width,
                     // position: 'absolute',
-                    justifyContent: 'center',
+                    justifyContent: "center",
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
                 provider={"google"}

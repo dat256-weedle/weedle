@@ -1,5 +1,5 @@
 import React from "react";
-import List from '../../common/list/List';
+import List from "../../common/list/List";
 import ParkingElement from "../../common/parkingelement/ParkingElement";
 import { IParkingSpot } from "../../types";
 
