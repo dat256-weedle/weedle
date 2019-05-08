@@ -60,7 +60,8 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
                                 backgroundColor: background,
                                 borderColor: border,
                                 paddingHorizontal,
-                                paddingVertical
+                                paddingVertical,
+                                width: 50,
                             }
                         ]}
                     >
