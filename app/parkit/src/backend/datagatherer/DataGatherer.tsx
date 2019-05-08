@@ -1,5 +1,5 @@
-import { IParkingSpot, IPosition } from "../types/ParkingSpots";
-import { Store } from "../Store";
+import { IParkingSpot, IPosition } from "./../../types";
+import { Store } from "./../store/Store";
 
 /**
  * Converts degrees to radians.
@@ -17,19 +17,19 @@ function degToRad(degrees: number): number {
  * @returns The distance in meters
  */
 export function getDistance(pos1: IPosition, pos2: IPosition): number {
-    let earthRadius = 6371000; // The earths average radius in meters.
-    if (pos1.latitude == pos2.latitude && pos1.longitude == pos2.longitude) {
+    const earthRadius = 6371000; // The earths average radius in meters.
+    if (pos1.latitude === pos2.latitude && pos1.longitude === pos2.longitude) {
         return 0;
     }
 
-    let deltaLat = degToRad(Math.abs(pos1.latitude - pos2.latitude));
-    let deltaLon = degToRad(Math.abs(pos1.longitude - pos2.longitude));
-    let a =
+    const deltaLat = degToRad(Math.abs(pos1.latitude - pos2.latitude));
+    const deltaLon = degToRad(Math.abs(pos1.longitude - pos2.longitude));
+    const a =
         Math.pow(Math.sin(deltaLat / 2), 2) +
         Math.cos(degToRad(pos1.latitude)) *
             Math.cos(degToRad(pos2.latitude)) *
             Math.pow(Math.sin(deltaLon / 2), 2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return c * earthRadius;
 }
 
@@ -82,16 +82,16 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
             return response.json();
         })
         .then(data => {
-            let arr = new Array<IParkingSpot>();
+            const arr = new Array<IParkingSpot>();
             if (data) {
                 data.forEach((obj: any) => {
-                    let pos: IPosition = {
+                    const pos: IPosition = {
                         longitude: obj.lng as number,
                         latitude: obj.lat as number
                     };
 
                     // The distance should possibly be calculated in the future.
-                    let newObj: IParkingSpot = {
+                    const newObj: IParkingSpot = {
                         name: obj.title,
                         position: pos,
                         id: obj.id,
@@ -145,16 +145,16 @@ function getQParkData(
             return response.json();
         })
         .then(data => {
-            let formattedArray = Array<IParkingSpot>();
+            const formattedArray = Array<IParkingSpot>();
 
             if (data && data.ParkingFacilities) {
                 data.ParkingFacilities.forEach((obj: any) => {
-                    let pos: IPosition = {
+                    const pos: IPosition = {
                         longitude: obj.Longitude,
                         latitude: obj.Latitude
                     };
 
-                    let parkingSpot: IParkingSpot = {
+                    const parkingSpot: IParkingSpot = {
                         name: obj.Title,
                         position: pos,
                         id: obj.ID,

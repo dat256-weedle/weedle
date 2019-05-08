@@ -1,5 +1,5 @@
 import { action, computed, observable } from "mobx";
-import { IParkingSpot } from "./types/ParkingSpots.js";
+import { IParkingSpot } from "./../../types";
 
 /**
  * Store which contains the state of the whole application
@@ -83,8 +83,8 @@ export class Store {
      */
     @action
     public assignParkingSpots(newParkingSpots: IParkingSpot[]) {
-        let numNew: number = newParkingSpots.length;
-        let newAllParkingSpots = new Map<string, IParkingSpot>();
+        const numNew: number = newParkingSpots.length;
+        const newAllParkingSpots = new Map<string, IParkingSpot>();
 
         newParkingSpots.forEach((obj: IParkingSpot) => {
             newAllParkingSpots.set(obj.id, obj);
@@ -92,7 +92,7 @@ export class Store {
 
         if (this.allParkingSpots) {
             this.allParkingSpots.forEach((value: IParkingSpot, key: string) => {
-                if (newAllParkingSpots.has(key) == false) {
+                if (newAllParkingSpots.has(key) === false) {
                     newAllParkingSpots.set(key, value);
                 }
             });

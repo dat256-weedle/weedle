@@ -1,8 +1,8 @@
 import { mount } from "enzyme";
 import React from "react";
 import { Button } from "react-native-material-ui";
-import RentButton from "../../common/RentButton";
-import { Store } from "../../Store";
+import { Store } from "../../src/backend/store/Store";
+import RentButton from "../../src/common/rentbutton/RentButton";
 
 const id = (Math.random() * Number.MAX_VALUE).toString();
 const store = new Store();

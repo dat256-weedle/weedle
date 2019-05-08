@@ -1,10 +1,10 @@
 import React from "react";
-import { IParkingSpot } from "../../../types/ParkingSpots";
-import ParkingElement from "../../../src/common/ParkingElement";
-import List from '../../../common/list/List';
+import List from "../../common/list/List";
+import ParkingElement from "../../common/parkingelement/ParkingElement";
+import { IParkingSpot } from "../../types";
 
 interface IProps {
-    array: Array<IParkingSpot>;
+    array: IParkingSpot[];
 }
 
 export default class PSpotsList extends React.Component<IProps> {

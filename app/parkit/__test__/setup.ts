@@ -5,9 +5,9 @@ import { GlobalWithFetchMock } from "jest-fetch-mock";
 /**
  * Set up DOM in node.js environment for Enzyme to mount to
  */
-const { JSDOM } = require('jsdom');
+import { JSDOM } from "jsdom";
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM("<!doctype html><html><body></body></html>");
 const { window } = jsdom;
 
 function copyProps(src: any, target: any) {
@@ -20,7 +20,7 @@ function copyProps(src: any, target: any) {
 (global as any).window = window;
 (global as any).document = window.document;
 (global as any).navigator = {
-  userAgent: 'node.js',
+  userAgent: "node.js",
 };
 copyProps(window, global);
 

@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-material-ui";
-import { Store } from "../Store";
+import { Store } from "../../backend/store/Store";
 
 /**
  * id: id of the parking spot

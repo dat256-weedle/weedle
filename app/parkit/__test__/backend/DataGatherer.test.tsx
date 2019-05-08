@@ -1,12 +1,12 @@
-import { IPosition } from "../../types/ParkingSpots";
-import { getDistance } from "../../backend/DataGatherer";
+import { getDistance } from "../../src/backend/datagatherer/DataGatherer";
+import { IPosition } from "../../src/types";
 
-let pos1: IPosition = {
+const pos1: IPosition = {
     latitude: 57.617,
     longitude: 12.0662
 };
 
-let pos2: IPosition = {
+const pos2: IPosition = {
     latitude: 57.5963,
     longitude: 12.0156
 };
@@ -14,27 +14,27 @@ let pos2: IPosition = {
 testDistanceCalc(pos1, pos2, 3803); // The 'accurate distance' according to wolfram alpha
 
 function testDistanceCalc(
-    pos1: IPosition,
-    pos2: IPosition,
+    posOne: IPosition,
+    posTwo: IPosition,
     accurateDistance: number,
     errorMargin: number = 20
 ) {
     test(
         "The distance between (" +
-            pos1.latitude +
+            posOne.latitude +
             ", " +
-            pos1.longitude +
+            posOne.longitude +
             ") and (" +
-            pos2.latitude +
+            posTwo.latitude +
             ", " +
-            pos2.longitude +
+            posTwo.longitude +
             ") should be within " +
             errorMargin +
             " kilometers of " +
             accurateDistance,
         () => {
             expect(
-                Math.abs(getDistance(pos1, pos2) - accurateDistance)
+                Math.abs(getDistance(posOne, posTwo) - accurateDistance)
             ).toBeLessThan(errorMargin);
         }
     );
