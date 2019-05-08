@@ -2,10 +2,9 @@ import { ScreenOrientation } from "expo";
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import RentButton from "./common/RentButton";
-import ParkingSpotMap from "./common/map/ParkingSpotMap";
-import { Store } from "./Store";
-import { getData } from "./backend/DataGatherer";
+import { getData } from "./src/backend/datagatherer/DataGatherer";
+import { Store } from "./src/backend/store/Store";
+import ParkingSpotMap from "./src/common/map/ParkingSpotMap";
 
 export default class App extends React.Component {
     private store: Store;

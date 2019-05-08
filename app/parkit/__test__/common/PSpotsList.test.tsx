@@ -1,10 +1,10 @@
 import { render } from "enzyme";
 import React from "react";
-import { IParkingSpot } from "../../types/ParkingSpots";
-import PSpotsList from "../../use-cases/main/list-pspots/PSpotsList";
+import { IParkingSpot } from "../../src/types";
+import PSpotsList from "../../src/usage/list-pspots/PSpotsList";
 
 it("Should show a list with parking-elements ", () => {
-    let data = new Array<IParkingSpot>();
+    const data = new Array<IParkingSpot>();
     data.push(
         {
             id: "000001",

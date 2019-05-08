@@ -2,8 +2,8 @@ import React from "react";
 import { Animated, Image, StyleSheet } from "react-native";
 import { Marker } from "react-native-maps";
 import { AnimatedValue } from "react-navigation";
-import { getLogo } from "../../LogoLoader";
-import { IParkingSpot } from "../../types/ParkingSpots";
+import { getLogo } from "../../../LogoLoader";
+import { IParkingSpot } from "../../types";
 
 interface IProps {
     parkingSpot: IParkingSpot;

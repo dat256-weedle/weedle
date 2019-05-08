@@ -2,8 +2,8 @@ import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
 import MapView, { MapEvent, Region } from "react-native-maps";
-import { Store } from "../../Store";
-import { IPosition } from "../../types/ParkingSpots";
+import { Store } from "../../backend/store/Store";
+import { IPosition } from "../../types";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
@@ -41,7 +41,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     alignItems: "center",
                     flex: 1,
                     marginBottom: this.state.width,
-                    //position: 'absolute',
+                    // position: 'absolute',
                     justifyContent: 'center',
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
