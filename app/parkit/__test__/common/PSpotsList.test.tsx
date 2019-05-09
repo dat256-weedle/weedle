@@ -1,6 +1,6 @@
 import { render } from "enzyme";
 import React from "react";
-import { IParkingSpot } from "../../src/types";
+import { IParkingSpot, Providers } from "../../src/types";
 import PSpotsList from "../../src/usage/list-pspots/PSpotsList";
 
 it("Should show a list with parking-elements ", () => {
@@ -13,7 +13,7 @@ it("Should show a list with parking-elements ", () => {
             description: "In some guys basement!",
             parkingSpots: "1, only for small vehicles.",
             distance: 5,
-            provider: "Some_guy",
+            provider: Providers.ParkeringGothenburg,
             price: "15kr / h",
             specialPrice: "150kr / h"
         },
@@ -24,7 +24,7 @@ it("Should show a list with parking-elements ", () => {
             description: "The largest parking house in the world",
             parkingSpots: "221 million cars",
             distance: 15000,
-            provider: "WPO, the World Parking Organization",
+            provider: Providers.QPark,
             price: "1$ / year",
             specialPrice: "2$ / year, for americans only!"
         },
@@ -35,7 +35,7 @@ it("Should show a list with parking-elements ", () => {
             description: "Parking for some fun place",
             parkingSpots: "42 cars",
             distance: 150,
-            provider: "Some Fun Place Inc",
+            provider: Providers.EasyPark,
             price: "195kr / h",
             specialPrice: "250kr / h during christmas"
         }
