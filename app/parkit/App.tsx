@@ -1,20 +1,20 @@
+import { ScreenOrientation } from "expo";
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-// import data from "./assets/temp.json";
-import RentButton from "./common/RentButton";
-import { Store } from "./Store";
-// import { IParkingSpot } from "./types/ParkingSpots.js";
-import Menu from "./src/common/Menu"
+import { getData } from "./src/backend/datagatherer/DataGatherer";
+import { Store } from "./src/backend/store/Store";
+import ParkingSpotMap from "./src/common/map/ParkingSpotMap";
+import Menu from "./src/common/Menu";
 
 export default class App extends React.Component {
-
     private store: Store;
 
     constructor(props: any) {
         super(props);
         this.store = new Store();
-        // const spots = data.parkingspots as IParkingSpot[];
+        getData(this.store);
+        ScreenOrientation.allow("ALL");
     }
 
     public render() {
@@ -23,6 +23,7 @@ export default class App extends React.Component {
             <Provider store={this.store}>
                 <View style={styles.container}>
                     <Menu/>
+                    <ParkingSpotMap nightmode={false} />
                 </View>
             </Provider>
         );
@@ -31,13 +32,15 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
-        justifyContent: "center",
+        // alignItems: "center",
+        backgroundColor: "#fff",
+        flex: 1,
         flexDirection: "column",
-        width: "100%",
         height: "100%",
+        justifyContent: "center",
+        paddingRight: 0,
         paddingTop: 20,
-        paddingRight: 0
+        width: "100%"
     },
     listContainer: {}
 });

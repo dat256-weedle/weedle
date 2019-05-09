@@ -40,7 +40,7 @@ export default class ParkingElement extends React.Component<IProps> {
             textstyle: { marginTop: 15, fontWeight: "bold" },
         });
         return (<View style={style.container} >
-            {RowItem(<Image source={require("../../assets/carpark.png")} style={style.image} />)}
+            {RowItem(<Image source={require("../../../assets/carpark.png")} style={style.image} />)}
             {RowItem(<Text style={style.textstyle}>ID: {id} </Text>)}
             {RowItem(<Text style={style.textstyle}>Distance: {distance} km</Text>)}
             {RowItem(<Text style={style.textstyle}>Price: {price} kr/h</Text>)}

@@ -1,12 +1,12 @@
 import { mount } from "enzyme";
 import React from "react";
 import { Button } from "react-native-material-ui";
-import RentButton from "../../common/RentButton";
-import { Store } from "../../Store";
+import { Store } from "../../src/backend/store/Store";
+import RentButton from "../../src/common/rentbutton/RentButton";
 
-const id = Math.random() * Number.MAX_VALUE;
+const id = (Math.random() * Number.MAX_VALUE).toString();
 const store = new Store();
-let app = mount(<RentButton id={id} store={store}/>);
+let app = mount(<RentButton id={id} store={store} />);
 
 it("Should add ids to the store when clicked", () => {
     app.find(Button).props().onPress!();
@@ -15,9 +15,8 @@ it("Should add ids to the store when clicked", () => {
 });
 
 it("Should remove ids from the store when clicked again", () => {
-
     expect(store.bookedParkingSpots).toContain(id);
-    app = mount(<RentButton id={id} store={store}/>);
+    app = mount(<RentButton id={id} store={store} />);
 
     app.find(Button).props().onPress!();
 
