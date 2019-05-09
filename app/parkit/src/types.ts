@@ -10,7 +10,13 @@ export interface IParkingSpot {
     description: string;
     parkingSpots: string;
     distance: number;
-    provider: string;
+    provider: Providers;
     price: string;
     specialPrice: string;
+}
+
+export enum Providers {
+    ParkeringGothenburg,
+    EasyPark,
+    QPark
 }

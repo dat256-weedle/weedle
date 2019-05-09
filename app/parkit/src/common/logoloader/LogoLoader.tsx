@@ -1,3 +1,4 @@
+import { Providers } from "../../types";
 
 /**
  * Logos of all parking providers
@@ -13,13 +14,13 @@ const logos = {
  * Returns the source of a parking providers logo
  * @param owner name of the owner
  */
-export function getLogo(owner: string) {
-    switch (owner.toLowerCase()) {
-        case "q-park":
+export function getLogo(provider: Providers) {
+    switch (provider) {
+        case Providers.QPark:
             return (logos.qpark);
-        case "easypark":
+        case Providers.EasyPark:
             return (logos.easypark);
-        case "parkeringgothenburg":
+        case Providers.ParkeringGothenburg:
             return (logos.gothenburg);
         default:
             return (logos.default);
