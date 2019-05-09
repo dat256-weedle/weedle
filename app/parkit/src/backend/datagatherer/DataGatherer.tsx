@@ -1,4 +1,4 @@
-import { IParkingSpot, IPosition } from "./../../types";
+import { IParkingSpot, IPosition, Providers } from "./../../types";
 import { Store } from "./../store/Store";
 
 /**
@@ -97,7 +97,7 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
                         id: obj.id,
                         description: obj.id,
                         distance: -1,
-                        provider: "ParkeringGothenburg",
+                        provider: Providers.ParkeringGothenburg,
                         price: obj.regularPrice,
                         specialPrice: obj.otherPrice,
                         parkingSpots: obj.amountOfSpots
@@ -160,7 +160,7 @@ function getQParkData(
                         id: obj.ID,
                         description: obj.Description,
                         distance: obj.Distance,
-                        provider: "Q-Park",
+                        provider: Providers.QPark,
                         price: "unknown",
                         specialPrice: "unknown",
                         parkingSpots: "unknown"
