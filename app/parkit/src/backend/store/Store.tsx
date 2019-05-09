@@ -1,5 +1,6 @@
 import { action, computed, observable } from "mobx";
-import { IParkingSpot } from "./../../types";
+import { IParkingSpot, IPosition } from "./../../types";
+import { getDistance } from "../datagatherer/DataGatherer";
 
 /**
  * Store which contains the state of the whole application
@@ -105,5 +106,47 @@ export class Store {
                 " parkingSpots, total number of parkingSpots now at " +
                 this.allParkingSpots.size
         );
+    }
+
+    /**
+     * Returns a map from a parkingspot to distance from position of length of up to (and including) limit, sorted in order of distance.
+     */
+    public getParkingSpotsByDistance(
+        position: IPosition,
+        limit: Number
+    ): IParkingSpot[] {
+        let parkingSpotToDistMap: Map<IParkingSpot, Number> = new Map<
+            IParkingSpot,
+            Number
+        >();
+
+        Array.from(this.allParkingSpots.values()).forEach(
+            (parkingSpot: IParkingSpot) => {
+                let distance: Number = getDistance(
+                    parkingSpot.position,
+                    position
+                );
+                parkingSpot.distance = Math.trunc(distance as number);
+                parkingSpotToDistMap.set(parkingSpot, distance);
+            }
+        );
+
+        let result: IParkingSpot[] = Array.from(
+            parkingSpotToDistMap.keys()
+        ).sort((a: IParkingSpot, b: IParkingSpot) => {
+            let valA = parkingSpotToDistMap.get(a);
+            let valB = parkingSpotToDistMap.get(b);
+            if (typeof valA === "number" && typeof valB === "number") {
+                if (valA > valB) {
+                    return 1;
+                } else if (valA < valB) {
+                    return -1;
+                }
+            }
+
+            return 0;
+        });
+
+        return result;
     }
 }

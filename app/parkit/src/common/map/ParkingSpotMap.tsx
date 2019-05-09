@@ -1,7 +1,7 @@
 import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
-import MapView, { MapEvent, Region } from "react-native-maps";
+import MapView, { MapEvent, Region, PROVIDER_DEFAULT } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import { IPosition } from "../../types";
 import daymodeStyle from "./MapStyleDay.json";
@@ -30,7 +30,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
         this.state = {
-            width: 1,
+            width: 1
         };
     }
 
@@ -42,10 +42,10 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     flex: 1,
                     marginBottom: this.state.width,
                     // position: 'absolute',
-                    justifyContent: "center",
+                    justifyContent: "center"
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
-                provider={"google"}
+                provider={PROVIDER_DEFAULT}
                 ref={this.theMap}
                 mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
                 showsUserLocation={true}
