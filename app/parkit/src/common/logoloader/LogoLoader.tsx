@@ -19,7 +19,7 @@ export function getLogo(owner: string) {
             return (logos.qpark);
         case "easypark":
             return (logos.easypark);
-        case "parking gothenburg":
+        case "parkeringgothenburg":
             return (logos.gothenburg);
         default:
             return (logos.default);
