@@ -11,7 +11,7 @@ export class Store {
      * All parking spots which have been loaded by the application mapped by their id
      * When this is made dynamic it should probably be made @observable
      */
-    @observable
+    @observable.shallow
     public allParkingSpots: Map<string, IParkingSpot> = new Map<
         string,
         IParkingSpot

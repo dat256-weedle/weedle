@@ -3,10 +3,10 @@
  * Logos of all parking providers
  */
 const logos = {
-    qpark: require("./assets/parking-providers/logo/qpark.png"),
-    easypark: require("./assets/parking-providers/logo/easypark.png"),
-    gothenburg: require("./assets/parking-providers/logo/gothenburg.png"),
-    default: require("./assets/carpark.png")
+    qpark: require("../../../assets/parking-providers/logo/qpark.png"),
+    easypark: require("../../../assets/parking-providers/logo/easypark.png"),
+    gothenburg: require("../../../assets/parking-providers/logo/gothenburg.png"),
+    default: require("../../../assets/carpark.png")
 }
 
 /**
