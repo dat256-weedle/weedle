@@ -2,7 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import { Button } from "react-native-material-ui";
 import { Store } from "../../src/backend/store/Store";
-import RentButton from "../../src/common/rentbutton/RentButton";
+import RentButton from "../../src/common/rentpage/RentButton";
 
 const id = (Math.random() * Number.MAX_VALUE).toString();
 const store = new Store();
