@@ -18,6 +18,12 @@ export class Store {
     >();
 
     /**
+     * List of all cars added in the UserPage
+     */
+    @observable
+    public theCars: Array<string> = new Array();
+
+    /**
      * The currently selected parking spot
      */
     @observable public selected: string;

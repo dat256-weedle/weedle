@@ -26,12 +26,12 @@ export default class CarElement extends Component<ICustomInputProps, IState> {
         return (
             <View style={{alignItems: "center", flexDirection: "column",
                 justifyContent: "flex-start", marginBottom: 10, marginLeft: 10}}>
-                <Image source={require("../../assets/car.png")} style={{width: 50, height: 50}}/>
+                <Image source={require("../../../assets/car.png")} style={{width: 50, height: 50}}/>
                 <View style={{flexDirection: "row", alignItems: "center"}}>
                     <Text style={{fontWeight: "bold"}}>{this.state.reg}</Text>
                     <View>
                     <TouchableOpacity onPress={this.onPressDelete}>
-                        <Image source={require("../../assets/delete.png")} style={{height: 20, marginBottom: 5,
+                        <Image source={require("../../../assets/delete.png")} style={{height: 20, marginBottom: 5,
                             marginLeft: 5,  width: 20}}/>
                     </TouchableOpacity>
                     </View>
