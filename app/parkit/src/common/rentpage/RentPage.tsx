@@ -21,21 +21,6 @@ interface IState {
     selectedCar: string;
 }
 
-const sports = [
-    {
-      label: 'Football',
-      value: 'football',
-    },
-    {
-      label: 'Baseball',
-      value: 'baseball',
-    },
-    {
-      label: 'Hockey',
-      value: 'hockey',
-    },
-  ];
-
 /**
  * Button for renting a parking spot.
  * Text will change between 'Rent' and 'Finish' based on if the parking spot with id = props.id is rented or not.
@@ -57,6 +42,7 @@ export default class RentPage extends React.Component<IProps, IState> {
     public render() {
 
         const { name, description, distance, provider, price, id } = this.props.parkingSpot;
+        const hasCars = this.store.theCars.length !== 0;
         return (
             <View style={{ flex: 1 }}>
                 <Text>{name}</Text>
@@ -68,7 +54,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                 <View>
                     <RNPickerSelect
                         placeholder={{}}
-                        items={sports}
+                        items={hasCars ? this.store.theCars.map((car) =>({value: car, label: car})) : [{value: "nocar", label: "No Cars"}]}
                         onValueChange={value => {
                             this.setState({
                                 selectedCar: value,
@@ -77,7 +63,6 @@ export default class RentPage extends React.Component<IProps, IState> {
                         style={pickerSelectStyles}
                         value={this.state.selectedCar}
                     />
-                    <Text style={styles.text}>{this.state.selectedCar}</Text>
                 </View>
             </View>
         );
