@@ -1,7 +1,7 @@
 import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
-import MapView, { MapEvent, Region, PROVIDER_DEFAULT } from "react-native-maps";
+import MapView, { MapEvent, PROVIDER_DEFAULT, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import { IPosition } from "../../types";
 import daymodeStyle from "./MapStyleDay.json";

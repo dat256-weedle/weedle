@@ -1,6 +1,6 @@
 import { action, computed, observable } from "mobx";
-import { IParkingSpot, IPosition } from "./../../types";
 import { getDistance } from "../datagatherer/DataGatherer";
+import { IParkingSpot, IPosition } from "./../../types";
 
 /**
  * Store which contains the state of the whole application
@@ -114,17 +114,17 @@ export class Store {
      */
     public getParkingSpotsByDistance(
         position: IPosition,
-        limit: Number
+        limit: number
     ): IParkingSpot[] {
-        let parkingSpotToDistMap: Map<IParkingSpot, Number> = new Map<
+        const parkingSpotToDistMap: Map<IParkingSpot, number> = new Map<
             IParkingSpot,
-            Number
+            number
         >();
 
         // Map all the parkingspots to their distance to the 'position'.
         Array.from(this.allParkingSpots.values()).forEach(
             (parkingSpot: IParkingSpot) => {
-                let distance: Number = getDistance(
+                const distance: number = getDistance(
                     parkingSpot.position,
                     position
                 );
@@ -134,11 +134,11 @@ export class Store {
         );
 
         // Now convert the map back to an array and sort it on distance.
-        let pSpots: IParkingSpot[] = Array.from(
+        const pSpots: IParkingSpot[] = Array.from(
             parkingSpotToDistMap.keys()
         ).sort((a: IParkingSpot, b: IParkingSpot) => {
-            let valA = parkingSpotToDistMap.get(a);
-            let valB = parkingSpotToDistMap.get(b);
+            const valA = parkingSpotToDistMap.get(a);
+            const valB = parkingSpotToDistMap.get(b);
             if (typeof valA === "number" && typeof valB === "number") {
                 if (valA > valB) {
                     return 1;
@@ -152,7 +152,7 @@ export class Store {
 
         if (limit > 0 && pSpots.length > 0) {
             // Filter out the 'limit' highest results.
-            let result: IParkingSpot[] = new Array<IParkingSpot>();
+            const result: IParkingSpot[] = new Array<IParkingSpot>();
             for (let i = 0; i < pSpots.length && i < limit; i++) {
                 result[i] = pSpots[i];
             }

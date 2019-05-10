@@ -1,5 +1,4 @@
 import { Providers } from "../../types";
-import { logicalExpression } from "@babel/types";
 
 /**
  * Logos of all parking providers
@@ -32,6 +31,10 @@ export function getLogo(provider: Providers) {
     }
 }
 
+/**
+ *
+ * @param provider
+ */
 export function getListLogo(provider: Providers) {
     switch (provider) {
         case Providers.ParkeringGothenburg:

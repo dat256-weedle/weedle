@@ -105,9 +105,9 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
 
                     if (newObj.price) {
                         let price: string = "";
-                        for (let i: number = 0; i < newObj.price.length; i++) {
-                            if ("0123456789".indexOf(newObj.price[i]) !== -1) {
-                                price = price + newObj.price[i];
+                        for (const char of newObj.price) {
+                            if ("0123456789".indexOf(char) !== -1) {
+                                price = price + char;
                             } else {
                                 break;
                             }

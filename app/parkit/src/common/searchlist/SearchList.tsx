@@ -1,11 +1,11 @@
-import { IPosition, IParkingSpot } from "../../types";
-import React from "react";
-import { Text, View, StyleSheet, FlatList, Image } from "react-native";
-import { SearchBar } from "react-native-elements";
-import ParkingSpotMap from "../map/ParkingSpotMap";
 import { Store } from "backend/store/Store";
 import { inject, observer } from "mobx-react";
+import React from "react";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { SearchBar } from "react-native-elements";
+import { IParkingSpot, IPosition } from "../../types";
 import { getListLogo } from "../logoloader/LogoLoader";
+import ParkingSpotMap from "../map/ParkingSpotMap";
 
 const address = "https://nominatim.openstreetmap.org/search/";
 const parameters = "?format=json&limit=1";
@@ -23,7 +23,7 @@ export async function getCoordsFromQuery(
             return response.json();
         })
         .then(data => {
-            let arr = data as Array<any>;
+            const arr = data as any[];
 
             // Try to get the position from the from the query result.
             if (arr.length > 0) {
@@ -66,6 +66,29 @@ export default class SearchList extends React.Component<IProps, IState> {
         };
     }
 
+    public render() {
+        return (
+            <View style={styles.container}>
+                <SearchBar
+                    round
+                    lightTheme
+                    placeholder="Type here to search..."
+                    value={this.state.searchText}
+                    onChangeText={text => {
+                        if (text === "") {
+                            this.setState({ viewMap: true });
+                        } else {
+                            this.setState({ viewMap: false, searchText: text });
+                            this.loadData();
+                        }
+                    }}
+                    onSubmitEditing={() => this.loadData()}
+                />
+                {this.ChooseRender()}
+            </View>
+        );
+    }
+
     private async loadData() {
         getCoordsFromQuery(this.state.searchText).then(
             (data: void | IPosition) => {
@@ -81,34 +104,11 @@ export default class SearchList extends React.Component<IProps, IState> {
         );
     }
 
-    public render() {
-        return (
-            <View style={styles.container}>
-                <SearchBar
-                    round
-                    lightTheme
-                    placeholder="Type here to search..."
-                    value={this.state.searchText}
-                    onChangeText={text => {
-                        if (text == "") {
-                            this.setState({ viewMap: true });
-                        } else {
-                            this.setState({ viewMap: false, searchText: text });
-                            this.loadData();
-                        }
-                    }}
-                    onSubmitEditing={() => this.loadData()}
-                />
-                {this.ChooseRender()}
-            </View>
-        );
-    }
-
     private listItem(item: any) {
-        let parkingSpot: IParkingSpot = item.item as IParkingSpot;
+        const parkingSpot: IParkingSpot = item.item as IParkingSpot;
 
         let distance: string = "";
-        let distanceNumber: number = parkingSpot.distance;
+        const distanceNumber: number = parkingSpot.distance;
         if (distanceNumber > 1000) {
             distance = (distanceNumber / 1000).toFixed(2) + " km";
         } else {
