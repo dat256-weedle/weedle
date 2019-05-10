@@ -5,7 +5,7 @@ import { SearchBar } from "react-native-elements";
 import ParkingSpotMap from "../map/ParkingSpotMap";
 import { Store } from "backend/store/Store";
 import { inject, observer } from "mobx-react";
-import { getLogo } from "../logoloader/LogoLoader";
+import { getListLogo } from "../logoloader/LogoLoader";
 
 const address = "https://nominatim.openstreetmap.org/search/";
 const parameters = "?format=json&limit=1";
@@ -13,7 +13,12 @@ const parameters = "?format=json&limit=1";
 export async function getCoordsFromQuery(
     query: string
 ): Promise<void | IPosition> {
-    return fetch(address + query + " sweden" + parameters, { method: "GET" })
+    return fetch(
+        address + query + " Gothenburg, västra götaland, sweden" + parameters,
+        {
+            method: "GET"
+        }
+    )
         .then(response => {
             return response.json();
         })
@@ -44,6 +49,7 @@ interface IState {
     viewMap: boolean;
     store: Store;
     searchResults: IParkingSpot[];
+    refreshing: boolean;
 }
 
 @inject("store")
@@ -55,8 +61,24 @@ export default class SearchList extends React.Component<IProps, IState> {
             viewMap: true,
             searchText: "",
             store: props.store!,
-            searchResults: new Array<IParkingSpot>()
+            searchResults: new Array<IParkingSpot>(),
+            refreshing: false
         };
+    }
+
+    private async loadData() {
+        getCoordsFromQuery(this.state.searchText).then(
+            (data: void | IPosition) => {
+                if (typeof data === "object") {
+                    this.setState({
+                        searchResults: this.state.store.getParkingSpotsByDistance(
+                            data,
+                            25
+                        )
+                    });
+                }
+            }
+        );
     }
 
     public render() {
@@ -72,20 +94,10 @@ export default class SearchList extends React.Component<IProps, IState> {
                             this.setState({ viewMap: true });
                         } else {
                             this.setState({ viewMap: false, searchText: text });
-                            getCoordsFromQuery(text).then(
-                                (data: void | IPosition) => {
-                                    if (typeof data === "object") {
-                                        this.setState({
-                                            searchResults: this.state.store.getParkingSpotsByDistance(
-                                                data,
-                                                25
-                                            )
-                                        });
-                                    }
-                                }
-                            );
+                            this.loadData();
                         }
                     }}
+                    onSubmitEditing={() => this.loadData()}
                 />
                 {this.ChooseRender()}
             </View>
@@ -106,7 +118,7 @@ export default class SearchList extends React.Component<IProps, IState> {
         return (
             <View style={styles.listElement}>
                 <Image
-                    source={getLogo(parkingSpot.provider)}
+                    source={getListLogo(parkingSpot.provider)}
                     style={styles.icon}
                 />
                 <View style={styles.centerTexts}>
@@ -130,6 +142,12 @@ export default class SearchList extends React.Component<IProps, IState> {
                     renderItem={this.listItem}
                     ItemSeparatorComponent={this.renderSeparator}
                     keyExtractor={item => item.id}
+                    refreshing={this.state.refreshing}
+                    onRefresh={() => {
+                        this.setState({ refreshing: true });
+                        this.loadData();
+                        this.setState({ refreshing: false });
+                    }}
                 />
             );
         }
@@ -177,7 +195,7 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        width: 130,
+        width: 50,
         height: 50,
         marginRight: 10,
         marginLeft: 10
