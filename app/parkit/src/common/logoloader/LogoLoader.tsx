@@ -32,8 +32,8 @@ export function getLogo(provider: Providers) {
 }
 
 /**
- *
- * @param provider
+ * Used instead of getLogo if you want smaller logo
+ * @param provider of parkingspot
  */
 export function getListLogo(provider: Providers) {
     switch (provider) {

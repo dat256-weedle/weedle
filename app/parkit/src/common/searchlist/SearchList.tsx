@@ -66,6 +66,9 @@ export default class SearchList extends React.Component<IProps, IState> {
         };
     }
 
+    /**
+     * Main render method
+     */
     public render() {
         return (
             <View style={styles.container}>
@@ -89,6 +92,9 @@ export default class SearchList extends React.Component<IProps, IState> {
         );
     }
 
+    /**
+     * Fetches coordinates and sets nearby parkingspots to state
+     */
     private async loadData() {
         getCoordsFromQuery(this.state.searchText).then(
             (data: void | IPosition) => {
@@ -104,6 +110,10 @@ export default class SearchList extends React.Component<IProps, IState> {
         );
     }
 
+    /**
+     * Render method for each listItem
+     * @param item is parkingspot top be rendered
+     */
     private listItem(item: any) {
         const parkingSpot: IParkingSpot = item.item as IParkingSpot;
 
@@ -132,6 +142,9 @@ export default class SearchList extends React.Component<IProps, IState> {
         );
     }
 
+    /**
+     * Render method which returns the parkingspotlist of mapview
+     */
     private ChooseRender() {
         if (this.state.viewMap) {
             return <ParkingSpotMap nightmode={false} />;
@@ -153,6 +166,9 @@ export default class SearchList extends React.Component<IProps, IState> {
         }
     }
 
+    /**
+     * Render method for the separator between listItems
+     */
     private renderSeparator() {
         return (
             <View
