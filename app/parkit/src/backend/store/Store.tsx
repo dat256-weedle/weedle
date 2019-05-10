@@ -109,7 +109,8 @@ export class Store {
     }
 
     /**
-     * Returns a map from a parkingspot to distance from position of length of up to (and including) limit, sorted in order of distance.
+     * Returns an array of parkingspots of max length limit, sorted in order of distance to the given position.
+     * Also sets the distance property of the parkingSpot to the distance to the given position.
      */
     public getParkingSpotsByDistance(
         position: IPosition,
@@ -120,6 +121,7 @@ export class Store {
             Number
         >();
 
+        // Map all the parkingspots to their distance to the 'position'.
         Array.from(this.allParkingSpots.values()).forEach(
             (parkingSpot: IParkingSpot) => {
                 let distance: Number = getDistance(
@@ -131,7 +133,8 @@ export class Store {
             }
         );
 
-        let result: IParkingSpot[] = Array.from(
+        // Now convert the map back to an array and sort it on distance.
+        let pSpots: IParkingSpot[] = Array.from(
             parkingSpotToDistMap.keys()
         ).sort((a: IParkingSpot, b: IParkingSpot) => {
             let valA = parkingSpotToDistMap.get(a);
@@ -147,6 +150,16 @@ export class Store {
             return 0;
         });
 
-        return result;
+        if (limit > 0 && pSpots.length > 0) {
+            // Filter out the 'limit' highest results.
+            let result: IParkingSpot[] = new Array<IParkingSpot>();
+            for (let i = 0; i < pSpots.length && i < limit; i++) {
+                result[i] = pSpots[i];
+            }
+
+            return result;
+        } else {
+            return pSpots;
+        }
     }
 }
