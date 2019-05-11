@@ -1,9 +1,10 @@
 import React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
 
-const Route1 = () => <Text>Placeholder1</Text>;
-const Route2 = () => <Text>Placeholder2</Text>;
-const Profile = () => <Text>Profile</Text>;
+const NavigationMap = () => <Text>ConstText1</Text>;
+const ActiveParking = () => <Text>ConstText2</Text>;
+const History = () => <Text>ConstText3</Text>;
+const Profile = () => <Text>ConstText4</Text>;
 
 interface IState {
   index: number,
@@ -13,8 +14,9 @@ interface IState {
 export default class Menu extends React.Component<any,IState> {
 
   private renderScene = BottomNavigation.SceneMap({
-    heart: Route1,
-    star: Route2,
+    navigationMap: NavigationMap,
+    activeParking: ActiveParking,
+    history: History,
     profile: Profile,
   });
 
@@ -23,8 +25,9 @@ export default class Menu extends React.Component<any,IState> {
     this.state = {
       index: 0,
       routes: [
-        { key: "heart", title: "Placeholder1", icon: "favorite" },
-        { key: "star", title: "Placeholder2", icon: "grade" },
+        { key: "navigationMap", title: "Map", icon: "map" },
+        { key: "activeParking", title: "Active parking", icon: "timelapse" },
+        { key: "history", title: "History", icon: "history" },
         { key: "profile", title: "Profile", icon: "person" },
       ],
     };
