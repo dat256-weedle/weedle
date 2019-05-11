@@ -1,11 +1,12 @@
 import React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
 import ParkingSpotMap from "../../src/common/map/ParkingSpotMap";
+import Screen from "../../src/usage/userpage/Screen"
 
 const NavigationMap = () => <ParkingSpotMap nightmode={false} />;
 const ActiveParking = () => <Text>ConstText2</Text>;
 const History = () => <Text>ConstText3</Text>;
-const Profile = () => <Text>ConstText4</Text>;
+const Profile = () => <Screen/>;
 
 interface IState {
   index: number,
