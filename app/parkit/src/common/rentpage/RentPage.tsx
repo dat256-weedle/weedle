@@ -99,7 +99,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                         />
                         <Divider />
 
-                        <RentButton id={id} disabled={!(hasCars && this.state.endDate)} />
+                        <RentButton id={id} disabled={!(isParked || (hasCars && this.state.endDate))} />
                         <Image source={getLogo(provider)} style={styles.image} />
 
 
