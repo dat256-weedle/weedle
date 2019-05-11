@@ -1,13 +1,14 @@
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker"
 import RNPickerSelect from "react-native-picker-select";
 import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 import { getLogo } from "../logoloader/LogoLoader";
 import RentButton from "./RentButton";
+import { Divider } from 'react-native-material-ui';
 
 
 /**
@@ -49,58 +50,62 @@ export default class RentPage extends React.Component<IProps, IState> {
         const { name, description, distance, provider, price, id } = this.props.parkingSpot;
         const hasCars = this.store.theCars.length !== 0;
         return (
-            <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "stretch", paddingTop: 20 }}>
-                <Text style={styles.titleText}>{name}</Text>
-                <View style={styles.subBox}>
-                    <View>
-                        <Text style={styles.sectionTitleText}>Price</Text>
-                        <Text style={styles.text}>{price}</Text>
-                        <Text style={styles.sectionTitleText}>Distance</Text>
-                        <Text style={styles.text}>{distance}</Text>
+            <ScrollView style={{ backgroundColor: "silver" }}>
+                <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "stretch" }}>
+                    <View style={styles.bigBox}>
+                        <Text style={styles.titleText}>{name}</Text>
+                        <View style={styles.subBox}>
+                            <View>
+                                <Text style={styles.sectionTitleText}>Price</Text>
+                                <Text style={styles.text}>{price}</Text>
+                                <Text style={styles.sectionTitleText}>Distance</Text>
+                                <Text style={styles.text}>{distance}</Text>
+                            </View>
+                            <Image source={getLogo(provider)} style={styles.imageMap} />
+                        </View>
+
+                        <Divider />
+                        <Text style={styles.descriptionText}>{description}</Text>
+                        <Divider />
+
+                        <View style={{ flex: 1, alignItems: "stretch" }}>
+                            <Text style={styles.sectionTitleText}>Car</Text>
+                            <RNPickerSelect
+                                placeholder={{}}
+                                items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "nocar", label: "No Cars" }]}
+                                onValueChange={value => {
+                                    this.setState({
+                                        selectedCar: value,
+                                    });
+                                }}
+                                style={pickerSelectStyles}
+                                value={this.state.selectedCar}
+                            />
+                            <Text style={styles.sectionTitleText}>End date</Text>
+                            <DatePicker
+                                style={{ width: "100%", height: "auto" }}
+                                date={this.state.endDate}
+                                mode="datetime"
+                                placeholder="Select time"
+                                minDate={moment().format()}
+                                maxDate=""
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                is24hour={true}
+                                onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
+                                getDateStr={(date: string) => this.getCalendarDateFormat(date)}
+                                showIcon={false}
+                            />
+                            <Divider style={{}}/>
+                        </View>
+                        <RentButton id={id} disabled={!(hasCars && this.state.endDate)} />
+                        <Image source={getLogo(provider)} style={styles.image} />
+
+
+
                     </View>
-                    <Image source={getLogo(provider)} style={styles.imageMap} />
                 </View>
-                <View style={styles.subBox}>
-                    <Text style={styles.descriptionText}>{description}</Text>
-                </View>
-                <View style={styles.subBox}>
-                    <View style={{flex: 1, alignItems: "stretch"}}>
-                        <Text style={styles.sectionTitleText}>Car</Text>
-                        <RNPickerSelect
-                            placeholder={{}}
-                            items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "nocar", label: "No Cars" }]}
-                            onValueChange={value => {
-                                this.setState({
-                                    selectedCar: value,
-                                });
-                            }}
-                            style={pickerSelectStyles}
-                            value={this.state.selectedCar}
-                        />
-                        <Text style={styles.sectionTitleText}>End date</Text>
-                        <DatePicker
-                            style={{width: "100%"}}
-                            date={this.state.endDate}
-                            mode="datetime"
-                            placeholder="Select time"
-                            minDate={moment().format()}
-                            maxDate=""
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            is24hour={true}
-                            onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
-                            getDateStr={(date: string) => this.getCalendarDateFormat(date)}
-                            showIcon={false}
-                        />
-                    </View>
-
-                </View>
-
-
-                <RentButton id={id} disabled={!(hasCars && this.state.endDate)} />
-                <Image source={getLogo(provider)} style={styles.image} />
-
-            </View>
+            </ScrollView>
         );
 
     }
@@ -127,12 +132,17 @@ export default class RentPage extends React.Component<IProps, IState> {
 const styles = StyleSheet.create({
 
     image: {
-        maxWidth: "100%",
-        height: "auto",
+        flex: 1,
+        height: 50,
+        width: "40%",
+        alignSelf: "center",
         resizeMode: "contain",
-        alignSelf: "center"
     },
-    imageMap: { maxWidth: "40%", height: "auto", resizeMode: "contain" },
+    imageMap: {
+        maxWidth: "40%",
+        height: "auto",
+        resizeMode: "contain"
+    },
 
     text: {
         fontSize: 20,
@@ -148,13 +158,31 @@ const styles = StyleSheet.create({
     descriptionText: {
         fontSize: 20,
         textAlign: "left",
+        margin: 20
+    },
+
+    bigBox: {
+        flex: 1, justifyContent: "flex-start",
+        alignItems: "stretch",
+        margin: 10,
+        padding: 10,
+        backgroundColor: "white",
+        borderRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+
+        elevation: 7,
     },
 
     subBox: {
         justifyContent: "space-between",
         flexDirection: "row",
         padding: 10,
-        backgroundColor: "silver",
         marginTop: 5,
         marginBottom: 5
     },

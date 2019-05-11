@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Button } from "react-native-material-ui";
 import { Store } from "../../backend/store/Store";
 
@@ -35,7 +35,7 @@ export default class RentButton extends React.Component<IProps, {}> {
         const isBooked = this.store.bookedParkingSpots.find((item: string) => item === this.props.id) === undefined;
         return (
             <View>
-                <Button disabled={this.props.disabled} text={isBooked ? "book" : "finish"} onPress={isBooked ? this.rent : this.finish}/>
+                <Button raised primary disabled={!this.props.disabled} text={isBooked ? "book" : "finish"} onPress={isBooked ? this.rent : this.finish} />
             </View>
         );
 
@@ -55,3 +55,11 @@ export default class RentButton extends React.Component<IProps, {}> {
         this.store.unBookParkingSpot(this.props.id);
     };
 }
+
+const styles = StyleSheet.create({
+        RentButton: {
+            width: "100%",
+            height: "50"
+        }
+    }
+)
