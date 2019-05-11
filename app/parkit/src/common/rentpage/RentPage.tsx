@@ -37,8 +37,10 @@ export default class RentPage extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
+        const isParked = (this.store.currentParkingSessions.find((item) => item.parkingSpot.id === this.props.parkingSpot.id ));
         this.state = {
-            selectedCar: "nocar",
+            selectedCar: isParked ? isParked.car : "",
+            endDate: isParked ? isParked.endTime : undefined
         }
     }
 
@@ -46,7 +48,7 @@ export default class RentPage extends React.Component<IProps, IState> {
 
         const { name, description, distance, provider, price, id } = this.props.parkingSpot;
         const hasCars = this.store.theCars.length !== 0;
-        const isParked = !(this.store.bookedParkingSpots.find((item: string) => item === id) === undefined);
+        const isParked = (this.store.currentParkingSessions.find((item) => item.parkingSpot.id === id ));
         const image = this.props.image;
         return (
             <View style={{ flex: 1, justifyContent: "center", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "white" }}>
@@ -70,16 +72,16 @@ export default class RentPage extends React.Component<IProps, IState> {
 
                         <Text style={styles.sectionTitleText}>Car</Text>
                         <RNPickerSelect
-                            placeholder={{}}
-                            items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "nocar", label: "No Cars" }]}
+                            placeholder={{ value: "", label: "Select car" }}
+                            items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "", label: "No Cars" }]}
                             onValueChange={value => {
                                 this.setState({
                                     selectedCar: value,
                                 });
                             }}
-                            style={isParked ? pickerSelectStylesDisabled : pickerSelectStyles}
+                            style={!!isParked ? pickerSelectStylesDisabled : pickerSelectStyles}
                             value={this.state.selectedCar}
-                            disabled={isParked}
+                            disabled={!!isParked}
                         />
                         <Text style={styles.sectionTitleText}>End date</Text>
                         <DatePicker
@@ -95,14 +97,17 @@ export default class RentPage extends React.Component<IProps, IState> {
                             onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
                             getDateStr={(date: Date) => this.getCalendarDateFormat(date)}
                             showIcon={false}
-                            disabled={isParked}
+                            disabled={!!isParked}
                         />
                         <Divider />
 
-                        <RentButton id={id} disabled={!(isParked || (hasCars && this.state.endDate))} />
+                        <RentButton 
+                            isBooked={!!isParked}
+                            parkingSpot={this.props.parkingSpot}
+                            car={this.state.selectedCar}
+                            endDate={this.state.endDate}
+                            />
                         <Image source={getLogo(provider)} style={styles.image} />
-
-
 
                     </View>
                 </ScrollView>

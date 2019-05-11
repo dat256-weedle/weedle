@@ -1,22 +1,27 @@
+import { action } from 'mobx';
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-material-ui";
+import { IParkingSpot } from 'types';
 import { Store } from "../../backend/store/Store";
+import moment from "moment";
 
 /**
- * id: id of the parking spot
+ * session: preliminary parking session
  * store: the store, injected with @inject
  */
 interface IProps {
-    id: string;
-    disabled: boolean;
+    isBooked: boolean;
+    parkingSpot: IParkingSpot;
+    car?: string;
+    endDate?: Date;
     store?: Store;
 }
 
 /**
  * Button for renting a parking spot.
- * Text will change between 'Rent' and 'Finish' based on if the parking spot with id = props.id is rented or not.
+ * Text will change between 'Rent' and 'Finish' based on if the parking spot with session.id = props.id is rented or not.
  * @param IProps id of the parking spot.
  */
 @inject("store")
@@ -31,11 +36,16 @@ export default class RentButton extends React.Component<IProps, {}> {
 
     public render() {
         // if the parking spot is not rented return a 'rent' button
-
-        const isNotBooked = this.store.bookedParkingSpots.find((item: string) => item === this.props.id) === undefined;
+        const {isBooked, endDate, car} = this.props;
+        console.log(!!this.props.car)
+        console.log(!!this.props.endDate)
         return (
             <View>
-                <Button raised primary disabled={this.props.disabled} text={isNotBooked ? "book" : "finish"} onPress={isNotBooked ? this.rent : this.finish} />
+                <Button raised primary 
+                    disabled={(!(isBooked || !(!car || !endDate)))} 
+                    text={!isBooked ? "rent" : "finish"} 
+                    onPress={!isBooked ? this.rent : this.finish} 
+                    />
             </View>
         );
 
@@ -44,15 +54,24 @@ export default class RentButton extends React.Component<IProps, {}> {
     /**
      * Push parking spot to store
      */
+    @action
     private rent = () => {
-        this.store.bookParkingSpot(this.props.id);
+        this.store.currentParkingSessions.push({
+            parkingSpot: this.props.parkingSpot,
+            car: this.props.car!,
+            endTime: this.props.endDate!,
+            startTime: moment().toDate(),
+        });
     };
 
     /**
      * Remove the parking spot from store
      */
+    @action
     private finish = () => {
-        this.store.unBookParkingSpot(this.props.id);
+        this.store.currentParkingSessions = this.store.currentParkingSessions.filter(
+            (item) => this.props.parkingSpot.id !== item.parkingSpot.id
+        );
     };
 }
 
