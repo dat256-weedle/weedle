@@ -72,7 +72,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     }
 
     private snapShotParkingSpot(parkingSpot: IParkingSpot, callback: (file: string) => any) {
-        this.theMap.current!.animateToRegion({ ...parkingSpot.position, latitudeDelta: defaultLatLong, longitudeDelta: defaultLatLong })
+        this.theMap.current!.animateToRegion({ ...parkingSpot.position, latitudeDelta: defaultLatLong /4, longitudeDelta: defaultLatLong /4 }, 1)
         this.theMap.current!.takeSnapshot({
             width: 300,      // optional, when omitted the view-width is used
             height: 300,     // optional, when omitted the view-height is used
@@ -86,7 +86,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
     private renderRentPage() {
         return (
-            <RentPage parkingSpot={this.store.selectedParkingSpot!} />
+            <RentPage parkingSpot={this.store.selectedParkingSpot!} image={this.state.selectedImage} />
         )
     }
 
@@ -101,7 +101,6 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     justifyContent: "center",
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
-
                 ref={this.theMap}
                 mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
                 showsUserLocation={true}

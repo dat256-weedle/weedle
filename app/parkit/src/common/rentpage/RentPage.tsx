@@ -18,6 +18,7 @@ import RentButton from "./RentButton";
 interface IProps {
     parkingSpot: IParkingSpot;
     store?: Store;
+    image?: string;
 }
 
 interface IState {
@@ -36,7 +37,6 @@ export default class RentPage extends React.Component<IProps, IState> {
         this.store = this.props.store!; // Since store is injected it should never be undefined
         this.state = {
             selectedCar: "nocar",
-
         }
     }
 
@@ -45,8 +45,10 @@ export default class RentPage extends React.Component<IProps, IState> {
         const { name, description, distance, provider, price, id } = this.props.parkingSpot;
         const hasCars = this.store.theCars.length !== 0;
         const isParked = !(this.store.bookedParkingSpots.find((item: string) => item === id) === undefined);
+        const image = this.props.image;
         return (
-            <ScrollView style={{ backgroundColor: "silver" }}>
+            <View style={{flex: 1, justifyContent : "center"}}>
+            <ScrollView style={{flexGrow: 1}}>
                     <View style={styles.bigBox}>
                         <Text style={styles.titleText}>{name}</Text>
                         <View style={styles.subBox}>
@@ -55,8 +57,8 @@ export default class RentPage extends React.Component<IProps, IState> {
                                 <Text style={styles.text}>{price}</Text>
                                 <Text style={styles.sectionTitleText}>Distance</Text>
                                 <Text style={styles.text}>{distance}</Text>
-                            </View>
-                            <Image source={getLogo(provider)} style={styles.imageMap} />
+                            </View>   
+                            {image && <Image source={{uri: `data:image/png;base64,${image}`}} style={styles.imageMap} />}
                         </View>
 
                         <Divider />
@@ -101,6 +103,7 @@ export default class RentPage extends React.Component<IProps, IState> {
 
                     </View>
             </ScrollView>
+            </View>
         );
 
     }
@@ -163,15 +166,6 @@ const styles = StyleSheet.create({
     bigBox: {
         padding: 10,
         backgroundColor: "white",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 7,
     },
 
     subBox: {
