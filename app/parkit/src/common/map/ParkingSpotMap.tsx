@@ -1,15 +1,15 @@
 import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
+import { View } from "react-native";
 import MapView, { MapEvent, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
-import { IParkingSpot, IPosition } from "../../types";
+import {  IPosition } from "../../types";
+import { snapshotMap } from "../mapsnapshotter/MapSnapshotter";
+import RentPage from "../rentpage/RentPage";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
-import RentPage from '../rentpage/RentPage';
-import { snapshotMap } from '../mapsnapshotter/MapSnapshotter';
-import { View, Text } from 'react-native';
 
 interface IProps {
     store?: Store;

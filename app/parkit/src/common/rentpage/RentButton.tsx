@@ -1,11 +1,11 @@
-import { action } from 'mobx';
+import { action } from "mobx";
 import { inject, observer } from "mobx-react";
+import moment from "moment";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-material-ui";
-import { IParkingSpot } from 'types';
+import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
-import moment from "moment";
 
 /**
  * session: preliminary parking session

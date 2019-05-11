@@ -1,4 +1,4 @@
-import { IParkingSpot } from 'types';
+import { IParkingSpot } from "types";
 
 const googleAPIKey = "AIzaSyAcE3_PtX7wAF5E9haD9SOKWp97PnSB_o0";
 const zoomLevel = 15;

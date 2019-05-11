@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 import React from "react";
@@ -9,7 +10,6 @@ import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 import { getLogo } from "../logoloader/LogoLoader";
 import RentButton from "./RentButton";
-import { Ionicons } from '@expo/vector-icons';
 
 
 /**
@@ -111,7 +111,7 @@ export default class RentPage extends React.Component<IProps, IState> {
 
                     </View>
                 </ScrollView>
-                <View style={{ alignItems: 'flex-end', padding: 10, position: "absolute", top: 0, right: 0, zIndex: 10 }}>
+                <View style={{ alignItems: "flex-end", padding: 10, position: "absolute", top: 0, right: 0, zIndex: 10 }}>
                     <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress} ></Ionicons>
                 </View>
             </View>
