@@ -37,8 +37,6 @@ export default class RentButton extends React.Component<IProps, {}> {
     public render() {
         // if the parking spot is not rented return a 'rent' button
         const {isBooked, endDate, car} = this.props;
-        console.log(!!this.props.car)
-        console.log(!!this.props.endDate)
         return (
             <View>
                 <Button raised primary 
