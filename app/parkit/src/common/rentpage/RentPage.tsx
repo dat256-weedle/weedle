@@ -51,7 +51,6 @@ export default class RentPage extends React.Component<IProps, IState> {
         const hasCars = this.store.theCars.length !== 0;
         return (
             <ScrollView style={{ backgroundColor: "silver" }}>
-                <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "stretch" }}>
                     <View style={styles.bigBox}>
                         <Text style={styles.titleText}>{name}</Text>
                         <View style={styles.subBox}>
@@ -68,43 +67,41 @@ export default class RentPage extends React.Component<IProps, IState> {
                         <Text style={styles.descriptionText}>{description}</Text>
                         <Divider />
 
-                        <View style={{ flex: 1, alignItems: "stretch" }}>
-                            <Text style={styles.sectionTitleText}>Car</Text>
-                            <RNPickerSelect
-                                placeholder={{}}
-                                items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "nocar", label: "No Cars" }]}
-                                onValueChange={value => {
-                                    this.setState({
-                                        selectedCar: value,
-                                    });
-                                }}
-                                style={pickerSelectStyles}
-                                value={this.state.selectedCar}
-                            />
-                            <Text style={styles.sectionTitleText}>End date</Text>
-                            <DatePicker
-                                style={{ width: "100%", height: "auto" }}
-                                date={this.state.endDate}
-                                mode="datetime"
-                                placeholder="Select time"
-                                minDate={moment().format()}
-                                maxDate=""
-                                confirmBtnText="Confirm"
-                                cancelBtnText="Cancel"
-                                is24hour={true}
-                                onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
-                                getDateStr={(date: string) => this.getCalendarDateFormat(date)}
-                                showIcon={false}
-                            />
-                            <Divider style={{}}/>
-                        </View>
+                        <Text style={styles.sectionTitleText}>Car</Text>
+                        <RNPickerSelect
+                            placeholder={{}}
+                            items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "nocar", label: "No Cars" }]}
+                            onValueChange={value => {
+                                this.setState({
+                                    selectedCar: value,
+                                });
+                            }}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedCar}
+                        />
+                        <Text style={styles.sectionTitleText}>End date</Text>
+                        <DatePicker
+                            style={{ width: "100%", height: "auto", paddingBottom: 20 }}
+                            date={this.state.endDate}
+                            mode="datetime"
+                            placeholder="Select time"
+                            minDate={moment().format()}
+                            maxDate=""
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            is24hour={true}
+                            onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
+                            getDateStr={(date: string) => this.getCalendarDateFormat(date)}
+                            showIcon={false}
+                        />
+                        <Divider />
+
                         <RentButton id={id} disabled={!(hasCars && this.state.endDate)} />
                         <Image source={getLogo(provider)} style={styles.image} />
 
 
 
                     </View>
-                </View>
             </ScrollView>
         );
 
@@ -162,8 +159,6 @@ const styles = StyleSheet.create({
     },
 
     bigBox: {
-        flex: 1, justifyContent: "flex-start",
-        alignItems: "stretch",
         margin: 10,
         padding: 10,
         backgroundColor: "white",

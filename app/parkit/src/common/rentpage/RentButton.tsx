@@ -35,7 +35,7 @@ export default class RentButton extends React.Component<IProps, {}> {
         const isBooked = this.store.bookedParkingSpots.find((item: string) => item === this.props.id) === undefined;
         return (
             <View>
-                <Button raised primary disabled={!this.props.disabled} text={isBooked ? "book" : "finish"} onPress={isBooked ? this.rent : this.finish} />
+                <Button raised primary disabled={this.props.disabled} text={isBooked ? "book" : "finish"} onPress={isBooked ? this.rent : this.finish} />
             </View>
         );
 
@@ -58,6 +58,8 @@ export default class RentButton extends React.Component<IProps, {}> {
 
 const styles = StyleSheet.create({
         RentButton: {
+            marginTop: 10,
+            paddingTop: 10,
             width: "100%",
             height: "50"
         }
