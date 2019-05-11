@@ -50,12 +50,12 @@ export default class RentPage extends React.Component<IProps, IState> {
         const image = this.props.image;
         return (
             <View style={{ flex: 1, justifyContent: "center", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "white" }}>
+                <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress} style={{alignSelf: 'flex-end', padding: 10}}></Ionicons>
                 <ScrollView style={{ flexGrow: 1 }}>
                     <View style={styles.bigBox}>
                         <Text style={styles.titleText}>{name}</Text>
                         <View style={styles.subBox}>
                             <View>
-                                <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress}></Ionicons>
                                 <Text style={styles.sectionTitleText}>Price</Text>
                                 <Text style={styles.text}>{price}</Text>
                                 <Text style={styles.sectionTitleText}>Distance</Text>
