@@ -16,7 +16,7 @@ it("Should add ids to the store when clicked", () => {
 
 it("Should remove ids from the store when clicked again", () => {
     expect(store.bookedParkingSpots).toContain(id);
-    app = mount(<RentButton id={id} store={store} />);
+    app = mount(<RentButton disabled ={false} id={id} store={store} />);
 
     app.find(Button).props().onPress!();
 
