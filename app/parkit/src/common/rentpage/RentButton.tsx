@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-material-ui";
 import { Store } from "../../backend/store/Store";
 
@@ -56,12 +56,4 @@ export default class RentButton extends React.Component<IProps, {}> {
     };
 }
 
-const styles = StyleSheet.create({
-        RentButton: {
-            marginTop: 10,
-            paddingTop: 10,
-            width: "100%",
-            height: "50"
-        }
-    }
-)
+

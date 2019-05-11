@@ -1,13 +1,12 @@
 import { ScreenOrientation } from "expo";
+import { LoremIpsum } from "lorem-ipsum";
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { getData } from "./src/backend/datagatherer/DataGatherer";
 import { Store } from "./src/backend/store/Store";
-import ParkingSpotMap from "./src/common/map/ParkingSpotMap";
-import RentPage from './src/common/rentpage/RentPage';
-import { Providers } from './src/types';
-import { LoremIpsum } from "lorem-ipsum";
+import RentPage from "./src/common/rentpage/RentPage";
+import { Providers } from "./src/types";
 
 const lorem = new LoremIpsum({
     sentencesPerParagraph: {

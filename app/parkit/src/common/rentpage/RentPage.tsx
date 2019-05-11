@@ -1,14 +1,14 @@
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 import React from "react";
-import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import DatePicker from "react-native-datepicker"
+import { Divider } from "react-native-material-ui";
 import RNPickerSelect from "react-native-picker-select";
 import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 import { getLogo } from "../logoloader/LogoLoader";
 import RentButton from "./RentButton";
-import { Divider } from 'react-native-material-ui';
 
 
 /**
@@ -78,6 +78,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                             }}
                             style={pickerSelectStyles}
                             value={this.state.selectedCar}
+                            disabled={true}
                         />
                         <Text style={styles.sectionTitleText}>End date</Text>
                         <DatePicker
@@ -93,6 +94,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                             onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
                             getDateStr={(date: string) => this.getCalendarDateFormat(date)}
                             showIcon={false}
+                            disabled={true}
                         />
                         <Divider />
 
