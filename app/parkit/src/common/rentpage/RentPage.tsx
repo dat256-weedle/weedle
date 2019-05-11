@@ -50,7 +50,7 @@ export default class RentPage extends React.Component<IProps, IState> {
         const image = this.props.image;
         return (
             <View style={{ flex: 1, justifyContent: "center", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "white" }}>
-                <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress} style={{alignSelf: 'flex-end', padding: 10}}></Ionicons>
+
                 <ScrollView style={{ flexGrow: 1 }}>
                     <View style={styles.bigBox}>
                         <Text style={styles.titleText}>{name}</Text>
@@ -106,6 +106,9 @@ export default class RentPage extends React.Component<IProps, IState> {
 
                     </View>
                 </ScrollView>
+                <View style={{ alignItems: 'flex-end', padding: 10, position: "absolute", top: 0, right: 0, zIndex: 10 }}>
+                    <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress} ></Ionicons>
+                </View>
             </View>
         );
 
@@ -141,8 +144,8 @@ const styles = StyleSheet.create({
     },
     imageMap: {
         flex: 2,
-        maxWidth: "40%",
-        height: "auto",
+        width: 200,
+        height: 200,
         resizeMode: "contain",
 
     },
