@@ -22,7 +22,7 @@ interface IProps {
 
 interface IState {
     selectedCar: string;
-    endDate?: any;
+    endDate?: Date;
 }
 
 
@@ -49,6 +49,7 @@ export default class RentPage extends React.Component<IProps, IState> {
 
         const { name, description, distance, provider, price, id } = this.props.parkingSpot;
         const hasCars = this.store.theCars.length !== 0;
+        const isParked = !(this.store.bookedParkingSpots.find((item: string) => item === id) === undefined);
         return (
             <ScrollView style={{ backgroundColor: "silver" }}>
                     <View style={styles.bigBox}>
@@ -76,13 +77,13 @@ export default class RentPage extends React.Component<IProps, IState> {
                                     selectedCar: value,
                                 });
                             }}
-                            style={pickerSelectStyles}
+                            style={isParked ? pickerSelectStylesDisabled : pickerSelectStyles}
                             value={this.state.selectedCar}
-                            disabled={true}
+                            disabled={isParked}
                         />
                         <Text style={styles.sectionTitleText}>End date</Text>
                         <DatePicker
-                            style={{ width: "100%", height: "auto", paddingBottom: 20 }}
+                            style={{ width: "100%", height: "auto", paddingBottom: 20, borderRadius: 4, }}
                             date={this.state.endDate}
                             mode="datetime"
                             placeholder="Select time"
@@ -90,11 +91,11 @@ export default class RentPage extends React.Component<IProps, IState> {
                             maxDate=""
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
-                            is24hour={true}
+                            is24Hour={true}
                             onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
-                            getDateStr={(date: string) => this.getCalendarDateFormat(date)}
+                            getDateStr={(date: Date) => this.getCalendarDateFormat(date)}
                             showIcon={false}
-                            disabled={true}
+                            disabled={isParked}
                         />
                         <Divider />
 
@@ -109,7 +110,7 @@ export default class RentPage extends React.Component<IProps, IState> {
 
     }
 
-    public getCalendarDateFormat = (date: string) => {
+    public getCalendarDateFormat = (date: Date) => {
         const formatDate = moment(date).calendar(undefined, {
             lastDay: "[Yesterday at] HH:mm",
             sameDay: "[Today at] HH:mm",
@@ -161,10 +162,8 @@ const styles = StyleSheet.create({
     },
 
     bigBox: {
-        margin: 10,
         padding: 10,
         backgroundColor: "white",
-        borderRadius: 20,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -213,4 +212,9 @@ const pickerSelectStyles = StyleSheet.create({
         color: "black",
         paddingRight: 30, // to ensure the text is never behind the icon
     },
+});
+
+const pickerSelectStylesDisabled = StyleSheet.create({
+    inputIOS: {...pickerSelectStyles.inputIOS, backgroundColor: "#F5F5F5"},
+    inputAndroid: {...pickerSelectStyles.inputAndroid, backgroundColor: "#F5F5F5"},
 });

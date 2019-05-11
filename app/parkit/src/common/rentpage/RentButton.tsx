@@ -32,10 +32,10 @@ export default class RentButton extends React.Component<IProps, {}> {
     public render() {
         // if the parking spot is not rented return a 'rent' button
 
-        const isBooked = this.store.bookedParkingSpots.find((item: string) => item === this.props.id) === undefined;
+        const isNotBooked = this.store.bookedParkingSpots.find((item: string) => item === this.props.id) === undefined;
         return (
             <View>
-                <Button raised primary disabled={this.props.disabled} text={isBooked ? "book" : "finish"} onPress={isBooked ? this.rent : this.finish} />
+                <Button raised primary disabled={this.props.disabled} text={isNotBooked ? "book" : "finish"} onPress={isNotBooked ? this.rent : this.finish} />
             </View>
         );
 
