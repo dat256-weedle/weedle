@@ -23,7 +23,7 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <RentPage parkingSpot = {{id: "lolid", name: "lolname", position: {latitude: 3, longitude: 3}, description: "loldesc",  parkingSpots: "3", distance: 3, provider: Providers.EasyPark, price: "3kr", specialPrice: "3skr"}}/>
+                    <RentPage parkingSpot = {{id: "lolid", name: "lolname", position: {latitude: 3, longitude: 3}, description: "loldescasidjaiosdjoasjdoåasjdoiasjdoiajsdoijasodjaoisjdaojdoasjdoajdaojdoaijdaojdaojdoaijdaoijdaoåjdaojdaojdaodjaodjaojdaojdaoådjaoådjaiodjaodjaodjaodjasiodjasojdoasjdoasjdoasjdoåaisjd",  parkingSpots: "3", distance: 3, provider: Providers.EasyPark, price: "3kr", specialPrice: "3skr"}}/>
                 </View>
             </Provider>
         );
