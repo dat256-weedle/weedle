@@ -58,7 +58,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                                 <Text style={styles.sectionTitleText}>Distance</Text>
                                 <Text style={styles.text}>{distance}</Text>
                             </View>   
-                            {image && <Image source={{uri: `data:image/png;base64,${image}`}} style={styles.imageMap} />}
+                            {image && <Image source={{uri: image}} style={styles.imageMap} />}
                         </View>
 
                         <Divider />

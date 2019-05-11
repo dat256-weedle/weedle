@@ -8,6 +8,7 @@ import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
 import RentPage from '../rentpage/RentPage';
+import { snapshotMap } from '../mapsnapshotter/MapSnapshotter';
 
 interface IProps {
     store?: Store;
@@ -71,19 +72,6 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         );
     }
 
-    private snapShotParkingSpot(parkingSpot: IParkingSpot, callback: (file: string) => any) {
-        this.theMap.current!.animateToRegion({ ...parkingSpot.position, latitudeDelta: defaultLatLong /4, longitudeDelta: defaultLatLong /4 }, 1)
-        this.theMap.current!.takeSnapshot({
-            width: 300,      // optional, when omitted the view-width is used
-            height: 300,     // optional, when omitted the view-height is used
-            format: "png",   // image formats: 'png', 'jpg' (default: 'png')
-            quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-            result: "base64"   // result types: 'file', 'base64' (default: 'file')
-        }).then((image: string) => {
-            callback(image);
-        })
-    }
-
     private renderRentPage() {
         return (
             <RentPage parkingSpot={this.store.selectedParkingSpot!} image={this.state.selectedImage} />
@@ -136,7 +124,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         if (id) {
             this.store.selected = id;
-            this.snapShotParkingSpot(this.store.allParkingSpots.get(id)!, (image: string) => { this.setState({ renderRentPage: true, selectedImage: image }) });
+            this.setState({ renderRentPage: true, selectedImage: snapshotMap(this.store.allParkingSpots.get(id)! )});
         }
     };
 

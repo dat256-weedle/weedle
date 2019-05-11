@@ -8,6 +8,7 @@ import { Store } from "./src/backend/store/Store";
 import RentPage from "./src/common/rentpage/RentPage";
 import { Providers } from "./src/types";
 import ParkingSpotMap from './src/common/map/ParkingSpotMap';
+import { snapshotMap } from './src/common/mapsnapshotter/MapSnapshotter';
 
 const lorem = new LoremIpsum({
     sentencesPerParagraph: {
@@ -27,6 +28,7 @@ export default class App extends React.Component {
         super(props);
         this.store = new Store();
         getData(this.store);
+        //snapshotMap({id: "lolid", name: "lolname", position: {latitude: 3, longitude: 3}, description: lorem.generateParagraphs(1),  parkingSpots: "3", distance: 3, provider: Providers.EasyPark, price: "3kr", specialPrice: "3skr"})
     }
 
     public render() {
