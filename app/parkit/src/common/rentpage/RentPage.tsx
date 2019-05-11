@@ -94,7 +94,7 @@ export default class RentPage extends React.Component<IProps, IState> {
             nextDay: '[Tomorrow at] HH:mm',
             lastWeek: '[last] dddd [at] HH:mm',
             nextWeek: 'dddd [at] HH:mm',
-            sameElse: 'L [at] HH:mm'
+            sameElse: 'YYYY/MM/DD [at] HH:mm'
         });
 
         return (formatDate);
