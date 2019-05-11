@@ -9,6 +9,7 @@ import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
 import RentPage from '../rentpage/RentPage';
 import { snapshotMap } from '../mapsnapshotter/MapSnapshotter';
+import { View, Text } from 'react-native';
 
 interface IProps {
     store?: Store;
@@ -40,7 +41,12 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     }
 
     public render() {
-        return (this.state.renderRentPage ? this.renderRentPage() : this.renderMap());
+        return (
+            <View style={{ flex: 1 }}>
+                {this.renderMap()}
+                {this.state.renderRentPage && this.renderRentPage()}
+            </View>
+        );
     }
 
     public componentDidMount() {
@@ -74,7 +80,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
     private renderRentPage() {
         return (
-            <RentPage parkingSpot={this.store.selectedParkingSpot!} image={this.state.selectedImage} />
+            <RentPage parkingSpot={this.store.selectedParkingSpot!} image={this.state.selectedImage} onCloseButtonPress={() => this.setState({ renderRentPage: false })} />
         )
     }
 
@@ -124,7 +130,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         if (id) {
             this.store.selected = id;
-            this.setState({ renderRentPage: true, selectedImage: snapshotMap(this.store.allParkingSpots.get(id)! )});
+            this.setState({ renderRentPage: true, selectedImage: snapshotMap(this.store.allParkingSpots.get(id)!) });
         }
     };
 

@@ -9,6 +9,7 @@ import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 import { getLogo } from "../logoloader/LogoLoader";
 import RentButton from "./RentButton";
+import { Ionicons } from '@expo/vector-icons';
 
 
 /**
@@ -19,6 +20,7 @@ interface IProps {
     parkingSpot: IParkingSpot;
     store?: Store;
     image?: string;
+    onCloseButtonPress: () => void;
 }
 
 interface IState {
@@ -47,18 +49,19 @@ export default class RentPage extends React.Component<IProps, IState> {
         const isParked = !(this.store.bookedParkingSpots.find((item: string) => item === id) === undefined);
         const image = this.props.image;
         return (
-            <View style={{flex: 1, justifyContent : "center"}}>
-            <ScrollView style={{flexGrow: 1}}>
+            <View style={{ flex: 1, justifyContent: "center", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "white" }}>
+                <ScrollView style={{ flexGrow: 1 }}>
                     <View style={styles.bigBox}>
                         <Text style={styles.titleText}>{name}</Text>
                         <View style={styles.subBox}>
                             <View>
+                                <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress}></Ionicons>
                                 <Text style={styles.sectionTitleText}>Price</Text>
                                 <Text style={styles.text}>{price}</Text>
                                 <Text style={styles.sectionTitleText}>Distance</Text>
                                 <Text style={styles.text}>{distance}</Text>
-                            </View>   
-                            {image && <Image source={{uri: image}} style={styles.imageMap} />}
+                            </View>
+                            {image && <Image source={{ uri: image }} style={styles.imageMap} />}
                         </View>
 
                         <Divider />
@@ -102,7 +105,7 @@ export default class RentPage extends React.Component<IProps, IState> {
 
 
                     </View>
-            </ScrollView>
+                </ScrollView>
             </View>
         );
 
@@ -209,6 +212,6 @@ const pickerSelectStyles = StyleSheet.create({
 });
 
 const pickerSelectStylesDisabled = StyleSheet.create({
-    inputIOS: {...pickerSelectStyles.inputIOS, backgroundColor: "#F5F5F5"},
-    inputAndroid: {...pickerSelectStyles.inputAndroid, backgroundColor: "#F5F5F5"},
+    inputIOS: { ...pickerSelectStyles.inputIOS, backgroundColor: "#F5F5F5" },
+    inputAndroid: { ...pickerSelectStyles.inputAndroid, backgroundColor: "#F5F5F5" },
 });
