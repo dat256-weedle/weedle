@@ -35,6 +35,7 @@ export class Store {
 
     constructor() {
         this.selected = "-1";
+        this.theCars.push("abc12")
     }
     /**
      * @returns the coordinates of the currently selected parking spot

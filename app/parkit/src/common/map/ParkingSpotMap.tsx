@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import MapView, { MapEvent, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
-import { IPosition } from "../../types";
+import { IPosition, IParkingSpot } from "../../types";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
@@ -45,7 +45,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     justifyContent: "center",
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
-                provider={"google"}
+
                 ref={this.theMap}
                 mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
                 showsUserLocation={true}
@@ -102,6 +102,19 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         );
     }
 
+    private snapShotParkingSpot(parkingSpot: IParkingSpot, callback: (file: string) => any) {
+        this.theMap.current!.animateToRegion({ ...parkingSpot.position, latitudeDelta: defaultLatLong, longitudeDelta: defaultLatLong })
+        this.theMap.current!.takeSnapshot({
+            width: 300,      // optional, when omitted the view-width is used
+            height: 300,     // optional, when omitted the view-height is used
+            format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
+            quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+            result: 'base64'   // result types: 'file', 'base64' (default: 'file')
+        }).then((image: string) => {
+            callback(image);
+        })
+    }
+
     @action
     private onPressEvent = (
         e: MapEvent<{ action: "marker-press"; id: string }>
@@ -110,6 +123,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         if (id) {
             this.store.selected = id;
+            this.snapShotParkingSpot(this.store.allParkingSpotsList.find((item: IParkingSpot) => id === item.id)!, (image: string) => console.log(image));
         }
     };
 
