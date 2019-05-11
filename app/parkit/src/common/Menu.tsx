@@ -3,9 +3,12 @@ import { BottomNavigation, Text } from "react-native-paper";
 import ParkingSpotMap from "../../src/common/map/ParkingSpotMap";
 import Screen from "../../src/usage/userpage/Screen"
 
-const NavigationMap = () => <ParkingSpotMap nightmode={false} />;
-const ActiveParking = () => <Text>ConstText2</Text>;
-const History = () => <Text>ConstText3</Text>;
+/**
+ * Decides what will happen when one of the menu buttons are pressed
+ */
+const ShowMap = () => <ParkingSpotMap nightmode={false} />;
+const ActiveParking = () => <Text>Placeholder for the active parking spot page</Text>;
+const History = () => <Text>Placeholder for the history page</Text>;
 const Profile = () => <Screen/>;
 
 interface IState {
@@ -14,21 +17,30 @@ interface IState {
 }
 
 export default class Menu extends React.Component<any,IState> {
-
+  /**
+   * Connects the key-value of a button to its specific action
+   */
   private renderScene = BottomNavigation.SceneMap({
-    navigationMap: NavigationMap,
+    showMap: ShowMap,
     activeParking: ActiveParking,
     history: History,
     profile: Profile,
   });
 
+  /**
+   * Constructor that creates the menu and its four buttons.
+   * 
+   * @param key The key-value for that specific button, which is used to give each button a unique action when pressed.
+   * @param title Text that is visible below the icon when the icon is selected.
+   * @param icon Fetches an icon matching the string from this library: https://material.io/tools/icons/?style=baseline
+   */
   constructor(props: any){
     super(props)
     this.state = {
       index: 0,
       routes: [
-        { key: "navigationMap", title: "Map", icon: "map" },
-        { key: "activeParking", title: "Active parking", icon: "timelapse" },
+        { key: "showMap", title: "Map", icon: "map" },
+        { key: "activeParking", title: "Active p-spots", icon: "timelapse" },
         { key: "history", title: "History", icon: "history" },
         { key: "profile", title: "Profile", icon: "person" },
       ],
