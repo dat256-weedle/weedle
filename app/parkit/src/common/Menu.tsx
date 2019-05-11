@@ -1,7 +1,8 @@
 import React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
+import ParkingSpotMap from "../../src/common/map/ParkingSpotMap";
 
-const NavigationMap = () => <Text>ConstText1</Text>;
+const NavigationMap = () => <ParkingSpotMap nightmode={false} />;
 const ActiveParking = () => <Text>ConstText2</Text>;
 const History = () => <Text>ConstText3</Text>;
 const Profile = () => <Text>ConstText4</Text>;

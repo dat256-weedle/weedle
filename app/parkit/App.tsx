@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { getData } from "./src/backend/datagatherer/DataGatherer";
 import { Store } from "./src/backend/store/Store";
-import ParkingSpotMap from "./src/common/map/ParkingSpotMap";
 import Menu from "./src/common/Menu";
 
 export default class App extends React.Component {
@@ -22,7 +21,6 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <ParkingSpotMap nightmode={false} />
                     <Menu/>
                 </View>
             </Provider>
