@@ -10,6 +10,7 @@ import { Store } from "../../backend/store/Store";
  */
 interface IProps {
     id: string;
+    disabled: boolean;
     store?: Store;
 }
 
@@ -30,24 +31,14 @@ export default class RentButton extends React.Component<IProps, {}> {
 
     public render() {
         // if the parking spot is not rented return a 'rent' button
-        if (
-            this.store.bookedParkingSpots.find(
-                (item: string) => item === this.props.id
-            ) === undefined
-        ) {
-            return (
-                <View>
-                    <Button text="Rent" onPress={this.rent} />
-                </View>
-            );
-        } else {
-            // else return a 'finish renting' button
-            return (
-                <View>
-                    <Button text="Finish" onPress={this.finish} />
-                </View>
-            );
-        }
+
+        const isBooked = this.store.bookedParkingSpots.find((item: string) => item === this.props.id) === undefined;
+        return (
+            <View>
+                <Button disabled={this.props.disabled} text={isBooked ? "book" : "finish"} onPress={isBooked ? this.rent : this.finish}/>
+            </View>
+        );
+
     }
 
     /**
