@@ -27,7 +27,6 @@ export default class App extends React.Component {
         super(props);
         this.store = new Store();
         getData(this.store);
-        ScreenOrientation.allow("ALL");
     }
 
     public render() {

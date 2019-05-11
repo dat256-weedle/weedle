@@ -3,10 +3,11 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import MapView, { MapEvent, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
-import { IPosition, IParkingSpot } from "../../types";
+import { IParkingSpot, IPosition } from "../../types";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
+import RentPage from '../rentpage/RentPage';
 
 interface IProps {
     store?: Store;
@@ -15,6 +16,8 @@ interface IProps {
 
 interface IState {
     width: number;
+    renderRentPage: boolean;
+    selectedImage?: string;
 }
 
 const defaultLatLong = 0.092;
@@ -31,10 +34,63 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         this.store = this.props.store!; // Since store is injected it should never be undefined
         this.state = {
             width: 1,
+            renderRentPage: false
         };
     }
 
     public render() {
+        return (this.state.renderRentPage ? this.renderRentPage() : this.renderMap());
+    }
+
+    public componentDidMount() {
+        // Move view to user's current location
+        navigator.geolocation.getCurrentPosition(position => {
+            this.theMap.current!.animateToRegion(
+                {
+                    latitude: position.coords.latitude,
+                    latitudeDelta: defaultLatLong,
+                    longitude: position.coords.longitude,
+                    longitudeDelta: defaultLatLong
+                },
+                1
+            );
+        });
+
+        reaction(
+            () => this.store.selectedParkingSpot,
+            parkingSpot => {
+                if (
+                    parkingSpot &&
+                    !this.positionIsInCurrentRegion(parkingSpot.position)
+                ) {
+                    this.theMap.current!.animateToCoordinate(
+                        parkingSpot.position
+                    );
+                }
+            }
+        );
+    }
+
+    private snapShotParkingSpot(parkingSpot: IParkingSpot, callback: (file: string) => any) {
+        this.theMap.current!.animateToRegion({ ...parkingSpot.position, latitudeDelta: defaultLatLong, longitudeDelta: defaultLatLong })
+        this.theMap.current!.takeSnapshot({
+            width: 300,      // optional, when omitted the view-width is used
+            height: 300,     // optional, when omitted the view-height is used
+            format: "png",   // image formats: 'png', 'jpg' (default: 'png')
+            quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+            result: "base64"   // result types: 'file', 'base64' (default: 'file')
+        }).then((image: string) => {
+            callback(image);
+        })
+    }
+
+    private renderRentPage() {
+        return (
+            <RentPage parkingSpot={this.store.selectedParkingSpot!} />
+        )
+    }
+
+    private renderMap() {
         return (
             <MapView
                 style={{
@@ -73,48 +129,6 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         );
     }
 
-    public componentDidMount() {
-        // Move view to user's current location
-        navigator.geolocation.getCurrentPosition(position => {
-            this.theMap.current!.animateToRegion(
-                {
-                    latitude: position.coords.latitude,
-                    latitudeDelta: defaultLatLong,
-                    longitude: position.coords.longitude,
-                    longitudeDelta: defaultLatLong
-                },
-                1
-            );
-        });
-
-        reaction(
-            () => this.store.selectedParkingSpot,
-            parkingSpot => {
-                if (
-                    parkingSpot &&
-                    !this.positionIsInCurrentRegion(parkingSpot.position)
-                ) {
-                    this.theMap.current!.animateToCoordinate(
-                        parkingSpot.position
-                    );
-                }
-            }
-        );
-    }
-
-    private snapShotParkingSpot(parkingSpot: IParkingSpot, callback: (file: string) => any) {
-        this.theMap.current!.animateToRegion({ ...parkingSpot.position, latitudeDelta: defaultLatLong, longitudeDelta: defaultLatLong })
-        this.theMap.current!.takeSnapshot({
-            width: 300,      // optional, when omitted the view-width is used
-            height: 300,     // optional, when omitted the view-height is used
-            format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
-            quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
-            result: 'base64'   // result types: 'file', 'base64' (default: 'file')
-        }).then((image: string) => {
-            callback(image);
-        })
-    }
-
     @action
     private onPressEvent = (
         e: MapEvent<{ action: "marker-press"; id: string }>
@@ -123,7 +137,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         if (id) {
             this.store.selected = id;
-            this.snapShotParkingSpot(this.store.allParkingSpotsList.find((item: IParkingSpot) => id === item.id)!, (image: string) => console.log(image));
+            this.snapShotParkingSpot(this.store.allParkingSpots.get(id)!, (image: string) => { this.setState({ renderRentPage: true, selectedImage: image }) });
         }
     };
 

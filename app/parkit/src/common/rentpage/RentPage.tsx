@@ -26,11 +26,6 @@ interface IState {
 }
 
 
-/**
- * Button for renting a parking spot.
- * Text will change between 'Rent' and 'Finish' based on if the parking spot with id = props.id is rented or not.
- * @param IProps id of the parking spot.
- */
 @inject("store")
 @observer
 export default class RentPage extends React.Component<IProps, IState> {
@@ -139,12 +134,16 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
     imageMap: {
+        flex: 2,
         maxWidth: "40%",
         height: "auto",
-        resizeMode: "contain"
+        resizeMode: "contain",
+
     },
 
     text: {
+        flex: 1,
+        width: 200,
         fontSize: 20,
         textAlign: "left",
     },
@@ -177,6 +176,7 @@ const styles = StyleSheet.create({
 
     subBox: {
         justifyContent: "space-between",
+        width: "100%",
         flexDirection: "row",
         padding: 10,
         marginTop: 5,
