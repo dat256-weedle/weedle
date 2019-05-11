@@ -6,7 +6,7 @@ import RentButton from "../../src/common/rentpage/RentButton";
 
 const id = (Math.random() * Number.MAX_VALUE).toString();
 const store = new Store();
-let app = mount(<RentButton id={id} store={store} />);
+let app = mount(<RentButton disabled={false} id={id} store={store} />);
 
 it("Should add ids to the store when clicked", () => {
     app.find(Button).props().onPress!();
