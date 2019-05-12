@@ -15,7 +15,7 @@ The communication in the group is done through Slack and through the meetings of
 
 ## Deadlines
 
-All turn-ins (Group and individual) is turned in on mondays.
+All turn-ins (Group and individual) is turned in on Mondays.
 
 ## Workload
 
@@ -55,7 +55,7 @@ The code should
 - have tests
 - satisfies acceptance criteria
 - approved by product owner
-- be merged into develope
+- be merged into develop
 
 ### Responsibilities of Scrum master
 
@@ -65,7 +65,7 @@ Create the agenda for and lead the groups meetings.
 
 ### Responsibilities of Product- and Vice Product Owner
 
-Prioritize and pick out user stories for each sprint. Approve and critisize user stories with their acceptance criterias as basis during sprint demo
+Prioritize and pick out user stories for each sprint. Approve and criticize user stories with their acceptance criteria as basis during sprint demo.
 
 Vice product owner is in charge when the product owner is the one delivering a user story.
 
@@ -99,7 +99,7 @@ When creating a branch in git follow the naming scheme below
 
 ### Folder Structure
 
-For the project we should put all source files in a folder called ``src`` and structure said them depending on the function of said source files. GUI components get individual folders under a folder called ``usage`` depending on geatures. Backend components get individual folders under a folder called ``backend`` based on component. Common
+For the project we should put all source files in a folder called ``src`` and structure said them depending on the function of said source files. GUI components get individual folders under a folder called ``usage`` depending on gestures. Backend components get individual folders under a folder called ``backend`` based on component. Common
 components get individual folders under ``common``. Types are defined in a single file in the root of the ``src`` folder and should be named ``types.ts``. An example of said structure is as follows.
 
 ```Filesystem
