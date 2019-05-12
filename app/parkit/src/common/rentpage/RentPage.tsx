@@ -1,8 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DatePicker from "react-native-datepicker"
 import { Divider } from "react-native-material-ui";
 import RNPickerSelect from "react-native-picker-select";
@@ -93,7 +92,9 @@ export default class RentPage extends React.Component<IProps, IState> {
                     </View>
                 </ScrollView>
                 <View style={{ alignItems: "flex-end", padding: 10, position: "absolute", top: 0, right: 0, zIndex: 10 }}>
-                    <Ionicons name="md-close" size={32} onPress={this.props.onCloseButtonPress} ></Ionicons>
+                    <TouchableOpacity onPress={this.props.onCloseButtonPress}>
+                        <Image source={require("../../../assets/closebutton.png")} style={{width: 32, height: 32}}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -124,6 +125,7 @@ export default class RentPage extends React.Component<IProps, IState> {
     private endDatePicker(isParked: boolean) {
         return (
             <DatePicker
+                testID="endDatePicker"
                 style={{ width: "100%", height: "auto", paddingBottom: 20, borderRadius: 4, }}
                 date={this.state.endDate}
                 mode="datetime"
