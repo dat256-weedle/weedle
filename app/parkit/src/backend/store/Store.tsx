@@ -1,5 +1,5 @@
 import { action, computed, observable } from "mobx";
-import { IParkingSpot, IParkingSession } from "./../../types";
+import { IParkingSession, IParkingSpot } from "./../../types";
 
 /**
  * Store which contains the state of the whole application

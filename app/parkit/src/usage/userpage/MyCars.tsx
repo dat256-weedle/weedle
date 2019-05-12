@@ -1,9 +1,9 @@
+import { action } from "mobx";
+import { inject, observer } from "mobx-react";
 import React from "react";
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Store } from "../../backend/store/Store";
 import CarElement from "./CarElement";
-import { observer, inject } from 'mobx-react';
-import { Store } from '../../backend/store/Store';
-import { action } from 'mobx';
 
 interface IState {
     temp: string;

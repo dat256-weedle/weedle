@@ -19,9 +19,9 @@ it("Should add sessions to the store when clicked", () => {
 it("Should remove sessions from the store when clicked again", () => {
     expect(store.currentParkingSessions.find((item) => item.parkingSpot.id === id)).toBeDefined();
     
-    const app = mount(<RentButton  store={store} parkingSpot={parkingSpot} car="car" isParked={true} />);
+    const newApp = mount(<RentButton  store={store} parkingSpot={parkingSpot} car="car" isParked={true} />);
 
-    app.find(Button).props().onPress!();
+    newApp.find(Button).props().onPress!();
 
     expect(store.currentParkingSessions.length).toEqual(0);
 });
