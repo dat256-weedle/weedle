@@ -5,7 +5,6 @@ import { View } from "react-native";
 import MapView, { MapEvent, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import {  IPosition } from "../../types";
-import { snapshotMap } from "../mapsnapshotter/MapSnapshotter";
 import RentPage from "../rentpage/RentPage";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
@@ -19,7 +18,6 @@ interface IProps {
 interface IState {
     width: number;
     renderRentPage: boolean;
-    selectedImage?: string;
 }
 
 const defaultLatLong = 0.092;
@@ -80,7 +78,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
     private renderRentPage() {
         return (
-            <RentPage parkingSpot={this.store.selectedParkingSpot!} image={this.state.selectedImage} onCloseButtonPress={() => this.setState({ renderRentPage: false })} />
+            <RentPage parkingSpot={this.store.selectedParkingSpot!} onCloseButtonPress={() => this.setState({ renderRentPage: false })} />
         )
     }
 
@@ -130,7 +128,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         if (id) {
             this.store.selected = id;
-            this.setState({ renderRentPage: true, selectedImage: snapshotMap(this.store.allParkingSpots.get(id)!) });
+            this.setState({ renderRentPage: true });
         }
     };
 

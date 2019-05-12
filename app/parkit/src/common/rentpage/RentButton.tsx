@@ -8,14 +8,14 @@ import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 
 /**
- * @param isBooked: has the user already booked the parking spot
+ * @param isParked: has the user already booked the parking spot
  * @param store: the store, injected with @inject
  * @param car: the selected car
  * @param endDate: the selected end date
  * @param parkingSpot: the selected parking spot
  */
 interface IProps {
-    isBooked: boolean;
+    isParked: boolean;
     parkingSpot: IParkingSpot;
     car?: string;
     endDate?: Date;
@@ -24,7 +24,7 @@ interface IProps {
 
 /**
  * Button for renting a parking spot.
- * Text will change between 'Rent' and 'Finish' based on isBooked
+ * Text will change between 'Rent' and 'Finish' based on isParked
  */
 @inject("store")
 @observer
@@ -37,13 +37,13 @@ export default class RentButton extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const {isBooked, endDate, car} = this.props;
+        const {isParked, endDate, car} = this.props;
         return (
             <View>
                 <Button raised primary 
-                    disabled={(!(isBooked || !(!car || !endDate)))} 
-                    text={!isBooked ? "rent" : "finish"} 
-                    onPress={!isBooked ? this.rent : this.finish} 
+                    disabled={(!(isParked || !(!car || !endDate)))} 
+                    text={!isParked ? "rent" : "finish"} 
+                    onPress={!isParked ? this.rent : this.finish} 
                     />
             </View>
         );
