@@ -10,6 +10,7 @@ cache:
 script:
   - cd ~/build/dat256-weedle/weedle/app/parkit
   - npm test
+  - npm run lint
 notifications:
   email: false
 
