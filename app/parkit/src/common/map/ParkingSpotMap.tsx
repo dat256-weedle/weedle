@@ -101,6 +101,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     private renderMap() {
         return (
             <MapView
+                provider={"google"}
                 style={{
                     alignItems: "center",
                     flex: 1,
