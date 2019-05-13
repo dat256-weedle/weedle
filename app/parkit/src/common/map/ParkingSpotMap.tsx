@@ -2,9 +2,9 @@ import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
 import { View } from "react-native";
-import MapView, { MapEvent, Region } from "react-native-maps";
+import MapView, { MapEvent, PROVIDER_GOOGLE, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
-import {  IPosition } from "../../types";
+import { IPosition } from "../../types";
 import RentPage from "../rentpage/RentPage";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
@@ -91,8 +91,13 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
      */
     private renderRentPage() {
         return (
-            <RentPage parkingSpot={this.store.selectedParkingSpot!} onCloseButtonPress={() => this.setState({ renderRentPage: false })} />
-        )
+            <RentPage
+                parkingSpot={this.store.selectedParkingSpot!}
+                onCloseButtonPress={() =>
+                    this.setState({ renderRentPage: false })
+                }
+            />
+        );
     }
 
     /**
@@ -101,15 +106,15 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     private renderMap() {
         return (
             <MapView
-                provider={"google"}
                 style={{
                     alignItems: "center",
                     flex: 1,
                     marginBottom: this.state.width,
                     // position: 'absolute',
-                    justifyContent: "center",
+                    justifyContent: "center"
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
+                provider={PROVIDER_GOOGLE}
                 ref={this.theMap}
                 mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
                 showsUserLocation={true}
@@ -142,7 +147,8 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
      */
     @action
     private onPressEvent = (
-        e: MapEvent<{ action: "marker-press"; id: string }>) => {
+        e: MapEvent<{ action: "marker-press"; id: string }>
+    ) => {
         // Identifier for ParkingSpotMarkers are set to their id
         const { id } = e.nativeEvent;
         // If the user pressed on a parking spot marker
@@ -168,7 +174,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
             latitudeDelta,
             longitudeDelta
         } = this.currentRegion;
-        
+
         const latMax = latitude + latitudeDelta / 2;
         const latMin = latitude - latitudeDelta / 2;
         const lonMax = longitude + longitudeDelta / 2;

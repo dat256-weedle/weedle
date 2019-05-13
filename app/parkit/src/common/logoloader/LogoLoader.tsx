@@ -8,7 +8,11 @@ const logos = {
     easypark: require("../../../assets/parking-providers/logo/easypark.png"),
     gothenburg: require("../../../assets/parking-providers/logo/gothenburg.png"),
     default: require("../../../assets/carpark.png")
-}
+};
+
+const listLogos = {
+    gothenburg: require("../../../assets/parking-providers/logo/gothenburg-list.png")
+};
 
 /**
  * Returns the source of a parking providers logo
@@ -17,13 +21,25 @@ const logos = {
 export function getLogo(provider: Providers) {
     switch (provider) {
         case Providers.QPark:
-            return (logos.qpark);
+            return logos.qpark;
         case Providers.EasyPark:
-            return (logos.easypark);
+            return logos.easypark;
         case Providers.ParkeringGothenburg:
-            return (logos.gothenburg);
+            return logos.gothenburg;
         default:
-            return (logos.default);
+            return logos.default;
     }
+}
 
+/**
+ * Used instead of getLogo if you want smaller logo
+ * @param provider of parkingspot
+ */
+export function getListLogo(provider: Providers) {
+    switch (provider) {
+        case Providers.ParkeringGothenburg:
+            return listLogos.gothenburg;
+        default:
+            return getLogo(provider);
+    }
 }
