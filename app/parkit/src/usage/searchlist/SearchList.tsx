@@ -4,8 +4,8 @@ import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { IParkingSpot, IPosition } from "../../types";
-import { getListLogo } from "../logoloader/LogoLoader";
-import ParkingSpotMap from "../map/ParkingSpotMap";
+import { getListLogo } from "../../common/logoloader/LogoLoader";
+import ParkingSpotMap from "../../common/map/ParkingSpotMap";
 
 const address = "https://nominatim.openstreetmap.org/search/";
 const parameters = "?format=json&limit=1";

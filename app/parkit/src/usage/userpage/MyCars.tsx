@@ -59,14 +59,14 @@ export default class NewCars extends React.Component <any, IState> {
 
                         <View style={{alignItems: "center", flexDirection: "column",
                         justifyContent: "flex-start", marginLeft: 10}}>
-                            <Image source={require("../../assets/plus.png")} style={{height: 20, marginBottom: 2,
+                            <Image source={require("../../../assets/plus.png")} style={{height: 20, marginBottom: 2,
                                 marginTop: 20, width: 20}}/>
                             <View style={{flexDirection: "row", alignItems: "center"}}>
                                 <TextInput style={{height: 40}}
                                     placeholder="Enter Reg"
                                     onChangeText={(text) => this.setState({temp: text})}/>
                                 <TouchableOpacity onPress={this.onPressSave}>
-                                    <Image source={require("../../assets/save.png")} style={{ height: 20,
+                                    <Image source={require("../../../assets/save.png")} style={{ height: 20,
                                         marginLeft: 5, width: 20}}/>
                                 </TouchableOpacity>
                             </View>

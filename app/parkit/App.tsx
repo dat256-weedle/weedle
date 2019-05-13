@@ -4,7 +4,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { getData } from "./src/backend/datagatherer/DataGatherer";
 import { Store } from "./src/backend/store/Store";
-import SearchList from "./src/common/searchlist/SearchList";
+import Menu from "./src/usage/menu/Menu";
 
 export default class App extends React.Component {
     private store: Store;
@@ -21,7 +21,7 @@ export default class App extends React.Component {
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
                 <View style={styles.container}>
-                    <SearchList />
+                    <Menu/>
                 </View>
             </Provider>
         );
