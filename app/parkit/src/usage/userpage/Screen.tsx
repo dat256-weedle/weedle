@@ -8,7 +8,7 @@ export default class Screen extends React.Component {
         return (
             <View style= {{flex: 2, flexDirection: "column"}}>
                 <View style= {{alignItems: "center", backgroundColor: "rgb(100,210,110)"}}>
-                    <Image source={require("../../assets/user.png")} style={{
+                    <Image source={require("../../../assets/user.png")} style={{
                         height: 100, marginLeft: 10, marginTop: 100, width: 100}}/>
                     <View style= {{alignItems: "center", marginTop: 10, marginBottom: 20}}>
                         <Text style={{color: "black", fontSize: 30, fontWeight: "bold"}}>John Doe </Text>
