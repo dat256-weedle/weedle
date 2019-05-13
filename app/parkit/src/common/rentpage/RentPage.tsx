@@ -131,7 +131,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                 mode="datetime"
                 placeholder="Select time"
                 minDate={moment().toDate()}
-                maxDate={moment().add("1 week").toDate()}
+                maxDate={moment().add(7, "d").toDate()}
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 is24Hour={true}
