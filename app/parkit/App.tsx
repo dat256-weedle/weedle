@@ -1,4 +1,3 @@
-import { ScreenOrientation } from "expo";
 import { Provider } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -13,7 +12,6 @@ export default class App extends React.Component {
         super(props);
         this.store = new Store();
         getData(this.store);
-        ScreenOrientation.allow("ALL");
     }
 
     public render() {

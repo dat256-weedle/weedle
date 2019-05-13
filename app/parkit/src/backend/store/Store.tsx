@@ -1,5 +1,5 @@
 import { action, computed, observable } from "mobx";
-import { IParkingSpot } from "./../../types";
+import { IParkingSession, IParkingSpot } from "./../../types";
 
 /**
  * Store which contains the state of the whole application
@@ -18,6 +18,12 @@ export class Store {
     >();
 
     /**
+     * List of all cars added in the UserPage
+     */
+    @observable
+    public theCars: string[] = new Array();
+
+    /**
      * The currently selected parking spot
      */
     @observable public selected: string;
@@ -25,10 +31,14 @@ export class Store {
     /**
      * List of all parking spots which are being rented by the user
      */
-    @observable public bookedParkingSpots: string[] = new Array();
+    @observable public oldParkingSessions: IParkingSession[] = new Array();
+
+
+    @observable public currentParkingSessions: IParkingSession[] = new Array();
 
     constructor() {
         this.selected = "-1";
+        this.theCars.push("abc12")
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -44,37 +54,6 @@ export class Store {
     @computed
     get allParkingSpotsList() {
         return Array.from(this.allParkingSpots.values());
-    }
-
-    /**
-     * Adds a parking spot to the bookedParkingSpots list
-     * @param parkingSpot The parking spot to rent
-     * @throws If parking spot with the same id is already booked by user
-     */
-    @action
-    public bookParkingSpot(parkingSpot: string) {
-        if (this.bookedParkingSpots.includes(parkingSpot)) {
-            throw new Error("Parking spot already booked");
-        }
-        this.bookedParkingSpots.push(parkingSpot);
-    }
-
-    /**
-     * Removes a parking spot from the bookedParkingsPots list.
-     * @param parkingSpot The parking spot to finish renting
-     * @throws If the parking spot is not already booked
-     */
-    @action
-    public unBookParkingSpot(parkingSpot: string) {
-        if (!this.bookedParkingSpots.includes(parkingSpot)) {
-            throw new Error("Parking spot is not booked");
-        }
-        this.bookedParkingSpots = this.bookedParkingSpots.filter(
-            item => parkingSpot !== item
-        );
-        this.bookedParkingSpots = this.bookedParkingSpots.filter(
-            item => parkingSpot !== item
-        );
     }
 
     /**
@@ -101,9 +80,9 @@ export class Store {
         this.allParkingSpots = newAllParkingSpots;
         console.log(
             "added/updated " +
-                numNew +
-                " parkingSpots, total number of parkingSpots now at " +
-                this.allParkingSpots.size
+            numNew +
+            " parkingSpots, total number of parkingSpots now at " +
+            this.allParkingSpots.size
         );
     }
 }
