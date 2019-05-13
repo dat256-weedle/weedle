@@ -124,9 +124,9 @@ src
 
 ## Dependencies and Tools
 
-* User stories: GitHub
-* Language: TypeScript
-* Language library: React Native
+* User stories: GitHub  
+* Language: TypeScript  
+* Language library: React Native  
 
 
 ## How the social contract is changed
