@@ -29,6 +29,8 @@ The group has a SCRUM master / group leader and a secretary.
 **Project manager**: Makes sure that there is an agenda before each meeting and keeps track of the meetings order of business. Also makes sure that the individual assignments are turned in on time.
 **Secretary**: Writes a protocol for each meeting and makes sure this exists on GitHub after the meeting.
 
+The group decided to make **Pontus Lindblom** the SCRUM master and **Oscar Östberg** the secretary.
+
 Additional roles and their responsibilities within the group are declared under the headline Scrum.
 
 ## Meeting times
@@ -102,8 +104,8 @@ When creating a branch in git follow the naming scheme below
 
 ### Folder Structure
 
-For the project we should put all source files in a folder called ``src`` and structure said them depending on the function of said source files. GUI components get individual folders under a folder called ``usage`` depending on gestures. Backend components get individual folders under a folder called ``backend`` based on component. Common
-components get individual folders under ``common``. Types are defined in a single file in the root of the ``src`` folder and should be named ``types.ts``. An example of said structure is as follows.
+For the project we should put all source files in a folder called ``src`` and structure them depending on the function of said source files. GUI components get individual folders under a folder called ``usage`` depending on features. Backend components get individual folders under a folder called ``backend`` based on component. Common
+components get individual folders under ``common``. Types are defined in a single file in the root of the ``src`` folder and should be named ``types.ts``. An example of said structure is as follows:
 
 ```Filesystem
 src
@@ -120,16 +122,13 @@ src
 └─types.ts
 ```
 
-## Frameworks
+## Dependencies and Tools
 
-User stories: GitHub
-Language: JavaScript
-Language library: React Native
+* User stories: GitHub
+* Language: TypeScript
+* Language library: React Native
 
-## Roles
-
-The group decided to make **Pontus Lindblom** the SCRUM master and **Oscar Östberg** the secretary.
 
 ## How the social contract is changed
 
-The person who bring up a change to the social contract is responsible to implement it into the contract, as long as the group agree.
+The person who brings up a change to the social contract is responsible to implement it into the contract, as long as the group agrees. Everyother week the social contract is reviewed at a weekly meeting by the entire group. 
