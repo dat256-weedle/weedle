@@ -15,6 +15,14 @@ export interface IParkingSpot {
     specialPrice: string;
 }
 
+export interface IParkingSession {
+    parkingSpot: IParkingSpot;
+    startTime: Date;
+    endTime: Date;
+    car: string;
+    cost?: number;
+}
+
 export enum Providers {
     ParkeringGothenburg,
     EasyPark,

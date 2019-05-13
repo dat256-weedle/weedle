@@ -2,23 +2,26 @@ import { mount } from "enzyme";
 import React from "react";
 import { Button } from "react-native-material-ui";
 import { Store } from "../../src/backend/store/Store";
-import RentButton from "../../src/common/rentbutton/RentButton";
+import RentButton from "../../src/common/rentpage/RentButton";
+import { IParkingSpot, Providers } from "../../src/types";
 
 const id = (Math.random() * Number.MAX_VALUE).toString();
 const store = new Store();
-let app = mount(<RentButton id={id} store={store} />);
+const parkingSpot: IParkingSpot = {id, name: "", position: {latitude: 0, longitude: 0}, description: "", price: "", specialPrice: "", parkingSpots: "", distance: 0, provider: Providers.EasyPark}
+const app = mount(<RentButton  store={store} parkingSpot={parkingSpot} car="car" isParked={false} />);
 
-it("Should add ids to the store when clicked", () => {
+it("Should add sessions to the store when clicked", () => {
     app.find(Button).props().onPress!();
 
-    expect(store.bookedParkingSpots).toContain(id);
+    expect(store.currentParkingSessions.find((item) => item.parkingSpot.id === id)).toBeDefined();
 });
 
-it("Should remove ids from the store when clicked again", () => {
-    expect(store.bookedParkingSpots).toContain(id);
-    app = mount(<RentButton id={id} store={store} />);
+it("Should remove sessions from the store when clicked again", () => {
+    expect(store.currentParkingSessions.find((item) => item.parkingSpot.id === id)).toBeDefined();
+    
+    const newApp = mount(<RentButton  store={store} parkingSpot={parkingSpot} car="car" isParked={true} />);
 
-    app.find(Button).props().onPress!();
+    newApp.find(Button).props().onPress!();
 
-    expect(store.bookedParkingSpots.length).toEqual(0);
+    expect(store.currentParkingSessions.length).toEqual(0);
 });

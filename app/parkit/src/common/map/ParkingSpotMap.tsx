@@ -1,22 +1,33 @@
 import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
+import { View } from "react-native";
 import MapView, { MapEvent, PROVIDER_GOOGLE, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import { IPosition } from "../../types";
+import RentPage from "../rentpage/RentPage";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import ParkingSpotMarker from "./ParkingSpotMarker";
 
+/**
+ * @param nightmode: dark mode enabled or not
+ */
 interface IProps {
     store?: Store;
     nightmode?: boolean;
 }
 
+/**
+ * @field width: stupid hack for android https://github.com/react-native-community/react-native-maps/issues/1033
+ * @field renderRentPage: if true render a RentPage on top of map
+ */
 interface IState {
     width: number;
+    renderRentPage: boolean;
 }
 
+// Δlatitude & Δlongitude for initial map position
 const defaultLatLong = 0.092;
 
 @inject("store")
@@ -30,11 +41,69 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
         this.state = {
-            width: 1
+            width: 1,
+            renderRentPage: false
         };
     }
 
     public render() {
+        return (
+            <View style={{ flex: 1 }}>
+                {this.renderMap()}
+                {this.state.renderRentPage && this.renderRentPage()}
+            </View>
+        );
+    }
+
+    public componentDidMount() {
+        // Move view to user's current location
+        navigator.geolocation.getCurrentPosition(position => {
+            this.theMap.current!.animateToRegion(
+                {
+                    latitude: position.coords.latitude,
+                    latitudeDelta: defaultLatLong,
+                    longitude: position.coords.longitude,
+                    longitudeDelta: defaultLatLong
+                },
+                1
+            );
+        });
+
+        // When a new parking spot is selected if this.positionIsInCurrentRegion returns false for the new parking spot
+        // then move the map to center on the new parking spot
+        reaction(
+            () => this.store.selectedParkingSpot,
+            parkingSpot => {
+                if (
+                    parkingSpot &&
+                    !this.positionIsInCurrentRegion(parkingSpot.position)
+                ) {
+                    this.theMap.current!.animateToCoordinate(
+                        parkingSpot.position
+                    );
+                }
+            }
+        );
+    }
+
+    /**
+     * Render a rent page based on the selectedParkingSpot from the store
+     */
+    private renderRentPage() {
+        return (
+            <RentPage
+                parkingSpot={this.store.selectedParkingSpot!}
+                onCloseButtonPress={() =>
+                    this.setState({ renderRentPage: false })
+                }
+            />
+        );
+    }
+
+    /**
+     * Render the map
+     */
+    private renderMap() {
         return (
             <MapView
                 style={{
@@ -73,48 +142,26 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         );
     }
 
-    public componentDidMount() {
-        // Move view to user's current location
-        navigator.geolocation.getCurrentPosition(position => {
-            this.theMap.current!.animateToRegion(
-                {
-                    latitude: position.coords.latitude,
-                    latitudeDelta: defaultLatLong,
-                    longitude: position.coords.longitude,
-                    longitudeDelta: defaultLatLong
-                },
-                1
-            );
-        });
-
-        reaction(
-            () => this.store.selectedParkingSpot,
-            parkingSpot => {
-                if (
-                    parkingSpot &&
-                    !this.positionIsInCurrentRegion(parkingSpot.position)
-                ) {
-                    this.theMap.current!.animateToCoordinate(
-                        parkingSpot.position
-                    );
-                }
-            }
-        );
-    }
-
+    /**
+     * Method for when the user touches the map
+     */
     @action
     private onPressEvent = (
         e: MapEvent<{ action: "marker-press"; id: string }>
     ) => {
+        // Identifier for ParkingSpotMarkers are set to their id
         const { id } = e.nativeEvent;
-
+        // If the user pressed on a parking spot marker
         if (id) {
+            // select the parking spot
             this.store.selected = id;
+            // render the RentPage
+            this.setState({ renderRentPage: true });
         }
     };
 
     /**
-     * Checks if
+     * Checks if the position is in the current map region
      */
     private positionIsInCurrentRegion = (position: IPosition) => {
         if (!this.currentRegion) {
@@ -127,6 +174,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
             latitudeDelta,
             longitudeDelta
         } = this.currentRegion;
+
         const latMax = latitude + latitudeDelta / 2;
         const latMin = latitude - latitudeDelta / 2;
         const lonMax = longitude + longitudeDelta / 2;

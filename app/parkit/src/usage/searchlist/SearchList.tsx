@@ -3,9 +3,9 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
-import { IParkingSpot, IPosition } from "../../types";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
 import ParkingSpotMap from "../../common/map/ParkingSpotMap";
+import { IParkingSpot, IPosition } from "../../types";
 
 const address = "https://nominatim.openstreetmap.org/search/";
 const parameters = "?format=json&limit=1";

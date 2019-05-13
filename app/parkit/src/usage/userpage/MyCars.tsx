@@ -1,27 +1,35 @@
+import { action } from "mobx";
+import { inject, observer } from "mobx-react";
 import React from "react";
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Store } from "../../backend/store/Store";
 import CarElement from "./CarElement";
 
 interface IState {
-    theCars: string[];
     temp: string;
     showAdd: boolean;
 }
 
-export default class NewCars extends React.Component <any, IState> {
-    constructor(props: null) {
+interface IProps {
+    store?: Store;
+}
+
+@inject("store")
+@observer
+export default class NewCars extends React.Component <IProps, IState> {
+    private store: Store;
+
+    constructor(props: IProps) {
         super(props);
-        this.state = { theCars: [], temp: "", showAdd: true};
+        this.state = { temp: "", showAdd: true};
+        this.store = this.props.store!;
     }
 
+    @action
     public onPressSave = () => {
         const temp = this.state.temp;
-        this.state.theCars.push(temp);
-        this.setState({
-            ...this.state,
-            theCars: this.state.theCars,
-        });
-        if (this.state.theCars.length === 4) {
+        this.store.theCars.push(temp);
+        if (this.store.theCars.length === 4) {
             this.setState({
                 ...this.state,
                 showAdd: false,
@@ -29,14 +37,11 @@ export default class NewCars extends React.Component <any, IState> {
         }
     }
 
+    @action
     public onDelete = (x: any) => {
-        const index = this.state.theCars.indexOf(x);
-        const temp1 = this.state.theCars.splice(index, 1);
-        this.setState({
-            ...this.state,
-            theCars: temp1},
-        );
-        if (this.state.theCars.length === 0) {
+        const index = this.store.theCars.indexOf(x);
+        const temp1 = this.store.theCars.splice(index, 1);
+        if (this.store.theCars.length === 0) {
                         this.setState({
                 ...this.state,
                 showAdd: true,
@@ -53,7 +58,7 @@ export default class NewCars extends React.Component <any, IState> {
                         <Text style={styles.carTitle}>My Cars </Text>
                     </View>
                     <View style= {{flexDirection: "row"}}>
-                        {this.state.theCars.map((reg: string, index: string | number | undefined) => (
+                        {this.store.theCars.map((reg: string, index: string | number | undefined) => (
                             <CarElement sendReg={reg} onDelete={this.onDelete.bind(this)} key={index}></CarElement>
                         ))}
 
@@ -82,7 +87,7 @@ export default class NewCars extends React.Component <any, IState> {
                         <Text style={styles.carTitle}>My Cars </Text>
                     </View>
                     <View style= {{flexDirection: "row"}}>
-                        {this.state.theCars.map((car: string, index: string | number | undefined) => (
+                        {this.store.theCars.map((car: string, index: string | number | undefined) => (
                             <CarElement sendReg={car} onDelete={this.onDelete.bind(this)} key={index}></CarElement>
                         ))}
                     </View>
