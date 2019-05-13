@@ -1,7 +1,7 @@
 import React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
-import ParkingSpotMap from "../../src/common/map/ParkingSpotMap";
-import Screen from "../../src/usage/userpage/Screen"
+import ParkingSpotMap from "../../common/map/ParkingSpotMap";
+import Screen from "../userpage/Screen"
 
 /**
  * Decides what will happen when one of the menu buttons are pressed

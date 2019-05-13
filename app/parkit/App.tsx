@@ -4,7 +4,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { getData } from "./src/backend/datagatherer/DataGatherer";
 import { Store } from "./src/backend/store/Store";
-import Menu from "./src/common/Menu";
+import Menu from "./src/usage/menu/Menu";
 
 export default class App extends React.Component {
     private store: Store;
