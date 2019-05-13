@@ -1,7 +1,12 @@
 import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
-import MapView, { MapEvent, PROVIDER_DEFAULT, Region } from "react-native-maps";
+import MapView, {
+    MapEvent,
+    PROVIDER_DEFAULT,
+    Region,
+    PROVIDER_GOOGLE
+} from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import { IPosition } from "../../types";
 import daymodeStyle from "./MapStyleDay.json";
@@ -45,7 +50,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     justifyContent: "center"
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
-                provider={PROVIDER_DEFAULT}
+                provider={PROVIDER_GOOGLE}
                 ref={this.theMap}
                 mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
                 showsUserLocation={true}
