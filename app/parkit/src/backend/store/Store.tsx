@@ -57,29 +57,6 @@ export class Store {
     }
 
     /**
-     * Adds a parking session to the parkingSessions list
-     * @param parkingSession The parking spot to rent
-     * @deprecated
-     */
-    @action
-    public bookParkingSpot(parkingSession: IParkingSession) {
-        this.currentParkingSessions.push(parkingSession);
-    }
-
-    /**
-     * Removes a parking session from the parkingSessions list.
-     * @param parkingSession The parking spot to finish renting
-     * @throws If the parking spot is not already booked
-     * @deprecated
-     */
-    @action
-    public unBookParkingSpot(parkingSession: IParkingSession) {
-        this.currentParkingSessions = this.currentParkingSessions.filter(
-            (item) => parkingSession !== item
-        );
-    }
-
-    /**
      * Adds / updates parking spots to the store.
      * @param newParkingSpots parkingSpots to be added to the store.
      */
