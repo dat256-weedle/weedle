@@ -3,11 +3,11 @@
 ## Level of ambition
 
 The group aims for a grade of 5.
-Goal with the project: create the best possible work-process for using SCRUM to create a product.
+Goal with the project: create the best possible work-process for using SCRUM to create a product of value.
 
 ## Being on time
 
-The members of the group will show up to meetings in time, with a 5-minute flex timer. It is disrespectful towards to the group to not follow this. If a member of the group is unable to arrive on time they will immediately inform the group of this.
+The members of the group will show up to meetings in time. It is disrespectful towards to the group to not follow this. If a member of the group is unable to arrive on time they will immediately inform the group of this.
 
 ## Communication
 
@@ -15,23 +15,25 @@ The communication in the group is done through Slack and through the meetings of
 
 ## Deadlines
 
-All turn-ins (Group and individual) is turned in on Mondays.
+All turn-ins are officially handed (Group and individual) in on Mondays. Individual reflections, however, have an internal deadline on sundays. 
 
 ## Workload
 
-We respect that the group members should only work 20 hours per week, and we won't
+We respect that the group members should  work 20 hours per week, and we won't
 force people to work on weekends to get done with an unfinished user story. All course
 activities counts, including meetings, lectures and lecture feedback.
 
 ## Group structure
 
 The group has a SCRUM master / group leader and a secretary.
-**The SCRUM master**: Makes sure that there is an agenda before each meeting and keeps track of the meetings order of business. Also makes sure that the individual assignments are turned in on time.
+**Project manager**: Makes sure that there is an agenda before each meeting and keeps track of the meetings order of business. Also makes sure that the individual assignments are turned in on time.
 **Secretary**: Writes a protocol for each meeting and makes sure this exists on GitHub after the meeting.
+
+Additional roles and their responsibilities within the group are declared under the headline Scrum.
 
 ## Meeting times
 
-The group has meetings on Mondays 13:00-15:00 and Thursdays 10:00-12:00.
+The group has meetings on Mondays 08:00-17:00 and Thursdays 10:00-12:00.
 
 ## Meeting protocol
 
@@ -52,20 +54,21 @@ If a personal conflict arises it should be resolved by the involved parties if p
 The code should
 
 - compile
-- have tests
-- satisfies acceptance criteria
-- approved by product owner
-- be merged into develop
+- be tested to the best of the abilities of the programmer
+- satisfy the acceptance criteria
+- satisfy the code conventions
+- be approved by the product owner(s)
+- be merged into the deveop-branch
 
 ### Responsibilities of Scrum master
 
-The SCRUM master will make sure that the members have turned in their parts for the teams deadlines.
+The SCRUM master will make sure that the members have turned in their parts for the team's deadlines.
 
-Create the agenda for and lead the groups meetings.
+Create the agenda for and lead the groups meetings. (The scrum master holds the responsibilities of the project manager)
 
 ### Responsibilities of Product- and Vice Product Owner
 
-Prioritize and pick out user stories for each sprint. Approve and criticize user stories with their acceptance criteria as basis during sprint demo.
+Prioritize and approve the set of user stories for each sprint. Approve and criticize user stories with their acceptance criteria as basis during sprint demo.
 
 Vice product owner is in charge when the product owner is the one delivering a user story.
 
@@ -83,7 +86,7 @@ Each day (from course-week 3) a daily SCRUM meeting will be held over Slack. Eac
 
 - All code and comments will be written in English.
 - Git commit messages should be short, concise and sufficiently describe what has changed.
-- All PR:s should be reviewed by at least 2 other members of the group.
+- All PR:s should be reviewed by at least 3 other members of the group.
 - No force pushes to master / develop should be made.
 - The person who created a pull request is also the person that merges it.
 - TODO:s are not allowed.
