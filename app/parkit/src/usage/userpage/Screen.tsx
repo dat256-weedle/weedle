@@ -2,6 +2,7 @@ import React from "react";
 import {Image, Text, View } from "react-native";
 import Email from "./Email";
 import MyCars from "./MyCars";
+import PaymentInfo from "./PaymentInfo";
 
 export default class Screen extends React.Component {
     public render() {
@@ -16,6 +17,7 @@ export default class Screen extends React.Component {
                 </View>
                 <View style ={{flex: 3, backgroundColor: "lightgrey"}}>
                     <Email/>
+                    <PaymentInfo/>
                     <MyCars/>
                 </View>
             </View>
