@@ -24,6 +24,15 @@ export class Store {
     @observable
     public theCars: string[] = new Array();
 
+
+    /**
+     * The email added in the UserPage
+     */
+    @observable
+    public email: string = "" ;
+    
+   
+
     /**
      * The currently selected parking spot
      */
@@ -54,6 +63,13 @@ export class Store {
     @computed
     get allParkingSpotsList() {
         return Array.from(this.allParkingSpots.values());
+    
+    /**
+     * The email added in the UserPage
+     */
+    @action
+    public setEmail (email: string) {
+        this.email = email;
     }
 
     /**

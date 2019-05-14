@@ -1,16 +1,26 @@
+import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Store } from "../../backend/store/Store";
 
 interface IState {
     enterMail: boolean;
-    email: string;
 }
 
-export default class Email extends Component<any, IState> {
-  constructor(props: Readonly<IState>) {
+interface IProps {
+    store?: Store;
+}
+
+@inject("store")
+@observer
+export default class Email extends Component<IProps, IState> {
+private store: Store;
+
+constructor(props: IProps) {
     super(props);
-    this.state = { enterMail: true, email: ""};
-  }
+    this.state = { enterMail: true};
+    this.store = this.props.store!;
+}
 
 public onPressEdit = () => {
     this.setState({
@@ -32,7 +42,7 @@ public onPressSave = () => {
                     <Image source={require("../../../assets/mail.png")} style={{width: 40, height: 40, marginLeft: 10}}/>
                     <TextInput style={{height: 40}}
                         placeholder="Enter E-mail"
-                        onChangeText={(text) => this.setState({email: text})}/>
+                        onChangeText={(text) => this.store.setEmail(text)}/>
                     <TouchableOpacity onPress={this.onPressSave}>
                         <Image source={require("../../../assets/save.png")} style={{width: 20, height: 20}}/>
                     </TouchableOpacity>
@@ -44,7 +54,7 @@ public onPressSave = () => {
             <View style={{alignItems: "center", backgroundColor: "white", justifyContent: "space-around",
                 marginTop: 10, rection: "row"}}>
                 <Image source={require("../../../assets/mail.png")} style={{width: 40, height: 40}}/>
-                <Text style={{color: "rgb(100,210,110)", fontSize: 20}}>{this.state.email}</Text>
+                <Text style={{color: "rgb(100,210,110)", fontSize: 20}}>{this.store.email}</Text>
                 <TouchableOpacity onPress={this.onPressEdit}>
                     <Image source={require("../../../assets/edit.png")} style={{width: 20, height: 20}}/>
                 </TouchableOpacity>
