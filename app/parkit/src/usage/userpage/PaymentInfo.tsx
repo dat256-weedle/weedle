@@ -36,17 +36,17 @@ export default class PaymentInfo extends React.Component<any, IState> {
                     <TextInput style={{height: 40}}
                         placeholder="Enter card number"
                         maxLength = {16}
-                        keyboardType = {"numeric"}
+                        keyboardType = {"phone-pad"}
                         onChangeText={(textInput) => this.onChanged(textInput)}/>
                     <TextInput style={{height: 40}}
                         placeholder="MM"
                         maxLength = {2}
-                        keyboardType = {"numeric"}
+                        keyboardType = {"phone-pad"}
                         onChangeText={(textInput) => this.setState({cardMonth: textInput.replace(/[^0-9]/g, "")})}/>
                     <TextInput style={{height: 40}}
                         placeholder="YY"
                         maxLength = {2}
-                        keyboardType = {"numeric"}
+                        keyboardType = {"phone-pad"}
                         onChangeText={(textInput) => this.setState({cardYear: textInput})}/>
                     <TextInput style={{height: 40}}
                         placeholder="CVC"
