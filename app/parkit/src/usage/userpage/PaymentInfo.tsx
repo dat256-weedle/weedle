@@ -37,23 +37,23 @@ export default class PaymentInfo extends React.Component<any, IState> {
                         placeholder="Enter card number"
                         maxLength = {16}
                         keyboardType = {"phone-pad"}
-                        onChangeText={(textInput) => this.onChanged(textInput)}/>
+                        onChangeText={(textInput) => this.onChanged(textInput, "cardNumber")}/>
                     <TextInput style={{height: 40}}
                         placeholder="MM"
                         maxLength = {2}
                         keyboardType = {"phone-pad"}
-                        onChangeText={(textInput) => this.setState({cardMonth: textInput.replace(/[^0-9]/g, "")})}/>
+                        onChangeText={(textInput) => this.onChanged(textInput, "cardMonth")}/>
                     <TextInput style={{height: 40}}
                         placeholder="YY"
                         maxLength = {2}
                         keyboardType = {"phone-pad"}
-                        onChangeText={(textInput) => this.setState({cardYear: textInput})}/>
+                        onChangeText={(textInput) => this.onChanged(textInput, "cardYear")}/>
                     <TextInput style={{height: 40}}
                         placeholder="CVC"
                         maxLength = {3}
                         keyboardType = {"numeric"}
                         secureTextEntry = {true}
-                        onChangeText={(textInput) => this.setState({cardCVC: textInput})}/>
+                        onChangeText={(textInput) => this.onChanged(textInput, "cardCVC")}/>
                     <TouchableOpacity onPress={this.onPressSave}>
                         <Image source={require("../../../assets/save.png")} style={{width: 20, height: 20}}/>
                     </TouchableOpacity>
@@ -78,10 +78,10 @@ export default class PaymentInfo extends React.Component<any, IState> {
         );
     }
 
-    private onChanged(textInput: any){
+    private onChanged(textInput: any, str: string){
         let newText = "";
         const numbers = "0123456789";
-    
+
         for (var i=0; i < textInput.length; i++) {
             if(numbers.indexOf(textInput[i]) > -1 ) {
                 newText = newText + textInput[i];
@@ -91,6 +91,28 @@ export default class PaymentInfo extends React.Component<any, IState> {
                 alert("please enter numbers only");
             }
         }
-        this.setState({ cardNumber: newText });
+
+        switch(str) { 
+            case "cardNumber": {
+                this.setState({ cardNumber: newText });
+               break;
+            }
+            case "cardMonth": { 
+                this.setState({ cardMonth: newText });
+               break;
+            }
+            case "cardYear": { 
+                this.setState({ cardYear: newText });
+                break;
+            }
+            case "cardCVC": { 
+                this.setState({ cardCVC: newText });
+                break;
+            }
+            default: {
+               console.error("onChanged: Got an input that doesn't match switch statement");
+               break;
+            }
+        }
     }
 }
