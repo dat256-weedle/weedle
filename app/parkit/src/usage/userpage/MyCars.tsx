@@ -53,7 +53,7 @@ export default class NewCars extends React.Component <IProps, IState> {
         if (this.state.showAdd) {
             return (
                 <View style= {{alignItems: "center", backgroundColor: "white", flexDirection: "column",
-                justifyContent: "center", marginTop: 20}}>
+                justifyContent: "center", marginTop: 10}}>
                     <View style= {{alignItems: "center"}}>
                         <Text style={styles.carTitle}>My Cars </Text>
                     </View>
