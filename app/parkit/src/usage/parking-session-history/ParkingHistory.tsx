@@ -99,6 +99,7 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
                             getFormattedTime(parkingSession.endTime)}
                     </Text>
                 </View>
+                <Text style={styles.paidText}>Paid</Text>
             </View>
         );
     }
@@ -121,6 +122,13 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
     }
 }
 
+function getFormattedTime(date: Date): string {
+    const hours = (date.getHours() < 10 ? "0" : "") + date.getHours();
+    const minutes = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
+
+    return date.getDay() + "/" + date.getMonth() + " " + hours + ":" + minutes;
+}
+
 const styles = StyleSheet.create({
     container: {
         width: "100%",
@@ -136,12 +144,16 @@ const styles = StyleSheet.create({
 
     paidText: {
         fontWeight: "bold",
-        color: "#20FF55"
+        color: "#20DD55",
+        marginRight: 10,
+        fontSize: 32
     },
 
     unPaidText: {
         fontWeight: "bold",
-        color: "#FF002E"
+        color: "#FF002E",
+        marginRight: 10,
+        fontSize: 32
     },
 
     titleBar: {
@@ -178,15 +190,3 @@ const styles = StyleSheet.create({
         marginLeft: 10
     }
 });
-
-function getFormattedTime(date: Date): string {
-    return (
-        date.getDay() +
-        "/" +
-        date.getMonth() +
-        " " +
-        date.getHours() +
-        ":" +
-        date.getMinutes()
-    );
-}
