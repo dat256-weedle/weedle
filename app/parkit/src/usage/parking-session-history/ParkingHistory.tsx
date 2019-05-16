@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
-import { IParkingSession, Providers } from "../../types";
+import { IParkingSession } from "../../types";
 
 interface IProps {
     store?: Store;
@@ -22,48 +22,6 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
         this.state = {
             store: props.store!
         };
-
-        // TMP data, remove this later!!!
-        this.state.store.oldParkingSessions.push({
-            car: "Car 1",
-            parkingSpot: {
-                id: "1234",
-                name: "Asd gatan 12",
-                price: "BS",
-                specialPrice: "BS?",
-                position: {
-                    latitude: 0,
-                    longitude: 0
-                },
-                description: "asdasdasd",
-                provider: Providers.ParkeringGothenburg,
-                distance: 0,
-                parkingSpots: "0"
-            },
-            startTime: new Date(2019, 5, 14, 15, 30, 0, 0),
-            endTime: new Date(2019, 5, 14, 15, 45, 0, 0),
-            cost: 57
-        });
-        this.state.store.oldParkingSessions.push({
-            car: "Car 2",
-            parkingSpot: {
-                id: "1234",
-                name: "Trevliga gatan 82",
-                price: "BS",
-                specialPrice: "BS?",
-                position: {
-                    latitude: 0,
-                    longitude: 0
-                },
-                description: "asdasdasd",
-                provider: Providers.ParkeringGothenburg,
-                distance: 0,
-                parkingSpots: "0"
-            },
-            startTime: new Date(2019, 6, 8, 12, 0, 0, 0),
-            endTime: new Date(2019, 6, 10, 15, 0, 0, 0),
-            cost: 192
-        });
     }
 
     public render() {
@@ -99,6 +57,7 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
                             getFormattedTime(parkingSession.endTime)}
                     </Text>
                 </View>
+                <Text>{getPrice(parkingSession.parkingSpot.price)}</Text>
                 <Text style={styles.paidText}>Paid</Text>
             </View>
         );
@@ -127,6 +86,10 @@ function getFormattedTime(date: Date): string {
     const minutes = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
 
     return date.getDay() + "/" + date.getMonth() + " " + hours + ":" + minutes;
+}
+
+function getPrice(text: string): number {
+    return parseFloat(text.substring(0, text.length - 3)) as number;
 }
 
 const styles = StyleSheet.create({
