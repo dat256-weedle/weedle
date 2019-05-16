@@ -1,5 +1,6 @@
 import { action, computed, observable } from "mobx";
 import { getDistance } from "../datagatherer/DataGatherer";
+import { asyncStorageKeys, getObjectFromAsyncStorage, setObjectInAsyncStorage} from "../storage/Asyncstorage";
 import { IParkingSession, IParkingSpot, IPosition } from "./../../types";
 
 /**
@@ -65,11 +66,22 @@ export class Store {
         return Array.from(this.allParkingSpots.values());
     
     /**
-     * The email added in the UserPage
+     * Set email method
      */
     @action
-    public setEmail (email: string) {
-        this.email = email;
+    public setEmail (email: string | void) {
+        if (typeof email === "string") {
+            this.email = email,
+            setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email)
+        } ;
+    }
+
+    /**
+     * Init method for store
+     */
+    @action
+    public initializeStoreFromStorage () {
+        getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then((email) => this.setEmail(email))
     }
 
     /**
