@@ -2,7 +2,7 @@ import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
 import { View } from "react-native";
-import MapView, { MapEvent, Marker, Region } from "react-native-maps";
+import MapView, { MapEvent, PROVIDER_GOOGLE, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import { IPosition } from "../../types";
 import RentPage from "../rentpage/RentPage";
@@ -116,7 +116,9 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         return (
             <RentPage
                 parkingSpot={this.store.selectedParkingSpot!}
-                onCloseButtonPress={() => this.setState({ renderRentPage: false })}
+                onCloseButtonPress={() =>
+                    this.setState({ renderRentPage: false })
+                }
             />
         );
     }
@@ -140,7 +142,6 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
 
         return (
             <MapView
-                provider={"google"}
                 style={{
                     alignItems: "center",
                     flex: 1,
@@ -149,6 +150,7 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                     justifyContent: "center"
                 }}
                 // Show user location button isn't implemented with Apple MapKit => use google instead
+                provider={PROVIDER_GOOGLE}
                 ref={this.theMap}
                 initialRegion={this.initialRegion}
                 mapPadding={{ top: 1, right: 1, bottom: 1, left: 1 }}
@@ -193,7 +195,12 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
             return false;
         }
 
-        const { latitude, longitude, latitudeDelta, longitudeDelta } = this.state.region;
+        const {
+            latitude,
+            longitude,
+            latitudeDelta,
+            longitudeDelta
+        } = this.state.region;
 
         const latMax = latitude + latitudeDelta / 2;
         const latMin = latitude - latitudeDelta / 2;

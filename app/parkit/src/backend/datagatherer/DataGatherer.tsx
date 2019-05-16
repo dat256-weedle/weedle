@@ -103,6 +103,24 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
                         parkingSpots: obj.amountOfSpots
                     };
 
+                    if (newObj.price) {
+                        let price: string = "";
+                        for (const char of newObj.price) {
+                            if ("0123456789".indexOf(char) !== -1) {
+                                price = price + char;
+                            } else {
+                                break;
+                            }
+                        }
+
+                        if (price.length > 0) {
+                            price += " kr/h";
+                        } else {
+                            price = "Okänd kostnad";
+                        }
+                        newObj.price = price;
+                    }
+
                     arr.push(newObj);
                 });
             }
