@@ -22,6 +22,7 @@ export default class Screen extends React.Component<any, IState> {
 
     public render() {
         return (
+            // if renderAboutPage is true render the about page instead
             this.state.renderAboutPage ? <About onCloseButtonPress={() => this.setState({renderAboutPage: false})}/> : this.renderUserPage()
         );
     }

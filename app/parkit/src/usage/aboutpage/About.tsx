@@ -5,10 +5,16 @@ const contactEmail = "contact@park.it"
 const contactPhone = "+46 031 123 12 12"
 const issuesURL = "https://github.com/dat256-weedle/weedle/issues"
 
+/**
+ * @param onCloseButtonPress: function called when close button is pressed
+ */
 interface IProps {
     onCloseButtonPress: () => void
 }
 
+/**
+ * About us page which shows the user usefull information for contacting the company
+ */
 export default class About extends React.Component<IProps> {
     public render() {
         return (
