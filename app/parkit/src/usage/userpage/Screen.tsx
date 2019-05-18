@@ -22,7 +22,7 @@ export default class Screen extends React.Component<any, IState> {
 
     public render() {
         return (
-            this.state.renderAboutPage ? <About /> : this.renderUserPage()
+            this.state.renderAboutPage ? <About onCloseButtonPress={() => this.setState({renderAboutPage: false})}/> : this.renderUserPage()
         );
     }
 

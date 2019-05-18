@@ -1,11 +1,15 @@
 import React from "react";
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const contactEmail = "contact@park.it"
 const contactPhone = "+46 031 123 12 12"
 const issuesURL = "https://github.com/dat256-weedle/weedle/issues"
 
-export default class About extends React.Component {
+interface IProps {
+    onCloseButtonPress: () => void
+}
+
+export default class About extends React.Component<IProps> {
     public render() {
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "stretch", }}>
@@ -33,6 +37,12 @@ export default class About extends React.Component {
                         Github Issues
                     </Text>
                 </TouchableOpacity>
+
+                <View style={{ alignItems: "flex-end", padding: 10, position: "absolute", top: 0, right: 0, zIndex: 10 }}>
+                    <TouchableOpacity onPress={this.props.onCloseButtonPress}>
+                        <Image source={require("../../../assets/closebutton.png")} style={{ width: 32, height: 32 }} />
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
