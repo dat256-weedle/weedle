@@ -1,7 +1,8 @@
 import { AsyncStorage } from "react-native";
 
 export const asyncStorageKeys = {
-    EMAIL: "EMAIL"
+    EMAIL: "EMAIL",
+    CARS: "CARS"
 };
 
 export const getObjectFromAsyncStorage = (key: string) => {
