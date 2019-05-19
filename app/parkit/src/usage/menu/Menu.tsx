@@ -57,6 +57,7 @@ export default class Menu extends React.Component<any, IState> {
     public render() {
         return (
             <BottomNavigation
+                barStyle={{backgroundColor: primarycolor}}
                 style={{ width: "100%" , backgroundColor: primarycolor}}
                 navigationState={this.state}
                 onIndexChange={this.handleIndexChange}

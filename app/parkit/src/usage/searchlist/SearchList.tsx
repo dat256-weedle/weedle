@@ -5,7 +5,7 @@ import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
 import ParkingSpotMap from "../../common/map/ParkingSpotMap";
-import { primarycolor } from "../../styles";
+import { primarycolor, secondarycolor } from "../../styles";
 import { IParkingSpot, IPosition } from "../../types";
 
 const address = "https://nominatim.openstreetmap.org/search/";
@@ -75,7 +75,6 @@ export default class SearchList extends React.Component<IProps, IState> {
             <View style={styles.container}>
                 <SearchBar
                     round
-                    lightTheme
                     placeholder="Type here to search..."
                     value={this.state.searchText}
                     onChangeText={text => {
@@ -86,6 +85,14 @@ export default class SearchList extends React.Component<IProps, IState> {
                             this.loadData();
                         }
                     }}
+                    containerStyle={{
+                        backgroundColor: secondarycolor,
+                    }}
+                    inputContainerStyle={{
+                        backgroundColor: "white",
+                    }}
+                    textContentType="addressCity"
+                    platform="ios"
                     onSubmitEditing={() => this.loadData()}
                 />
                 {this.ChooseRender()}

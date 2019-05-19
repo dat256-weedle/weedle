@@ -64,7 +64,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                     <View style={styles.centeralign}>
                         <Text style={styles.carTitle}>My Cars </Text>
                     </View>
-                    <View style={styles.maincontainer}>
+                    <View style={styles.rowcontainer}>
                         {this.store.theCars.map(
                             (
                                 reg: string,
