@@ -36,6 +36,11 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
             outputRange: [secondarycolor, primarycolor]
         });
 
+        const borderWidth = this.selectedAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [2, 4]
+        });
+
         const paddingHorizontal = this.selectedAnimation.interpolate({
             inputRange: [0, 0.7, 1],
             outputRange: [4, 8 * 1.1, 4 * 2]
@@ -58,11 +63,11 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
                         style={[
                             styles.bubble,
                             {
-                                backgroundColor: background,
-                                borderColor: border,
+                                backgroundColor: "white",
+                                borderColor: primarycolor,
+                                borderWidth,
                                 paddingHorizontal,
                                 paddingVertical,
-                                width: 50
                             }
                         ]}
                     >

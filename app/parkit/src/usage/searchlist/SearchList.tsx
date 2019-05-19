@@ -88,11 +88,19 @@ export default class SearchList extends React.Component<IProps, IState> {
                     containerStyle={{
                         backgroundColor: secondarycolor,
                     }}
+                    style={{
+                        color: "white"
+                    }}
                     inputContainerStyle={{
                         backgroundColor: "white",
                     }}
                     textContentType="addressCity"
                     platform="ios"
+                    cancelButtonProps={
+                        {
+                            color: "white",
+                        }
+                    }
                     onSubmitEditing={() => this.loadData()}
                 />
                 {this.ChooseRender()}

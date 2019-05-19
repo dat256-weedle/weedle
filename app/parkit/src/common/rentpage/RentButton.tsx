@@ -49,13 +49,14 @@ export default class RentButton extends React.Component<IProps, {}> {
                     onPress={!isParked ? this.rent : this.finish}
                     style={{
                         container: {
-                            backgroundColor: primarycolor
-
+                            backgroundColor: primarycolor,
+                            margin: 5,
+                            padding: 5,
+                            height: 60,
                         },
                         text: {
                             color: "white",
-                            fontWeight: "bold",
-                            fontSize: bigfont,
+                            fontSize: bigfont
                         }
                     }}
                 />
