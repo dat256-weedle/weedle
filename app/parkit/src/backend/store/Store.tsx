@@ -1,6 +1,10 @@
 import { action, computed, observable } from "mobx";
 import { getDistance } from "../datagatherer/DataGatherer";
-import { asyncStorageKeys, getObjectFromAsyncStorage, setObjectInAsyncStorage} from "../storage/Asyncstorage";
+import {
+    asyncStorageKeys,
+    getObjectFromAsyncStorage,
+    setObjectInAsyncStorage
+} from "../storage/Asyncstorage";
 import { IParkingSession, IParkingSpot, IPosition } from "./../../types";
 
 /**
@@ -25,14 +29,11 @@ export class Store {
     @observable
     public theCars: string[] = new Array();
 
-
     /**
      * The email added in the UserPage
      */
     @observable
-    public email: string = "" ;
-    
-   
+    public email: string = "";
 
     /**
      * The currently selected parking spot
@@ -64,24 +65,27 @@ export class Store {
     @computed
     get allParkingSpotsList() {
         return Array.from(this.allParkingSpots.values());
-    
-    /**
-     * Set email method
-     */
-    @action
-    public setEmail (email: string | void) {
-        if (typeof email === "string") {
-            this.email = email,
-            setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email)
-        } ;
     }
 
     /**
      * Init method for store
      */
     @action
-    public initializeStoreFromStorage () {
-        getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then((email) => this.setEmail(email))
+    public initializeStoreFromStorage() {
+        getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(email =>
+            this.setEmail(email)
+        );
+    }
+
+    /**
+     * Set email method
+     */
+    @action
+    public setEmail(email: string | void) {
+        if (typeof email === "string") {
+            (this.email = email),
+                setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+        }
     }
 
     /**
