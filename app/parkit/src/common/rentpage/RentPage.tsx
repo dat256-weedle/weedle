@@ -148,11 +148,11 @@ export default class RentPage extends React.Component<IProps, IState> {
      * @param isParked has the user already parked on the parking spot, disables component if true
      */
     private carSelector(isParked: boolean) {
-        const hasCars = this.store.theCars.length !== 0;
+        const hasCars = this.store.cars.length !== 0;
         return (
             <RNPickerSelect
                 placeholder={{ value: "", label: "Select car" }}
-                items={hasCars ? this.store.theCars.map((car) => ({ value: car, label: car })) : [{ value: "", label: "No Cars" }]}
+                items={hasCars ? this.store.cars.map((car) => ({ value: car, label: car })) : [{ value: "", label: "No Cars" }]}
                 onValueChange={value => {
                     this.setState({
                         selectedCar: value,
