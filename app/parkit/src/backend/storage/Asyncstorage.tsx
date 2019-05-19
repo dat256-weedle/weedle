@@ -6,8 +6,8 @@ export const asyncStorageKeys = {
     EMAIL
 };
 
-export const getObjectFromAsyncStorage = (itemName: any) => {
-    return AsyncStorage.getItem(itemName)
+export const getObjectFromAsyncStorage = (key: string) => {
+    return AsyncStorage.getItem(key)
         .then(item => {
             if (item) {
                 return JSON.parse(item);
@@ -21,5 +21,13 @@ export const getObjectFromAsyncStorage = (itemName: any) => {
 export const setObjectInAsyncStorage = (key: string, value: any) => {
     const valueString = JSON.stringify(value);
     AsyncStorage.setItem(key, valueString);
-    AsyncStorage.getAllKeys(error);
+    AsyncStorage.getAllKeys()
+        .then((keys: string[]) => {
+            return AsyncStorage.multiGet(keys);
+        })
+        .then(result => {
+            return console.log(
+                "ASYNCSTORAGE   " + result.map(r => JSON.parse(r[1]))
+            );
+        });
 };
