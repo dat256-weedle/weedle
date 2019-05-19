@@ -71,8 +71,11 @@ export class Store {
      */
     @action
     public initializeStoreFromStorage() {
-        getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(email =>
-            this.setEmail(email)
+        getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(
+            (email: string) => this.setEmail(email)
+        );
+        getObjectFromAsyncStorage(asyncStorageKeys.CARS).then(
+            (cars: string[]) => cars.map(car => this.cars.push(car))
         );
         getObjectFromAsyncStorage(asyncStorageKeys.CARS).then((cars: string[])  =>
            cars.map(car => this.cars.push(car))
