@@ -1,9 +1,7 @@
 import { AsyncStorage } from "react-native";
 
-const EMAIL = "EMAIL";
-
 export const asyncStorageKeys = {
-    EMAIL
+    EMAIL: "EMAIL"
 };
 
 export const getObjectFromAsyncStorage = (key: string) => {
@@ -21,13 +19,4 @@ export const getObjectFromAsyncStorage = (key: string) => {
 export const setObjectInAsyncStorage = (key: string, value: any) => {
     const valueString = JSON.stringify(value);
     AsyncStorage.setItem(key, valueString);
-    AsyncStorage.getAllKeys()
-        .then((keys: string[]) => {
-            return AsyncStorage.multiGet(keys);
-        })
-        .then(result => {
-            return console.log(
-                "ASYNCSTORAGE   " + result.map(r => JSON.parse(r[1]))
-            );
-        });
 };
