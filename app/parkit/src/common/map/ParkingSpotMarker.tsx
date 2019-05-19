@@ -2,6 +2,7 @@ import React from "react";
 import { Animated, Image, StyleSheet } from "react-native";
 import { Marker } from "react-native-maps";
 import { AnimatedValue } from "react-navigation";
+import { primarycolor, secondarycolor } from "../../styles";
 import { IParkingSpot } from "../../types";
 import { getLogo } from "../logoloader/LogoLoader";
 
@@ -27,12 +28,12 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
     public render() {
         const background = this.selectedAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: ["#FFFFFF", "#4da2ab"]
+            outputRange: ["white", secondarycolor]
         });
 
         const border = this.selectedAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: ["#D23F44", "#007a87"]
+            outputRange: [secondarycolor, primarycolor]
         });
 
         const paddingHorizontal = this.selectedAnimation.interpolate({
@@ -61,7 +62,7 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
                                 borderColor: border,
                                 paddingHorizontal,
                                 paddingVertical,
-                                width: 50,
+                                width: 50
                             }
                         ]}
                     >
@@ -116,14 +117,14 @@ const styles = StyleSheet.create({
     },
     image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" },
     selectedArrow: {
-        borderTopColor: "#4da2ab"
+        borderTopColor: primarycolor
     },
     selectedArrowBorder: {
-        borderTopColor: "#007a87"
+        borderTopColor: secondarycolor
     },
     selectedBubble: {
-        backgroundColor: "#4da2ab",
-        borderColor: "#007a87"
+        backgroundColor: primarycolor,
+        borderColor: secondarycolor
     }
 });
 

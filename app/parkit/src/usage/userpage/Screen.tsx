@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         width: 100
     },
     textstyle: {
-        color: "black",
+        color: "white",
         fontSize: bigfont,
         fontWeight: "bold"
     }

@@ -5,6 +5,7 @@ import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
 import ParkingSpotMap from "../../common/map/ParkingSpotMap";
+import { primarycolor } from "../../styles";
 import { IParkingSpot, IPosition } from "../../types";
 
 const address = "https://nominatim.openstreetmap.org/search/";
@@ -172,13 +173,7 @@ export default class SearchList extends React.Component<IProps, IState> {
     private renderSeparator() {
         return (
             <View
-                style={{
-                    height: 1,
-                    width: "72%",
-                    marginLeft: "14%",
-                    marginRight: "14%",
-                    backgroundColor: "#CED0CE"
-                }}
+                style={styles.seperator}
             />
         );
     }
@@ -189,7 +184,13 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%"
     },
-
+    seperator: {
+        height: 1,
+        width: "72%",
+        marginLeft: "14%",
+        marginRight: "14%",
+        backgroundColor: primarycolor,
+    },
     listElement: {
         height: 60,
         display: "flex",

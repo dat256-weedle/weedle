@@ -10,6 +10,7 @@ import {
     View
 } from "react-native";
 import { Store } from "../../backend/store/Store";
+import { bigfont, primarycolor } from "../../styles";
 import CarElement from "./CarElement";
 
 interface IState {
@@ -84,7 +85,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                             />
                             <View style={styles.row}>
                                 <TextInput
-                                    style={{ height: 40 }}
+                                    style={styles.text}
                                     placeholder="Enter Reg"
                                     onChangeText={text =>
                                         this.setState({ temp: text })
@@ -111,7 +112,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                 <View style={styles.centeralign}>
                     <Text style={styles.carTitle}>My Cars </Text>
                 </View>
-                <View style={styles.simplerow}>
+                <View style={styles.rowcontainer}>
                     {this.store.theCars.map(
                         (car: string, index: string | number | undefined) => (
                             <CarElement
@@ -128,7 +129,7 @@ export default class NewCars extends React.Component<IProps, IState> {
 }
 const styles = StyleSheet.create({
     carTitle: {
-        color: "rgb(100,210,110)",
+        color: primarycolor,
         fontSize: 20,
         fontWeight: "bold"
     },
@@ -136,6 +137,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "white",
         flexDirection: "column",
+        justifyContent: "center",
+        marginTop: 20
+    },
+    rowcontainer: {
+        alignItems: "center",
+        backgroundColor: "white",
+        flexDirection: "row",
         justifyContent: "center",
         marginTop: 20
     },
@@ -160,5 +168,10 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         marginTop: 20,
         width: 20
+    },
+    text: {
+        height: bigfont,
+        color: "black",
+        margin: 5,
     }
 });
