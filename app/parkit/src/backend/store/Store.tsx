@@ -59,7 +59,7 @@ export class Store {
     }
 
     /**
-     * * Unmapped version of the 'allParkingSpots' map
+     * Unmapped version of the 'allParkingSpots' map
      */
     @computed
     get allParkingSpotsList() {
@@ -67,7 +67,7 @@ export class Store {
     }
 
     /**
-     * Init method for store
+     * Initializes the store from previously stored items in AsyncStorage
      */
     @action
     public initializeStoreFromStorage() {
@@ -80,7 +80,7 @@ export class Store {
     }
 
     /**
-     * Set email method
+     * Set email and stores new email in AsyncStorage
      */
     @action
     public setEmail(email: string) {
@@ -89,7 +89,7 @@ export class Store {
     }
 
     /**
-     * Adds / updates parking spots to the store.
+     * Adds/updates parkingspots to the store.
      * @param newParkingSpots parkingSpots to be added to the store.
      */
     @action
@@ -117,12 +117,21 @@ export class Store {
                 this.allParkingSpots.size
         );
     }
+
+    /**
+     * Adds car to this.cars and saves updated list of cars to AsyncStorage
+     * @param value car regnumber to be stored
+     */
     @action
     public setCar(value: string) {
         this.cars.push(value);
         setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
     }
 
+    /**
+     * Removes car from this.cars and saves the updated list of cars to AsyncStorage
+     * @param value car regnumber to be removed
+     */
     @action
     public removeCar(value: string) {
         const index = this.cars.indexOf(value);
