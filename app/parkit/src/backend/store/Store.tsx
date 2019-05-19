@@ -38,7 +38,7 @@ export class Store {
     /**
      * The currently selected parking spot
      */
-    @observable public selected: string;
+    @observable public selected: string = "-1";
 
     /**
      * List of all parking spots which are being rented by the user
@@ -48,7 +48,7 @@ export class Store {
     @observable public currentParkingSessions: IParkingSession[] = new Array();
 
     constructor() {
-        this.selected = "-1";
+        this.initializeStoreFromStorage();
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -75,22 +75,17 @@ export class Store {
             (email: string) => this.setEmail(email)
         );
         getObjectFromAsyncStorage(asyncStorageKeys.CARS).then(
-            (cars: string[]) => cars.map(car => this.cars.push(car))
+            (cars: string[]) => cars.map(car => this.setCar(car))
         );
-        getObjectFromAsyncStorage(asyncStorageKeys.CARS).then((cars: string[])  =>
-           cars.map(car => this.cars.push(car))
-       );
     }
 
     /**
      * Set email method
      */
     @action
-    public setEmail(email: string | void) {
-        if (typeof email === "string") {
-            (this.email = email),
-                setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
-        }
+    public setEmail(email: string) {
+        (this.email = email),
+            setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
     }
 
     /**
