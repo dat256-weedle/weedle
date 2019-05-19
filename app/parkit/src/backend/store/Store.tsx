@@ -74,6 +74,9 @@ export class Store {
         getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(email =>
             this.setEmail(email)
         );
+        getObjectFromAsyncStorage(asyncStorageKeys.CARS).then((cars: string[])  =>
+           cars.map(car => this.cars.push(car))
+       );
     }
 
     /**
@@ -117,10 +120,17 @@ export class Store {
         );
     }
     @action
+    public setCar(value: string) {
+        this.cars.push(value);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+    }
+
+    @action
     public removeCar(value: string) {
         const index = this.cars.indexOf(value);
         this.cars.splice(index, 1);
-        console.log(index, this.cars);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+        // console.log(index, this.cars);
     }
 
     /**
