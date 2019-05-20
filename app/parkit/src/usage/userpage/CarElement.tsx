@@ -1,26 +1,25 @@
+import { observer } from "mobx-react";
 import React, { Component } from "react";
 import {Image, Text, TouchableOpacity, View } from "react-native";
+import { Store } from "../../backend/store/Store";
 
 interface ICustomInputProps {
-    sendReg: string;
-    onDelete(reg: any): any;
+    reg: string;
+    store: Store;
 }
 
 interface IState {
     reg: string;
 }
 
+@observer
 export default class CarElement extends Component<ICustomInputProps, IState> {
   constructor(props: ICustomInputProps) {
     super(props);
     this.state = {
-        reg: props.sendReg,
+        reg: props.reg,
     };
   }
-
-    public onPressDelete = () => {
-        this.props.onDelete(this.state.reg);
-    }
 
     public render() {
         return (
@@ -28,9 +27,9 @@ export default class CarElement extends Component<ICustomInputProps, IState> {
                 justifyContent: "flex-start", marginBottom: 10, marginLeft: 10}}>
                 <Image source={require("../../../assets/car.png")} style={{width: 50, height: 50}}/>
                 <View style={{flexDirection: "row", alignItems: "center"}}>
-                    <Text style={{fontWeight: "bold"}}>{this.state.reg}</Text>
+                    <Text style={{fontWeight: "bold"}}>{this.props.reg}</Text>
                     <View>
-                    <TouchableOpacity onPress={this.onPressDelete}>
+                    <TouchableOpacity onPress={() => this.props.store.removeCar(this.props.reg)}>
                         <Image source={require("../../../assets/delete.png")} style={{height: 20, marginBottom: 5,
                             marginLeft: 5,  width: 20}}/>
                     </TouchableOpacity>
