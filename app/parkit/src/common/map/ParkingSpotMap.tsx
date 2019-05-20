@@ -2,7 +2,7 @@ import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
 import { View } from "react-native";
-import MapView, { MapEvent, PROVIDER_GOOGLE, Region } from "react-native-maps";
+import MapView, { MapEvent, Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
 import { IPosition } from "../../types";
 import RentPage from "../rentpage/RentPage";
@@ -10,7 +10,6 @@ import ClusterMarker from "./ClusterMarker";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import { getCluster } from "./MapUtils";
-import ParkingSpotMarker from "./ParkingSpotMarker";
 
 /**
  * @param nightmode: dark mode enabled or not
