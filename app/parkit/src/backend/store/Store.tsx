@@ -72,10 +72,15 @@ export class Store {
     @action
     public initializeStoreFromStorage() {
         getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(
-            (email: string) => this.setEmail(email)
+            (email: string | undefined) =>
+                typeof email === "string" ? this.setEmail(email) : {}
         );
+
         getObjectFromAsyncStorage(asyncStorageKeys.CARS).then(
-            (cars: string[]) => cars.map(car => this.setCar(car))
+            (cars: string[] | undefined) =>
+                typeof cars === "object"
+                    ? cars.map(car => this.addCar(car))
+                    : {}
         );
     }
 
@@ -123,7 +128,7 @@ export class Store {
      * @param value car regnumber to be stored
      */
     @action
-    public setCar(value: string) {
+    public addCar(value: string) {
         this.cars.push(value);
         setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
     }

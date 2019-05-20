@@ -36,7 +36,7 @@ export default class NewCars extends React.Component<IProps, IState> {
     @action
     public onPressSave = () => {
         const temp = this.state.temp;
-        this.store.setCar(temp);
+        this.store.addCar(temp);
         if (this.store.cars.length === 4) {
             this.setState({
                 ...this.state,

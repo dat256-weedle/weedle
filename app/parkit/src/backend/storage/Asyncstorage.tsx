@@ -18,7 +18,7 @@ export const getObjectFromAsyncStorage = (key: string) => {
             if (item) {
                 return JSON.parse(item);
             } else {
-                Promise.reject(Error("Empty result"));
+                return undefined;
             }
         })
         .catch(error => console.log(error));
