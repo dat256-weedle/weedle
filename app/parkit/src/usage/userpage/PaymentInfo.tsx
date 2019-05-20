@@ -44,7 +44,6 @@ export default class PaymentInfo extends React.Component<any, IState> {
                         onFocus={this.onFocus}
                         onChange={this.onChange} />) :
                     (<CreditCardInput // The big and flashy view
-                        autoFocus
                         requiresName
                         requiresCVC
 
@@ -61,12 +60,12 @@ export default class PaymentInfo extends React.Component<any, IState> {
         );
     }
 
-    private onChange = formData => {
+    private onChange = (formData: any) => {
         /* eslint no-console: 0 */
         console.log(JSON.stringify(formData, null, " "));
     };
 
-    private onFocus = field => {
+    private onFocus = (field: any) => {
         /* eslint no-console: 0 */
         console.log(field);
     };
