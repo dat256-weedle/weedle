@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-material-ui";
 import { bigfont, primarycolor } from "../../styles";
 import About from "../aboutpage/About";
