@@ -57,8 +57,10 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
                             getFormattedTime(parkingSession.endTime)}
                     </Text>
                 </View>
-                <Text>{getPrice(parkingSession.parkingSpot.price)}</Text>
-                <Text style={styles.paidText}>Paid</Text>
+                <Text />
+                <Text style={styles.paidText}>
+                    {getPrice(parkingSession.parkingSpot.price) + " kr Paid"}
+                </Text>
             </View>
         );
     }
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#20DD55",
         marginRight: 10,
-        fontSize: 32
+        fontSize: 24
     },
 
     unPaidText: {
