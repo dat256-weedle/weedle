@@ -1,3 +1,4 @@
+import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import {
     Image,
@@ -7,17 +8,27 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
+import { Store } from "../../backend/store/Store";
+
 
 interface IState {
     enterMail: boolean;
-    email: string;
 }
 
-export default class Email extends Component<any, IState> {
-    constructor(props: Readonly<IState>) {
-        super(props);
-        this.state = { enterMail: true, email: "" };
-    }
+interface IProps {
+    store?: Store;
+}
+
+@inject("store")
+@observer
+export default class Email extends Component<IProps, IState> {
+private store: Store;
+
+constructor(props: IProps) {
+    super(props);
+    this.state = { enterMail: true};
+    this.store = this.props.store!;
+}
 
     public onPressEdit = () => {
         this.setState({
@@ -42,7 +53,7 @@ export default class Email extends Component<any, IState> {
                     <TextInput
                         style={styles.text}
                         placeholder="Enter E-mail"
-                        onChangeText={text => this.setState({ email: text })}
+                        onChangeText={(text) => this.store.setEmail(text)}
                     />
                     <TouchableOpacity onPress={this.onPressSave}>
                         <Image

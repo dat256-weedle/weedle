@@ -1,5 +1,10 @@
 import { action, computed, observable } from "mobx";
 import { getDistance } from "../datagatherer/DataGatherer";
+import {
+    asyncStorageKeys,
+    getObjectFromAsyncStorage,
+    setObjectInAsyncStorage
+} from "../storage/Asyncstorage";
 import { IParkingSession, IParkingSpot, IPosition } from "./../../types";
 
 /**
@@ -25,9 +30,15 @@ export class Store {
     public cars: string[] = new Array();
 
     /**
+     * The email added in the UserPage
+     */
+    @observable
+    public email: string = "";
+
+    /**
      * The currently selected parking spot
      */
-    @observable public selected: string;
+    @observable public selected: string = "-1";
 
     /**
      * List of all parking spots which are being rented by the user
@@ -37,7 +48,7 @@ export class Store {
     @observable public currentParkingSessions: IParkingSession[] = new Array();
 
     constructor() {
-        this.selected = "-1";
+        this.initializeStoreFromStorage();
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -48,7 +59,7 @@ export class Store {
     }
 
     /**
-     * * Unmapped version of the 'allParkingSpots' map
+     * Unmapped version of the 'allParkingSpots' map
      */
     @computed
     get allParkingSpotsList() {
@@ -56,7 +67,34 @@ export class Store {
     }
 
     /**
-     * Adds / updates parking spots to the store.
+     * Initializes the store from previously stored items in AsyncStorage
+     */
+    @action
+    public initializeStoreFromStorage() {
+        getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(
+            (email: string | undefined) =>
+                typeof email === "string" ? this.setEmail(email) : {}
+        );
+
+        getObjectFromAsyncStorage(asyncStorageKeys.CARS).then(
+            (cars: string[] | undefined) =>
+                typeof cars === "object"
+                    ? cars.map(car => this.addCar(car))
+                    : {}
+        );
+    }
+
+    /**
+     * Set email and stores new email in AsyncStorage
+     */
+    @action
+    public setEmail(email: string) {
+        (this.email = email),
+            setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+    }
+
+    /**
+     * Adds/updates parkingspots to the store.
      * @param newParkingSpots parkingSpots to be added to the store.
      */
     @action
@@ -84,11 +122,27 @@ export class Store {
                 this.allParkingSpots.size
         );
     }
+
+    /**
+     * Adds car to this.cars and saves updated list of cars to AsyncStorage
+     * @param value car regnumber to be stored
+     */
+    @action
+    public addCar(value: string) {
+        this.cars.push(value);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+    }
+
+    /**
+     * Removes car from this.cars and saves the updated list of cars to AsyncStorage
+     * @param value car regnumber to be removed
+     */
     @action
     public removeCar(value: string) {
         const index = this.cars.indexOf(value);
         this.cars.splice(index, 1);
-        console.log(index, this.cars);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+        // console.log(index, this.cars);
     }
 
     /**

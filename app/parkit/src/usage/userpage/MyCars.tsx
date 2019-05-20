@@ -37,7 +37,7 @@ export default class NewCars extends React.Component<IProps, IState> {
     @action
     public onPressSave = () => {
         const temp = this.state.temp;
-        this.store.cars.push(temp);
+        this.store.addCar(temp);
         if (this.store.cars.length === 4) {
             this.setState({
                 ...this.state,
@@ -74,7 +74,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                             ) => (
                                 <CarElement
                                     reg={reg}
-                                    store={this.props.store!}
+                                    store={this.store}
                                     key={index}
                                 />
                             )
@@ -109,6 +109,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                     </View>
                 </View>
             );
+
         } else {
             return (
                 <View style={styles.maincontainer}>
@@ -116,20 +117,6 @@ export default class NewCars extends React.Component<IProps, IState> {
                         <Text style={styles.carTitle}>My Cars </Text>
                     </View>
                     <View style={styles.simplerow}>
-                        {this.store.cars.map(
-                            (
-                                car: string,
-                                index: string | number | undefined
-                            ) => (
-                                <CarElement
-                                    reg={car}
-                                    store={this.props.store!}
-                                    key={index}
-                                />
-                            )
-                        )}
-                    </View>
-                    <View style={styles.rowcontainer}>
                         {this.store.cars.map(
                             (
                                 car: string,
