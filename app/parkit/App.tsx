@@ -1,8 +1,9 @@
 import { Provider } from "mobx-react";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import { getData } from "./src/backend/datagatherer/DataGatherer";
 import { Store } from "./src/backend/store/Store";
+import { primarycolor, secondarycolor } from "./src/styles";
 import Menu from "./src/usage/menu/Menu";
 
 export default class App extends React.Component {
@@ -18,9 +19,15 @@ export default class App extends React.Component {
         return (
             // Makes it possible to inject any child components with the store object using @inject from mobx-react
             <Provider store={this.store}>
-                <View style={styles.container}>
-                    <Menu />
-                </View>
+                <SafeAreaView style={styles.safeArea}>
+                    <View style={styles.container}>
+                        <StatusBar
+                            backgroundColor={secondarycolor}
+                            barStyle="light-content"
+                        />
+                        <Menu />
+                    </View>
+                </SafeAreaView>
             </Provider>
         );
     }
@@ -28,15 +35,16 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        // alignItems: "center",
         backgroundColor: "#fff",
         flex: 1,
         flexDirection: "column",
         height: "100%",
         justifyContent: "center",
         paddingRight: 0,
-        paddingTop: 20,
         width: "100%"
     },
-    listContainer: {}
+    safeArea: {
+        flex: 1,
+        backgroundColor: primarycolor
+    }
 });

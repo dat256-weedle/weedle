@@ -6,6 +6,7 @@ import { View } from "react-native";
 import { Button } from "react-native-material-ui";
 import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
+import { bigfont, primarycolor } from "../../styles";
 
 /**
  * @param isParked: has the user already booked the parking spot
@@ -46,6 +47,18 @@ export default class RentButton extends React.Component<IProps, {}> {
                     disabled={!(isParked || !(!car || !endDate))}
                     text={!isParked ? "rent" : "finish"}
                     onPress={!isParked ? this.rent : this.finish}
+                    style={{
+                        container: {
+                            backgroundColor: primarycolor,
+                            margin: 5,
+                            padding: 5,
+                            height: 60,
+                        },
+                        text: {
+                            color: "white",
+                            fontSize: bigfont
+                        }
+                    }}
                 />
             </View>
         );

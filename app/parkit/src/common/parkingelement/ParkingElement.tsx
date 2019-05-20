@@ -27,23 +27,32 @@ export default class ParkingElement extends React.Component<IProps> {
 
     public render() {
         const { distance, price, id } = this.props;
-        const style = StyleSheet.create({
-            container: {
-                borderBottomWidth: 1,
-                borderColor: "gray",
-                borderStyle: "solid",
-                flex: 1,
-                flexDirection: "row",
-                maxHeight: 50,
-            },
-            image: { maxHeight: 40, maxWidth: 40, marginLeft: 15 },
-            textstyle: { marginTop: 15, fontWeight: "bold" },
-        });
-        return (<View style={style.container} >
-            {RowItem(<Image source={require("../../../assets/carpark.png")} style={style.image} />)}
-            {RowItem(<Text style={style.textstyle}>ID: {id} </Text>)}
-            {RowItem(<Text style={style.textstyle}>Distance: {distance} km</Text>)}
-            {RowItem(<Text style={style.textstyle}>Price: {price} kr/h</Text>)}
+
+        return (<View style={styles.container} >
+            {RowItem(<Image source={require("../../../assets/carpark.png")} style={styles.image} />)}
+            {RowItem(<Text style={styles.textstyle}>ID: {id} </Text>)}
+            {RowItem(<Text style={styles.textstyle}>Distance: {distance} km</Text>)}
+            {RowItem(<Text style={styles.textstyle}>Price: {price} kr/h</Text>)}
         </View >);
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        borderBottomWidth: 1,
+        borderColor: "gray",
+        borderStyle: "solid",
+        flex: 1,
+        flexDirection: "row",
+        maxHeight: 50,
+    },
+    image: { 
+        maxHeight: 40, 
+        maxWidth: 40, 
+        marginLeft: 15
+     },
+    textstyle: { 
+        marginTop: 15, 
+        fontWeight: "bold" 
+    },
+});
