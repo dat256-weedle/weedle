@@ -92,6 +92,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                                     onChangeText={text =>
                                         this.setState({ temp: text })
                                     }
+                                    ref={this.input}
                                 />
                                 <TouchableOpacity onPress={this.onPressSave}>
                                     <Image
