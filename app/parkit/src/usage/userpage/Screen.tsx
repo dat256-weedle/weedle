@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { bigfont, primarycolor } from "../../styles";
 import Email from "./Email";
 import MyCars from "./MyCars";
+import PaymentInfo from "./PaymentInfo";
 
 export default class Screen extends React.Component {
     public render() {
@@ -25,6 +26,7 @@ export default class Screen extends React.Component {
                 </View>
                 <View style={styles.secondarycontainer}>
                     <Email />
+                    <PaymentInfo/>
                     <MyCars />
                 </View>
             </View>

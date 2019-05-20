@@ -83,7 +83,13 @@ export default class RentButton extends React.Component<IProps, {}> {
     @action
     private finish = () => {
         this.store.currentParkingSessions = this.store.currentParkingSessions.filter(
-            item => this.props.parkingSpot.id !== item.parkingSpot.id
+            item => {
+                if (this.props.parkingSpot.id === item.parkingSpot.id) {
+                    this.store.oldParkingSessions.push(item);
+                    return false;
+                }
+                return true;
+            }
         );
     };
 }
