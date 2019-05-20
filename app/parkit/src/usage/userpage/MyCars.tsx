@@ -60,7 +60,7 @@ export default class NewCars extends React.Component<IProps, IState> {
     };
 
     public render() {
-        if (this.store.cars.length < 4) {
+        if (this.store.cars.length < 3) {
             return (
                 <View style={styles.maincontainer}>
                     <View style={styles.centeralign}>
@@ -72,11 +72,13 @@ export default class NewCars extends React.Component<IProps, IState> {
                                 reg: string,
                                 index: string | number | undefined
                             ) => (
+                                <View style={styles.carContainer}>
                                 <CarElement
                                     reg={reg}
                                     store={this.store}
                                     key={index}
                                 />
+                                </View>
                             )
                         )}
 
@@ -149,10 +151,10 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     rowcontainer: {
-        alignItems: "center",
         backgroundColor: "white",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "space-between",
+        alignItems: "center",
         marginTop: 20
     },
     simplerow: {
@@ -181,5 +183,8 @@ const styles = StyleSheet.create({
         height: bigfont,
         color: "black",
         margin: 5
+    },
+    carContainer: {
+        flexBasis: "100%"
     }
 });

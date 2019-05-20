@@ -3,8 +3,8 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
+import { primarycolor } from "../../styles";
 import { IParkingSession } from "../../types";
-
 interface IProps {
     store?: Store;
 }
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     },
 
     titleBar: {
-        backgroundColor: "#6200EE",
+        backgroundColor: primarycolor,
         width: "100%",
         height: 60,
         display: "flex",

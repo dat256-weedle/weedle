@@ -25,11 +25,11 @@ export default class CarElement extends Component<ICustomInputProps, IState> {
         return (
             <View style={styles.maincontainer}>
                 <Image
-                    source={require("../../../assets/car.png")}
+                    source={require("../../../assets/black_car_icon.png")}
                     style={styles.image}
                 />
                 <View style={styles.secondarycontainer}>
-                    <Text style={{ fontWeight: "bold" }}>{this.state.reg}</Text>
+                    <Text numberOfLines={1} style={{ fontWeight: "bold" }}>{this.state.reg}</Text>
                     <View>
                         <TouchableOpacity
                             onPress={() =>

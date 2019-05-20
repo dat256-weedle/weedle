@@ -32,7 +32,7 @@ export default class Screen extends React.Component<any, IState> {
     private renderUserPage() {
         return (
             <View style={{ flex: 2, flexDirection: "column" }}>
-                <View style={{ alignItems: "center", backgroundColor: "rgb(100,210,110)" }}>
+                <View style={styles.primarycontainer}>
                     <Image source={require("../../../assets/user.png")} style={{
                         height: 70, width: 70, marginTop: 10, marginBottom: 10}}/>
                     <View style= {{alignItems: "center", marginTop: 10, marginBottom: 10}}>
