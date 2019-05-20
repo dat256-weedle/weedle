@@ -22,7 +22,7 @@ export class Store {
      * List of all cars added in the UserPage
      */
     @observable
-    public theCars: string[] = new Array();
+    public cars: string[] = new Array();
 
     /**
      * The currently selected parking spot
@@ -38,7 +38,6 @@ export class Store {
 
     constructor() {
         this.selected = "-1";
-        this.theCars.push("abc12");
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -84,6 +83,12 @@ export class Store {
                 " parkingSpots, total number of parkingSpots now at " +
                 this.allParkingSpots.size
         );
+    }
+    @action
+    public removeCar(value: string) {
+        const index = this.cars.indexOf(value);
+        this.cars.splice(index, 1);
+        console.log(index, this.cars);
     }
 
     /**
