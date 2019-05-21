@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Store } from "../../backend/store/Store";
 
-
 interface IState {
     enterMail: boolean;
 }
@@ -22,13 +21,13 @@ interface IProps {
 @inject("store")
 @observer
 export default class Email extends Component<IProps, IState> {
-private store: Store;
+    private store: Store;
 
-constructor(props: IProps) {
-    super(props);
-    this.state = { enterMail: true};
-    this.store = this.props.store!;
-}
+    constructor(props: IProps) {
+        super(props);
+        this.store = this.props.store!;
+        this.state = { enterMail: this.store.email === "" ? true : false };
+    }
 
     public onPressEdit = () => {
         this.setState({
@@ -53,7 +52,8 @@ constructor(props: IProps) {
                     <TextInput
                         style={styles.text}
                         placeholder="Enter E-mail"
-                        onChangeText={(text) => this.store.setEmail(text)}
+                        onChangeText={text => this.store.setEmail(text)}
+                        value={this.store.email}
                     />
                     <TouchableOpacity onPress={this.onPressSave}>
                         <Image
@@ -72,7 +72,7 @@ constructor(props: IProps) {
                     style={styles.image}
                 />
                 <Text style={{ color: "rgb(100,210,110)", fontSize: 20 }}>
-                    {this.state.email}
+                    {this.store.email}
                 </Text>
                 <TouchableOpacity onPress={this.onPressEdit}>
                     <Image

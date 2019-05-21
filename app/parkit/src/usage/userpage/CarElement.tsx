@@ -8,17 +8,10 @@ interface ICustomInputProps {
     store: Store;
 }
 
-interface IState {
-    reg: string;
-}
-
 @observer
-export default class CarElement extends Component<ICustomInputProps, IState> {
+export default class CarElement extends Component<ICustomInputProps, {}> {
     constructor(props: ICustomInputProps) {
         super(props);
-        this.state = {
-            reg: props.reg
-        };
     }
 
     public render() {
@@ -29,7 +22,7 @@ export default class CarElement extends Component<ICustomInputProps, IState> {
                     style={styles.image}
                 />
                 <View style={styles.secondarycontainer}>
-                    <Text style={{ fontWeight: "bold" }}>{this.state.reg}</Text>
+                    <Text style={{ fontWeight: "bold" }}>{this.props.reg}</Text>
                     <View>
                         <TouchableOpacity
                             onPress={() =>
