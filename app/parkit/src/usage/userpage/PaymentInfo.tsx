@@ -1,10 +1,7 @@
 import { inject, observer } from "mobx-react";
 import React, { RefObject } from "react";
 import { StyleSheet, View } from "react-native";
-import {
-    CreditCardInput,
-    LiteCreditCardInput
-} from "react-native-credit-card-input";
+import { LiteCreditCardInput } from "react-native-credit-card-input";
 import { Store } from "../../backend/store/Store";
 
 interface IProps {
