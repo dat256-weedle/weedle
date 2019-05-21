@@ -52,9 +52,7 @@ const styles = StyleSheet.create({
     maincontainer: {
         alignItems: "center",
         flexDirection: "column",
-        justifyContent: "flex-start",
-        marginBottom: 10,
-        marginLeft: 10
+        justifyContent: "flex-start"
     },
     secondarycontainer: {
         flexDirection: "row",
