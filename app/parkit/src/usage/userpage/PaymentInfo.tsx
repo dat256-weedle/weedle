@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import React from "react";
+import React, { RefObject } from "react";
 import { StyleSheet, View } from "react-native";
 import {
     CreditCardInput,
@@ -25,51 +25,36 @@ const USE_LITE_CREDIT_CARD_INPUT = true;
 @inject("store")
 @observer
 export default class PaymentInfo extends React.Component<IProps, IState> {
+    private card: RefObject<LiteCreditCardInput>;
     private store: Store;
 
     constructor(props: IProps) {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
+        this.card = React.createRef<LiteCreditCardInput>();
+    }
+
+    public componentDidMount() {
+        this.card.setValues(this.store.creditCard);
     }
 
     public render() {
         return (
             <View style={styles.container}>
-                {USE_LITE_CREDIT_CARD_INPUT ? (
-                    <LiteCreditCardInput // The compact view
+                <LiteCreditCardInput
+                    ref={(c: LiteCreditCardInput) => (this.card = c)}
                         autoFocus
-                        inputStyle={styles.input}
-                        validColor={"black"}
-                        invalidColor={"red"}
-                        placeholderColor={"darkgray"}
-                        onFocus={this.onFocus}
-                        onChange={this.onChange}
-                    />
-                ) : (
-                    <CreditCardInput // The big and flashy view
-                        requiresName
-                        requiresCVC
-                        labelStyle={styles.label}
-                        inputStyle={styles.input}
-                        validColor={"black"}
-                        invalidColor={"red"}
-                        placeholderColor={"darkgray"}
-                        onFocus={this.onFocus}
-                        onChange={this.onChange}
-                    />
-                )}
+                    validColor={"black"}
+                    invalidColor={"red"}
+                    placeholderColor={"darkgray"}
+                    onChange={this.saveCardDetails}
+                />
             </View>
         );
     }
 
-    private onChange = (formData: any) => {
-        /* eslint no-console: 0 */
-        console.log(JSON.stringify(formData, null, " "));
-    };
-
-    private onFocus = (field: any) => {
-        /* eslint no-console: 0 */
-        console.log(field);
+    private saveCardDetails = (formData: any) => {
+        this.store.setCreditCard(formData.values);
     };
 }
 
