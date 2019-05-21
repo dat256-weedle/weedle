@@ -1,5 +1,7 @@
 import React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
+import { primarycolor } from "../../styles";
+import ParkingHistory from "../parking-session-history/ParkingHistory";
 import SearchList from "../searchlist/SearchList";
 import Screen from "../userpage/Screen";
 
@@ -10,7 +12,7 @@ const ShowMap = () => <SearchList />;
 const ActiveParking = () => (
     <Text>Placeholder for the active parking spot page</Text>
 );
-const History = () => <Text>Placeholder for the history page</Text>;
+const History = () => <ParkingHistory />;
 const Profile = () => <Screen />;
 
 interface IState {
@@ -56,7 +58,8 @@ export default class Menu extends React.Component<any, IState> {
     public render() {
         return (
             <BottomNavigation
-                style={{ width: "100%" }}
+                barStyle={{ backgroundColor: primarycolor }}
+                style={{ width: "100%", backgroundColor: primarycolor }}
                 navigationState={this.state}
                 onIndexChange={this.handleIndexChange}
                 renderScene={this.renderScene}

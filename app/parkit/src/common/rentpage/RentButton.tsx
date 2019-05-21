@@ -6,6 +6,7 @@ import { View } from "react-native";
 import { Button } from "react-native-material-ui";
 import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
+import { bigfont, primarycolor } from "../../styles";
 
 /**
  * @param isParked: has the user already booked the parking spot
@@ -37,17 +38,30 @@ export default class RentButton extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const {isParked, endDate, car} = this.props;
+        const { isParked, endDate, car } = this.props;
         return (
             <View>
-                <Button raised primary 
-                    disabled={(!(isParked || !(!car || !endDate)))} 
-                    text={!isParked ? "rent" : "finish"} 
-                    onPress={!isParked ? this.rent : this.finish} 
-                    />
+                <Button
+                    raised
+                    primary
+                    disabled={!(isParked || !(!car || !endDate))}
+                    text={!isParked ? "rent" : "finish"}
+                    onPress={!isParked ? this.rent : this.finish}
+                    style={{
+                        container: {
+                            backgroundColor: primarycolor,
+                            margin: 5,
+                            padding: 5,
+                            height: 60,
+                        },
+                        text: {
+                            color: "white",
+                            fontSize: bigfont
+                        }
+                    }}
+                />
             </View>
         );
-
     }
 
     /**
@@ -59,7 +73,7 @@ export default class RentButton extends React.Component<IProps, {}> {
             parkingSpot: this.props.parkingSpot,
             car: this.props.car!,
             endTime: this.props.endDate!,
-            startTime: moment().toDate(),
+            startTime: moment().toDate()
         });
     };
 
@@ -69,9 +83,13 @@ export default class RentButton extends React.Component<IProps, {}> {
     @action
     private finish = () => {
         this.store.currentParkingSessions = this.store.currentParkingSessions.filter(
-            (item) => this.props.parkingSpot.id !== item.parkingSpot.id
+            item => {
+                if (this.props.parkingSpot.id === item.parkingSpot.id) {
+                    this.store.oldParkingSessions.push(item);
+                    return false;
+                }
+                return true;
+            }
         );
     };
 }
-
-
