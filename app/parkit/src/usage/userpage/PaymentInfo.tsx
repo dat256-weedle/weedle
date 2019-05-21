@@ -1,9 +1,15 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import {
     CreditCardInput,
     LiteCreditCardInput
 } from "react-native-credit-card-input";
+import { Store } from "../../backend/store/Store";
+
+interface IProps {
+    store?: Store;
+}
 
 interface IState {
     enterCardInfo: boolean;
@@ -31,7 +37,16 @@ const s = StyleSheet.create({
 // Change to "false" to change visual presentation of credit card inputs
 const USE_LITE_CREDIT_CARD_INPUT = true;
 
-export default class PaymentInfo extends React.Component<any, IState> {
+@inject("store")
+@observer
+export default class PaymentInfo extends React.Component<IProps, IState> {
+    private store: Store;
+
+    constructor(props: IProps) {
+        super(props);
+        this.store = this.props.store!; // Since store is injected it should never be undefined
+    }
+
     public render() {
         return (
             <View style={s.container}>
