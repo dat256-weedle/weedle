@@ -1,6 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input";
+import {
+    CreditCardInput,
+    LiteCreditCardInput
+} from "react-native-credit-card-input";
 
 interface IState {
     enterCardInfo: boolean;
@@ -13,16 +16,16 @@ interface IState {
 const s = StyleSheet.create({
     container: {
         backgroundColor: "#F5F5F5",
-        marginTop: 10,
+        marginTop: 10
     },
     label: {
         color: "black",
-        fontSize: 12,
+        fontSize: 12
     },
     input: {
         fontSize: 16,
-        color: "black",
-    },
+        color: "black"
+    }
 });
 
 // Change to "false" to change visual presentation of credit card inputs
@@ -32,30 +35,29 @@ export default class PaymentInfo extends React.Component<any, IState> {
     public render() {
         return (
             <View style={s.container}>
-                {USE_LITE_CREDIT_CARD_INPUT ?
-                    (<LiteCreditCardInput // The compact view
+                {USE_LITE_CREDIT_CARD_INPUT ? (
+                    <LiteCreditCardInput // The compact view
                         autoFocus
                         inputStyle={s.input}
-
                         validColor={"black"}
                         invalidColor={"red"}
                         placeholderColor={"darkgray"}
-
                         onFocus={this.onFocus}
-                        onChange={this.onChange} />) :
-                    (<CreditCardInput // The big and flashy view
+                        onChange={this.onChange}
+                    />
+                ) : (
+                    <CreditCardInput // The big and flashy view
                         requiresName
                         requiresCVC
-
                         labelStyle={s.label}
                         inputStyle={s.input}
                         validColor={"black"}
                         invalidColor={"red"}
                         placeholderColor={"darkgray"}
-
                         onFocus={this.onFocus}
-                        onChange={this.onChange} />)
-                }
+                        onChange={this.onChange}
+                    />
+                )}
             </View>
         );
     }
