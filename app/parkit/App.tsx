@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     /**
-     * Apperantly padding doesn't always work in React Native.
+     * SafeAreaView doesn't take effect on Android and apperantly padding doesn't always work in React Native.
      * As a workaround we have to create a wrapper view so the padding can take effect.
      * https://stackoverflow.com/questions/36690207/react-native-why-padding-does-not-work
      */
