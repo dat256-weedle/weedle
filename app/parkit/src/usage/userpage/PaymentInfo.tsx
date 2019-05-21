@@ -11,20 +11,9 @@ interface IProps {
     store?: Store;
 }
 
-interface IState {
-    enterCardInfo: boolean;
-    cardNumber: string;
-    cardMonth: string;
-    cardYear: string;
-    cardCVC: string;
-}
-
-// Change to "false" to change visual presentation of credit card inputs
-const USE_LITE_CREDIT_CARD_INPUT = true;
-
 @inject("store")
 @observer
-export default class PaymentInfo extends React.Component<IProps, IState> {
+export default class PaymentInfo extends React.Component<IProps, {}> {
     private card: RefObject<LiteCreditCardInput>;
     private store: Store;
 
@@ -43,7 +32,8 @@ export default class PaymentInfo extends React.Component<IProps, IState> {
             <View style={styles.container}>
                 <LiteCreditCardInput
                     ref={(c: LiteCreditCardInput) => (this.card = c)}
-                        autoFocus
+                    autofocus
+                    inputStyle={styles.input}
                     validColor={"black"}
                     invalidColor={"red"}
                     placeholderColor={"darkgray"}
