@@ -19,21 +19,6 @@ interface IState {
     cardCVC: string;
 }
 
-const s = StyleSheet.create({
-    container: {
-        backgroundColor: "#F5F5F5",
-        marginTop: 10
-    },
-    label: {
-        color: "black",
-        fontSize: 12
-    },
-    input: {
-        fontSize: 16,
-        color: "black"
-    }
-});
-
 // Change to "false" to change visual presentation of credit card inputs
 const USE_LITE_CREDIT_CARD_INPUT = true;
 
@@ -49,11 +34,11 @@ export default class PaymentInfo extends React.Component<IProps, IState> {
 
     public render() {
         return (
-            <View style={s.container}>
+            <View style={styles.container}>
                 {USE_LITE_CREDIT_CARD_INPUT ? (
                     <LiteCreditCardInput // The compact view
                         autoFocus
-                        inputStyle={s.input}
+                        inputStyle={styles.input}
                         validColor={"black"}
                         invalidColor={"red"}
                         placeholderColor={"darkgray"}
@@ -64,8 +49,8 @@ export default class PaymentInfo extends React.Component<IProps, IState> {
                     <CreditCardInput // The big and flashy view
                         requiresName
                         requiresCVC
-                        labelStyle={s.label}
-                        inputStyle={s.input}
+                        labelStyle={styles.label}
+                        inputStyle={styles.input}
                         validColor={"black"}
                         invalidColor={"red"}
                         placeholderColor={"darkgray"}
@@ -87,3 +72,18 @@ export default class PaymentInfo extends React.Component<IProps, IState> {
         console.log(field);
     };
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "#F5F5F5",
+        marginTop: 10
+    },
+    label: {
+        color: "black",
+        fontSize: 12
+    },
+    input: {
+        fontSize: 16,
+        color: "black"
+    }
+});
