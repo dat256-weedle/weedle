@@ -10,9 +10,8 @@ import {
     View
 } from "react-native";
 import { Store } from "../../backend/store/Store";
-import { bigfont, primarycolor } from "../../styles";
+import { primarycolor } from "../../styles";
 import CarElement from "./CarElement";
-import { createSecureContext } from 'tls';
 
 interface IState {
     temp: string;
@@ -66,56 +65,50 @@ export default class NewCars extends React.Component<IProps, IState> {
                 <View style={styles.carTitleContainer}>
                     <Text style={styles.carTitle}>My Cars</Text>
                 </View>
-                <View style={styles.seperator}/>
+                <View style={styles.seperator} />
                 <View style={styles.carsContainer}>
-                {
-                    this.store.cars.map(
-                    (reg: string,
-                        index: number) => (
-                        <View style={styles.itemContainer} >
-                            <CarElement reg={reg} store={this.store} key={index} />
+                    {this.store.cars.map((reg: string, index: number) => (
+                        <View style={styles.itemContainer} key={index} s>
+                            <CarElement reg={reg} store={this.store} />
                         </View>
-                        )
-                    )
-                }
-                {
-                    this.store.cars.length < 3 && 
-                    <View style={styles.itemContainer}>
-                        <View style={addCar.maincontainer}>
-                            <Image
-                                source={require("../../../assets/plus.png")}
-                                style={addCar.image}
-                            />
-                            <View style={addCar.secondarycontainer}>
-                                <TextInput
+                    ))}
+                    {this.store.cars.length < 3 && (
+                        <View style={styles.itemContainer}>
+                            <View style={asd.maincontainer}>
+                                <Image
+                                    source={require("../../../assets/plus.png")}
+                                    style={asd.image}
+                                />
+                                <View style={asd.secondarycontainer}>
+                                    <TextInput
                                         style={styles.text}
                                         placeholder="Enter Reg"
                                         onChangeText={text =>
                                             this.setState({ temp: text })
                                         }
                                         ref={this.input}
-                                />
-                                <View>
-                                    <TouchableOpacity
-                                        onPress={this.onPressSave}
-                                    >
-                                        <Image
-                                            source={require("../../../assets/save.png")}
-                                            style={addCar.smallimage}
-                                        />
-                                    </TouchableOpacity>
+                                    />
+                                    <View>
+                                        <TouchableOpacity
+                                            onPress={this.onPressSave}
+                                        >
+                                            <Image
+                                                source={require("../../../assets/save.png")}
+                                                style={asd.smallimage}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                    </View>
-                }
+                    )}
                 </View>
             </View>
-        )
+        );
     }
 }
 
-const addCar = StyleSheet.create({
+const asd = StyleSheet.create({
     maincontainer: {
         alignItems: "center",
         flexDirection: "column",
@@ -160,7 +153,7 @@ const styles = StyleSheet.create({
     carTitleContainer: {
         width: "100%"
     },
-    
+
     carTitle: {
         margin: 5,
         color: primarycolor,
@@ -168,7 +161,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center"
     },
-    
+
     addCarContainer: {
         display: "flex",
         flexDirection: "column",
@@ -187,7 +180,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50
     },
-    
+
     image: {
         height: 20,
         margin: 10,
@@ -203,7 +196,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "flex-start",
-        padding: 5,
+        padding: 5
     },
 
     itemContainer: {
