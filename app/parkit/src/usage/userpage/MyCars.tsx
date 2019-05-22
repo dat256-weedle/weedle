@@ -81,58 +81,32 @@ export default class NewCars extends React.Component<IProps, IState> {
                 {
                     this.store.cars.length < 3 && 
                     <View style={styles.itemContainer}>
-                        <View style={asd.maincontainer}>
+                        <View style={addCar.maincontainer}>
                             <Image
                                 source={require("../../../assets/plus.png")}
-                                style={asd.image}
+                                style={addCar.image}
                             />
-                        <View style={asd.secondarycontainer}>
-                            
-                            <TextInput
-                                    style={styles.text}
-                                    placeholder="Enter Reg"
-                                    onChangeText={text =>
-                                        this.setState({ temp: text })
-                                    }
-                                    ref={this.input}
-                            />
-                            <View>
-                                <TouchableOpacity
-                                    onPress={this.onPressSave}
-                                >
-                                    <Image
-                                        source={require("../../../assets/save.png")}
-                                        style={asd.smallimage}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                        {/*
-                        <View style={styles.addCarContainer}>
-                            <Image source={require("../../../assets/plus.png")} style={styles.plusImage}/>
-                            <View style={styles.row}>
+                            <View style={addCar.secondarycontainer}>
                                 <TextInput
-                                    style={styles.text}
-                                    placeholder="Enter Reg"
-                                    onChangeText={text =>
-                                        this.setState({ temp: text })
-                                    }
-                                    ref={this.input}
+                                        style={styles.text}
+                                        placeholder="Enter Reg"
+                                        onChangeText={text =>
+                                            this.setState({ temp: text })
+                                        }
+                                        ref={this.input}
                                 />
-                                <TouchableOpacity onPress={this.onPressSave}>
-                                    <Image
-                                        source={require("../../../assets/save.png")}
-                                        style={{
-                                            height: 20,
-                                            marginLeft: 5,
-                                            width: 20
-                                        }}
-                                    />
-                                </TouchableOpacity>
+                                <View>
+                                    <TouchableOpacity
+                                        onPress={this.onPressSave}
+                                    >
+                                        <Image
+                                            source={require("../../../assets/save.png")}
+                                            style={addCar.smallimage}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
-                                    */}            
                     </View>
                 }
                 </View>
@@ -141,35 +115,7 @@ export default class NewCars extends React.Component<IProps, IState> {
     }
 }
 
-/*
-
-            <View style={styles.maincontainer}>
-                <Image
-                    source={require("../../../assets/black_car_icon.png")}
-                    style={styles.image}
-                />
-                <View style={styles.secondarycontainer}>
-                    <Text numberOfLines={1} style={{ fontWeight: "bold" }}>{this.state.reg}</Text>
-                    <View>
-                        <TouchableOpacity
-                            onPress={() =>
-                                this.props.store.removeCar(this.props.reg)
-                            }
-                        >
-                            <Image
-                                source={require("../../../assets/delete.png")}
-                                style={styles.smallimage}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-        );
-    }
-}
-*/
-
-const asd = StyleSheet.create({
+const addCar = StyleSheet.create({
     maincontainer: {
         alignItems: "center",
         flexDirection: "column",
