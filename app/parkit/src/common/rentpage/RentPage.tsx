@@ -1,3 +1,4 @@
+import LottieView from "lottie-react-native";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 import React from "react";
@@ -37,6 +38,7 @@ interface IState {
     selectedCar: string;
     endDate?: Date;
     isActive: boolean;
+    animation: boolean;
 }
 
 /**
@@ -58,6 +60,7 @@ export default class RentPage extends React.Component<IProps, IState> {
             selectedCar: isParked ? isParked.car : "",
             endDate: isParked ? isParked.endTime : undefined,
             isActive: false,
+            animation: false
         };
     }
 
@@ -126,8 +129,18 @@ export default class RentPage extends React.Component<IProps, IState> {
                             parkingSpot={this.props.parkingSpot}
                             car={this.state.selectedCar}
                             endDate={this.state.endDate}
-                            endaction={() => null}
+                            finishAction={() => {
+                                this.setState({
+                                    animation: true
+                                });
+                                setTimeout(this.props.onCloseButtonPress, 1400);
+                            }}
                         />
+                        {isParked ? (
+                            <Text>The parking lot is currently booked</Text>
+                        ) : (
+                            <Text />
+                        )}
                         <Image
                             source={getLogo(provider)}
                             style={styles.image}
@@ -151,6 +164,15 @@ export default class RentPage extends React.Component<IProps, IState> {
                         />
                     </TouchableOpacity>
                 </View>
+                {this.state.animation ? (
+                    <LottieView
+                        loop={false}
+                        autoPlay
+                        source={require("../../../assets/animations/animation-w80-h80.json")}
+                    />
+                ) : (
+                    <View />
+                )}
             </View>
         );
     }

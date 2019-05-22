@@ -21,7 +21,7 @@ interface IProps {
     car?: string;
     endDate?: Date;
     store?: Store;
-    endaction: () => void;
+    finishAction: () => void;
 }
 
 /**
@@ -31,11 +31,8 @@ interface IProps {
 @inject("store")
 @observer
 export default class RentButton extends React.Component<IProps, {}> {
-    private store: Store;
-
     constructor(props: IProps) {
         super(props);
-        this.store = this.props.store!; // Since store is injected it should never be undefined
     }
 
     public render() {
@@ -46,14 +43,14 @@ export default class RentButton extends React.Component<IProps, {}> {
                     raised
                     primary
                     disabled={!(isParked || !(!car || !endDate))}
-                    text={!isParked ? "rent" : "finish"}
+                    text={!isParked ? "rent" : "end parking"}
                     onPress={!isParked ? this.rent : this.finish}
                     style={{
                         container: {
                             backgroundColor: primarycolor,
                             margin: 5,
                             padding: 5,
-                            height: 60,
+                            height: 60
                         },
                         text: {
                             color: "white",
@@ -70,7 +67,7 @@ export default class RentButton extends React.Component<IProps, {}> {
      */
     @action
     private rent = () => {
-        this.store.currentParkingSessions.push({
+        this.props.store!.currentParkingSessions.push({
             parkingSpot: this.props.parkingSpot,
             car: this.props.car!,
             endTime: this.props.endDate!,
@@ -83,14 +80,15 @@ export default class RentButton extends React.Component<IProps, {}> {
      */
     @action
     private finish = () => {
-        this.store.currentParkingSessions = this.store.currentParkingSessions.filter(
+        this.props.store!.currentParkingSessions = this.props.store!.currentParkingSessions.filter(
             item => {
                 if (this.props.parkingSpot.id === item.parkingSpot.id) {
-                    this.store.oldParkingSessions.push(item);
+                    this.props.store!.oldParkingSessions.push(item);
                     return false;
                 }
                 return true;
             }
         );
+        this.props.finishAction()
     };
 }
