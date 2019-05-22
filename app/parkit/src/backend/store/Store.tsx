@@ -63,7 +63,19 @@ export class Store {
      */
     @computed
     get allParkingSpotsList() {
-        return Array.from(this.allParkingSpots.values());
+        return Array.from(this.allParkingSpots.values()).slice(0, 5);
+    }
+
+    /**
+     * Returns the parking history sorted based on the date when they were added
+     */
+    @computed
+    public get sortedParkingHistory(): IParkingSession[] {
+        return this.oldParkingSessions.slice().sort(
+            (a: IParkingSession, b: IParkingSession): number => {
+                return b.endTime.getTime() - a.endTime.getTime();
+            }
+        );
     }
 
     /**
