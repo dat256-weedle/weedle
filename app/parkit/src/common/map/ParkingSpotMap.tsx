@@ -9,7 +9,7 @@ import MapView, {
     Region
 } from "react-native-maps";
 import { Store } from "../../backend/store/Store";
-import { IParkingSpot, IPosition } from "../../types";
+import { IPosition } from "../../types";
 import RentPage from "../rentpage/RentPage";
 import ClusterMarker from "./ClusterMarker";
 import daymodeStyle from "./MapStyleDay.json";
@@ -86,6 +86,9 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         );
     }
 
+    /**
+     * If a marker return a ClusterMarker, if not return a parkingSpotMarker
+     */
     private renderMarker = (marker: any, index: any) => {
         const key = index + marker.geometry.coordinates[0];
 

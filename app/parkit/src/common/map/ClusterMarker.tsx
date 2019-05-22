@@ -22,12 +22,18 @@ const Style = StyleSheet.create({
     }
 });
 
+/**
+ * Round component which displays an arbitrary number
+ * @param count: number to display
+ */
 const ClusterMarker = ({ count }: { count: number }) => {
-    return (<View style={Style.container}>
-        <View style={Style.bubble}>
-            <Text style={Style.count}>{count}</Text>
+    return (
+        <View style={Style.container}>
+            <View style={Style.bubble}>
+                <Text style={Style.count}>{count}</Text>
+            </View>
         </View>
-    </View>);
+    );
 };
 
 export default ClusterMarker;
