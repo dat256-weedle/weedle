@@ -63,7 +63,7 @@ export class Store {
      */
     @computed
     get allParkingSpotsList() {
-        return Array.from(this.allParkingSpots.values()).slice(0, 5);
+        return Array.from(this.allParkingSpots.values());
     }
 
     /**
