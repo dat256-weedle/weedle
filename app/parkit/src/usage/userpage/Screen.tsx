@@ -6,6 +6,7 @@ import About from "../aboutpage/About";
 import Email from "./Email";
 import MyCars from "./MyCars";
 import PaymentInfo from "./PaymentInfo";
+import User from "./User"
 
 /**
  * @field renderAboutPage should the about page be rendered or not
@@ -32,13 +33,7 @@ export default class Screen extends React.Component<any, IState> {
     private renderUserPage() {
         return (
             <View style={{ flex: 2, flexDirection: "column" }}>
-                <View style={{ alignItems: "center", backgroundColor: "rgb(100,210,110)" }}>
-                    <Image source={require("../../../assets/user.png")} style={{
-                        height: 70, width: 70, marginTop: 10, marginBottom: 10}}/>
-                    <View style= {{alignItems: "center", marginTop: 10, marginBottom: 10}}>
-                        <Text style={{color: "black", fontSize: 30, fontWeight: "bold"}}>John Doe </Text>
-                    </View>
-                </View>
+                <User />
                 <View style={styles.secondarycontainer}>
                     <Email />
                     <PaymentInfo/>
