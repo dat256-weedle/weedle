@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
-import { primarycolor, secondarycolor } from "../../styles";
+import { secondarycolor } from "../../styles";
 import { IParkingSession } from "../../types";
 interface IProps {
     store?: Store;
