@@ -21,6 +21,7 @@ interface IProps {
     car?: string;
     endDate?: Date;
     store?: Store;
+    endaction: () => void;
 }
 
 /**
