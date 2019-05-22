@@ -17,7 +17,6 @@ import { Store } from "../../backend/store/Store";
 import { getLogo } from "../logoloader/LogoLoader";
 import { snapshotMap } from "../mapsnapshotter/MapSnapshotter";
 import RentButton from "./RentButton";
-import { getDistance } from "backend/datagatherer/DataGatherer";
 
 /**
  * @param parkingSpot: the selected parking spot

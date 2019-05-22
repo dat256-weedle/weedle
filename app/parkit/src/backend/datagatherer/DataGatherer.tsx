@@ -94,7 +94,8 @@ function getParkingGothenburgData(
                         provider: Providers.ParkeringGothenburg,
                         price: obj.regularPrice,
                         specialPrice: obj.otherPrice,
-                        parkingSpots: obj.amountOfSpots
+                        parkingSpots: obj.amountOfSpots,
+                        specialDistance: -1
                     };
 
                     if (newObj.price) {
@@ -180,7 +181,8 @@ function getQParkData(
                         provider: Providers.QPark,
                         price: "unknown",
                         specialPrice: "unknown",
-                        parkingSpots: "unknown"
+                        parkingSpots: "unknown",
+                        specialDistance: -1
                     };
 
                     formattedArray.push(parkingSpot);
