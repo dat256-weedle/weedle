@@ -86,21 +86,19 @@ export default class SearchList extends React.Component<IProps, IState> {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: secondarycolor,
+                        backgroundColor: secondarycolor
                     }}
                     style={{
                         color: "white"
                     }}
                     inputContainerStyle={{
-                        backgroundColor: "white",
+                        backgroundColor: "white"
                     }}
                     textContentType="addressCity"
                     platform="ios"
-                    cancelButtonProps={
-                        {
-                            color: "white",
-                        }
-                    }
+                    cancelButtonProps={{
+                        color: "white"
+                    }}
                     onSubmitEditing={() => this.loadData()}
                 />
                 {this.ChooseRender()}
@@ -143,10 +141,7 @@ export default class SearchList extends React.Component<IProps, IState> {
 
         return (
             <View style={styles.listElement}>
-                <Image
-                    source={getListLogo(parkingSpot.provider)}
-                    style={styles.icon}
-                />
+                {getListLogo(parkingSpot.provider)}
                 <View style={styles.centerTexts}>
                     <Text numberOfLines={1} style={styles.addressText}>
                         {parkingSpot.name}
@@ -186,11 +181,7 @@ export default class SearchList extends React.Component<IProps, IState> {
      * Render method for the separator between listItems
      */
     private renderSeparator() {
-        return (
-            <View
-                style={styles.seperator}
-            />
-        );
+        return <View style={styles.seperator} />;
     }
 }
 
@@ -204,7 +195,7 @@ const styles = StyleSheet.create({
         width: "72%",
         marginLeft: "14%",
         marginRight: "14%",
-        backgroundColor: primarycolor,
+        backgroundColor: primarycolor
     },
     listElement: {
         height: 60,
