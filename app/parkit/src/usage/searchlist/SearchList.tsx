@@ -86,21 +86,19 @@ export default class SearchList extends React.Component<IProps, IState> {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: secondarycolor,
+                        backgroundColor: secondarycolor
                     }}
                     style={{
                         color: "white"
                     }}
                     inputContainerStyle={{
-                        backgroundColor: "white",
+                        backgroundColor: "white"
                     }}
                     textContentType="addressCity"
                     platform="ios"
-                    cancelButtonProps={
-                        {
-                            color: "white",
-                        }
-                    }
+                    cancelButtonProps={{
+                        color: "white"
+                    }}
                     onSubmitEditing={() => this.loadData()}
                 />
                 {this.ChooseRender()}
@@ -134,11 +132,11 @@ export default class SearchList extends React.Component<IProps, IState> {
         const parkingSpot: IParkingSpot = item.item as IParkingSpot;
 
         let distance: string = "";
-        const distanceNumber: number = parkingSpot.distance;
+        const distanceNumber: number = parkingSpot.specialDistance;
         if (distanceNumber > 1000) {
             distance = (distanceNumber / 1000).toFixed(2) + " km";
         } else {
-            distance = distanceNumber + " m";
+            distance = distanceNumber.toFixed(0) + " m";
         }
 
         return (
@@ -186,11 +184,7 @@ export default class SearchList extends React.Component<IProps, IState> {
      * Render method for the separator between listItems
      */
     private renderSeparator() {
-        return (
-            <View
-                style={styles.seperator}
-            />
-        );
+        return <View style={styles.seperator} />;
     }
 }
 
@@ -204,7 +198,7 @@ const styles = StyleSheet.create({
         width: "72%",
         marginLeft: "14%",
         marginRight: "14%",
-        backgroundColor: primarycolor,
+        backgroundColor: primarycolor
     },
     listElement: {
         height: 60,

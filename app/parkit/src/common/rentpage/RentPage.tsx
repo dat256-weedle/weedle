@@ -1,8 +1,15 @@
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import DatePicker from "react-native-datepicker"
+import {
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
+import DatePicker from "react-native-datepicker";
 import { Divider } from "react-native-material-ui";
 import RNPickerSelect from "react-native-picker-select";
 import { IParkingSpot } from "types";
@@ -10,6 +17,7 @@ import { Store } from "../../backend/store/Store";
 import { getLogo } from "../logoloader/LogoLoader";
 import { snapshotMap } from "../mapsnapshotter/MapSnapshotter";
 import RentButton from "./RentButton";
+import { getDistance } from "backend/datagatherer/DataGatherer";
 
 /**
  * @param parkingSpot: the selected parking spot
@@ -43,36 +51,69 @@ export default class RentPage extends React.Component<IProps, IState> {
         super(props);
         this.store = this.props.store!; // Since store is injected it should never be undefined
         // checks if the parking spot from props is in the currentParkingSessions in the store
-        const isParked = (this.store.currentParkingSessions.find((item) => item.parkingSpot.id === this.props.parkingSpot.id));
+        const isParked = this.store.currentParkingSessions.find(
+            item => item.parkingSpot.id === this.props.parkingSpot.id
+        );
         this.state = {
             selectedCar: isParked ? isParked.car : "",
             endDate: isParked ? isParked.endTime : undefined
-        }
+        };
     }
 
     public render() {
-
-        const { name, description, distance, provider, price, id } = this.props.parkingSpot;
-        const isParked = (this.store.currentParkingSessions.find((item) => item.parkingSpot.id === id));
+        const {
+            name,
+            description,
+            distance,
+            provider,
+            price,
+            id
+        } = this.props.parkingSpot;
+        const isParked = this.store.currentParkingSessions.find(
+            item => item.parkingSpot.id === id
+        );
         const image = snapshotMap(this.props.parkingSpot);
         return (
-            <View style={{ flex: 1, justifyContent: "center", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "white" }}>
-
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "white"
+                }}
+            >
                 <ScrollView style={{ flexGrow: 1 }}>
                     <View style={styles.bigBox}>
                         <Text style={styles.titleText}>{name}</Text>
                         <View style={styles.subBox}>
                             <View>
-                                <Text style={styles.sectionTitleText}>Price</Text>
+                                <Text style={styles.sectionTitleText}>
+                                    Price
+                                </Text>
                                 <Text style={styles.text}>{price}</Text>
-                                <Text style={styles.sectionTitleText}>Distance</Text>
-                                <Text style={styles.text}>{distance}</Text>
+                                <Text style={styles.sectionTitleText}>
+                                    Distance
+                                </Text>
+                                <Text style={styles.text}>
+                                    {formatDistance(distance)}
+                                </Text>
                             </View>
-                            {image && <Image source={{ uri: image }} style={styles.imageMap} />}
+                            {image && (
+                                <Image
+                                    source={{ uri: image }}
+                                    style={styles.imageMap}
+                                />
+                            )}
                         </View>
 
                         <Divider />
-                        <Text style={styles.descriptionText}>{description}</Text>
+                        <Text style={styles.descriptionText}>
+                            {description}
+                        </Text>
                         <Divider />
 
                         <Text style={styles.sectionTitleText}>Car</Text>
@@ -87,18 +128,31 @@ export default class RentPage extends React.Component<IProps, IState> {
                             car={this.state.selectedCar}
                             endDate={this.state.endDate}
                         />
-                        <Image source={getLogo(provider)} style={styles.image} />
-
+                        <Image
+                            source={getLogo(provider)}
+                            style={styles.image}
+                        />
                     </View>
                 </ScrollView>
-                <View style={{ alignItems: "flex-end", padding: 10, position: "absolute", top: 0, right: 0, zIndex: 10 }}>
+                <View
+                    style={{
+                        alignItems: "flex-end",
+                        padding: 10,
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        zIndex: 10
+                    }}
+                >
                     <TouchableOpacity onPress={this.props.onCloseButtonPress}>
-                        <Image source={require("../../../assets/closebutton.png")} style={{width: 32, height: 32}}/>
+                        <Image
+                            source={require("../../../assets/closebutton.png")}
+                            style={{ width: 32, height: 32 }}
+                        />
                     </TouchableOpacity>
                 </View>
             </View>
         );
-
     }
     /**
      * Returns a calendar version a the date (e.g. (2019/05/12, 15:13) => (Today: 15:13))
@@ -114,8 +168,8 @@ export default class RentPage extends React.Component<IProps, IState> {
             sameElse: "YYYY/MM/DD [at] HH:mm"
         });
 
-        return (formatDate);
-    }
+        return formatDate;
+    };
 
     /**
      * Component to pick day, hour, and minute of when to end the parking session.
@@ -126,16 +180,25 @@ export default class RentPage extends React.Component<IProps, IState> {
         return (
             <DatePicker
                 testID="endDatePicker"
-                style={{ width: "100%", height: "auto", paddingBottom: 20, borderRadius: 4, }}
+                style={{
+                    width: "100%",
+                    height: "auto",
+                    paddingBottom: 20,
+                    borderRadius: 4
+                }}
                 date={this.state.endDate}
                 mode="datetime"
                 placeholder="Select time"
                 minDate={moment().toDate()}
-                maxDate={moment().add(7, "d").toDate()}
+                maxDate={moment()
+                    .add(7, "d")
+                    .toDate()}
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 is24Hour={true}
-                onDateChange={(datestr: string, date: any) => { this.setState({ endDate: date }) }}
+                onDateChange={(datestr: string, date: any) => {
+                    this.setState({ endDate: date });
+                }}
                 getDateStr={(date: Date) => this.getCalendarDateFormat(date)}
                 showIcon={false}
                 disabled={isParked}
@@ -152,20 +215,40 @@ export default class RentPage extends React.Component<IProps, IState> {
         return (
             <RNPickerSelect
                 placeholder={{ value: "", label: "Select car" }}
-                items={hasCars ? this.store.cars.map((car) => ({ value: car, label: car })) : [{ value: "", label: "No Cars" }]}
+                items={
+                    hasCars
+                        ? this.store.cars.map(car => ({
+                              value: car,
+                              label: car
+                          }))
+                        : [{ value: "", label: "No Cars" }]
+                }
                 onValueChange={value => {
                     this.setState({
-                        selectedCar: value,
+                        selectedCar: value
                     });
                 }}
-                style={!!isParked ? pickerSelectStylesDisabled : pickerSelectStyles}
+                style={
+                    !!isParked ? pickerSelectStylesDisabled : pickerSelectStyles
+                }
                 value={this.state.selectedCar}
                 disabled={isParked}
             />
-        )
+        );
     }
 }
 
+/**
+ * Returns a string with the formatted distance
+ * @param distance the distance.
+ */
+function formatDistance(distance: number): string {
+    if (distance > 1000) {
+        return (distance / 1000).toFixed(2) + "km";
+    }
+
+    return distance.toFixed(0) + "m";
+}
 
 const styles = StyleSheet.create({
     /**
@@ -176,7 +259,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: "40%",
         alignSelf: "center",
-        resizeMode: "contain",
+        resizeMode: "contain"
     },
     /**
      * Stylesheet for the map snapshot
@@ -185,8 +268,7 @@ const styles = StyleSheet.create({
         flex: 2,
         width: 200,
         height: 200,
-        resizeMode: "contain",
-
+        resizeMode: "contain"
     },
     /**
      * Stylesheet for price and distance
@@ -195,7 +277,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: 200,
         fontSize: 20,
-        textAlign: "left",
+        textAlign: "left"
     },
     /**
      * Stylesheet for section titles (e.g. Car, End Date)
@@ -218,7 +300,7 @@ const styles = StyleSheet.create({
      */
     bigBox: {
         padding: 10,
-        backgroundColor: "white",
+        backgroundColor: "white"
     },
     /**
      * Stylesheet for horizontal box
@@ -237,9 +319,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 30,
         textAlign: "center"
-
-    },
-
+    }
 });
 
 /**
@@ -254,7 +334,7 @@ const pickerSelectStyles = StyleSheet.create({
         borderColor: "gray",
         borderRadius: 4,
         color: "black",
-        paddingRight: 30, // to ensure the text is never behind the icon
+        paddingRight: 30 // to ensure the text is never behind the icon
     },
     inputAndroid: {
         fontSize: 16,
@@ -264,8 +344,8 @@ const pickerSelectStyles = StyleSheet.create({
         borderColor: "red",
         borderRadius: 8,
         color: "black",
-        paddingRight: 30, // to ensure the text is never behind the icon
-    },
+        paddingRight: 30 // to ensure the text is never behind the icon
+    }
 });
 
 /**
@@ -273,5 +353,8 @@ const pickerSelectStyles = StyleSheet.create({
  */
 const pickerSelectStylesDisabled = StyleSheet.create({
     inputIOS: { ...pickerSelectStyles.inputIOS, backgroundColor: "#F5F5F5" },
-    inputAndroid: { ...pickerSelectStyles.inputAndroid, backgroundColor: "#F5F5F5" },
+    inputAndroid: {
+        ...pickerSelectStyles.inputAndroid,
+        backgroundColor: "#F5F5F5"
+    }
 });

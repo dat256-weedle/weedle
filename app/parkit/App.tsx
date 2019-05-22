@@ -4,6 +4,7 @@ import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import { getData } from "./src/backend/datagatherer/DataGatherer";
 import { Store } from "./src/backend/store/Store";
 import { primarycolor, secondarycolor } from "./src/styles";
+import { IPosition } from "./src/types";
 import Menu from "./src/usage/menu/Menu";
 
 export default class App extends React.Component {
@@ -12,7 +13,13 @@ export default class App extends React.Component {
     constructor(props: any) {
         super(props);
         this.store = new Store();
-        getData(this.store);
+        navigator.geolocation.getCurrentPosition(position => {
+            const pos: IPosition = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+            getData(this.store, pos);
+        });
     }
 
     public render() {
