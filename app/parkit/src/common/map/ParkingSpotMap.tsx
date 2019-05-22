@@ -2,14 +2,20 @@ import { action, reaction } from "mobx";
 import { inject, observer } from "mobx-react";
 import React from "react";
 import { View } from "react-native";
-import MapView, { MapEvent, Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
+import MapView, {
+    MapEvent,
+    Marker,
+    PROVIDER_GOOGLE,
+    Region
+} from "react-native-maps";
 import { Store } from "../../backend/store/Store";
-import { IPosition } from "../../types";
+import { IParkingSpot, IPosition } from "../../types";
 import RentPage from "../rentpage/RentPage";
 import ClusterMarker from "./ClusterMarker";
 import daymodeStyle from "./MapStyleDay.json";
 import nightmodeStyle from "./MapStyleNight.json";
 import { getCluster } from "./MapUtils";
+import ParkingSpotMarker from "./ParkingSpotMarker";
 
 /**
  * @param nightmode: dark mode enabled or not
@@ -38,13 +44,12 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     private store: Store;
     private theMap = React.createRef<MapView>();
 
-
     private initialRegion = {
         latitude: 57.7089,
         longitude: 11.9746,
         latitudeDelta: defaultLatLong,
         longitudeDelta: defaultLatLong
-    }
+    };
 
     constructor(props: IProps) {
         super(props);
@@ -66,13 +71,15 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
     }
 
     public componentDidMount() {
-
         // When a new parking spot is selected if this.positionIsInCurrentRegion returns false for the new parking spot
         // then move the map to center on the new parking spot
         reaction(
             () => this.store.selectedParkingSpot,
-            (parkingSpot) => {
-                if (parkingSpot && !this.positionIsInCurrentRegion(parkingSpot.position)) {
+            parkingSpot => {
+                if (
+                    parkingSpot &&
+                    !this.positionIsInCurrentRegion(parkingSpot.position)
+                ) {
                     // this.theMap.current!.animateToCoordinate(parkingSpot.position);
                 }
             }
@@ -98,12 +105,10 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         }
         // If a single marker
         return (
-            <Marker
+            <ParkingSpotMarker
                 key={key}
-                coordinate={{
-                    latitude: marker.geometry.coordinates[1],
-                    longitude: marker.geometry.coordinates[0]
-                }}
+                parkingSpot={marker.parkingSpot}
+                isSelected={false}
             />
         );
     };
@@ -126,17 +131,18 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
      * Render the map
      */
     private renderMap() {
-
         // Make parking spot list fit into MapBox supercluster format
-        const allCoords = this.store.allParkingSpotsList.map((c) => ({
+        const allCoords = this.store.allParkingSpotsList.map(c => ({
+            parkingSpot: c,
             geometry: {
-                coordinates: [ c.position.longitude, c.position.latitude ]
+                coordinates: [c.position.longitude, c.position.latitude]
             }
         }));
 
         let cluster: any;
-        if(allCoords.length) {
+        if (allCoords.length) {
             cluster = getCluster(allCoords, this.state.region);
+            console.log(cluster);
         }
 
         return (
@@ -156,16 +162,19 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
                 showsUserLocation={true}
                 showsMyLocationButton={true}
                 pitchEnabled={false}
-                onRegionChangeComplete={(region) => (this.setState({region}))}
-                onPress={(e) => this.onPressEvent(e as any)}
-                customMapStyle={this.props.nightmode ? nightmodeStyle : daymodeStyle}
+                onRegionChangeComplete={region => this.setState({ region })}
+                onPress={e => this.onPressEvent(e as any)}
+                customMapStyle={
+                    this.props.nightmode ? nightmodeStyle : daymodeStyle
+                }
                 // Stupid hack to make the 'show user location' button appear on android
                 // from https://github.com/react-native-community/react-native-maps/issues/1033
                 onMapReady={() => this.setState({ width: 0 })}
             >
-                {
-                    cluster && cluster.markers.map((marker: any, index: any) => this.renderMarker(marker, index))
-                }
+                {cluster &&
+                    cluster.markers.map((marker: any, index: any) =>
+                        this.renderMarker(marker, index)
+                    )}
             </MapView>
         );
     }
@@ -174,7 +183,9 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
      * Method for when the user touches the map
      */
     @action
-    private onPressEvent = (e: MapEvent<{ action: "marker-press"; id: string }>) => {
+    private onPressEvent = (
+        e: MapEvent<{ action: "marker-press"; id: string }>
+    ) => {
         // Identifier for ParkingSpotMarkers are set to their id
         const { id } = e.nativeEvent;
         // If the user pressed on a parking spot marker

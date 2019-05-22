@@ -28,8 +28,7 @@ export function getCluster(places: any, region: Region) {
                 region.longitude + region.longitudeDelta * (0.5 + padding),
                 region.latitude + region.latitudeDelta * (0.5 + padding)
             ],
-            getZoomLevel(region.longitudeDelta),
-
+            getZoomLevel(region.longitudeDelta)
         );
     } catch (e) {
         console.debug("failed to create cluster", e);
