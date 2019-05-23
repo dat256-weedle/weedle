@@ -132,11 +132,11 @@ export default class SearchList extends React.Component<IProps, IState> {
         const parkingSpot: IParkingSpot = item.item as IParkingSpot;
 
         let distance: string = "";
-        const distanceNumber: number = parkingSpot.distance;
+        const distanceNumber: number = parkingSpot.specialDistance;
         if (distanceNumber > 1000) {
             distance = (distanceNumber / 1000).toFixed(2) + " km";
         } else {
-            distance = distanceNumber + " m";
+            distance = distanceNumber.toFixed(0) + " m";
         }
 
         return (

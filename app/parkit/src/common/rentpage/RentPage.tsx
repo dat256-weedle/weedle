@@ -102,7 +102,9 @@ export default class RentPage extends React.Component<IProps, IState> {
                                 <Text style={styles.sectionTitleText}>
                                     Distance
                                 </Text>
-                                <Text style={styles.text}>{distance}</Text>
+                                <Text style={styles.text}>
+                                    {formatDistance(distance)}
+                                </Text>
                             </View>
                             {image && (
                                 <Image
@@ -258,6 +260,18 @@ export default class RentPage extends React.Component<IProps, IState> {
             />
         );
     }
+}
+
+/**
+ * Returns a string with the formatted distance
+ * @param distance the distance.
+ */
+function formatDistance(distance: number): string {
+    if (distance > 1000) {
+        return (distance / 1000).toFixed(2) + "km";
+    }
+
+    return distance.toFixed(0) + "m";
 }
 
 const styles = StyleSheet.create({

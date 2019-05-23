@@ -13,6 +13,7 @@ export interface IParkingSpot {
     provider: Providers;
     price: string;
     specialPrice: string;
+    specialDistance: number;
 }
 
 export interface IParkingSession {
