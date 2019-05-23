@@ -47,7 +47,7 @@ constructor(props: IProps) {
             return (
                 <View style={styles.maincontainer}>
                     <Image
-                        source={require("../../../assets/mail.png")}
+                        source={require("../../../assets/mail_black.png")}
                         style={styles.imagemargin}
                     />
                     <TextInput
@@ -68,7 +68,7 @@ constructor(props: IProps) {
         return (
             <View style={styles.maincontainer}>
                 <Image
-                    source={require("../../../assets/mail.png")}
+                    source={require("../../../assets/mail_black.png")}
                     style={styles.image}
                 />
                 <Text style={{ color: "rgb(100,210,110)", fontSize: 20 }}>
@@ -87,11 +87,12 @@ constructor(props: IProps) {
 
 const styles = StyleSheet.create({
     maincontainer: {
-        alignItems: "center",
         backgroundColor: "white",
         flexDirection: "row",
-        justifyContent: "space-around",
-        marginTop: 10
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 10,
+        paddingRight: 10
     },
     imagemargin: {
         width: 40,

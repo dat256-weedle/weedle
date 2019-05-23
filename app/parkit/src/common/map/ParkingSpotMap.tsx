@@ -27,7 +27,7 @@ interface IState {
     renderRentPage: boolean;
 }
 
-// Δlatitude & Δlongitude for initial map position
+// Δlatitude & Δlongitude for initial map positionPROVIDER_DEFAULT
 const defaultLatLong = 0.092;
 
 @inject("store")
