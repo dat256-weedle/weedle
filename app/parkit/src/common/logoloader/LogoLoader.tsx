@@ -1,17 +1,54 @@
+import React from "react";
+import { Image, StyleSheet } from "react-native";
 import { Providers } from "../../types";
+
+const styles = StyleSheet.create({
+    image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" },
+    icon: {
+        width: 50,
+        height: 50,
+        marginRight: 10,
+        marginLeft: 10
+    }
+});
 
 /**
  * Logos of all parking providers
  */
 const logos = {
-    qpark: require("../../../assets/parking-providers/logo/qpark.png"),
-    easypark: require("../../../assets/parking-providers/logo/easypark.png"),
-    gothenburg: require("../../../assets/parking-providers/logo/gothenburg.png"),
-    default: require("../../../assets/carpark.png")
+    qpark: (
+        <Image
+            source={require("../../../assets/parking-providers/logo/qpark.png")}
+            style={styles.image}
+        />
+    ),
+    easypark: (
+        <Image
+            source={require("../../../assets/parking-providers/logo/easypark.png")}
+            style={styles.image}
+        />
+    ),
+    gothenburg: (
+        <Image
+            source={require("../../../assets/parking-providers/logo/gothenburg.png")}
+            style={styles.image}
+        />
+    ),
+    default: (
+        <Image
+            source={require("../../../assets/carpark.png")}
+            style={styles.image}
+        />
+    )
 };
 
 const listLogos = {
-    gothenburg: require("../../../assets/parking-providers/logo/gothenburg-list.png")
+    gothenburg: (
+        <Image
+            source={require("../../../assets/parking-providers/logo/gothenburg-list.png")}
+            style={styles.icon}
+        />
+    )
 };
 
 /**

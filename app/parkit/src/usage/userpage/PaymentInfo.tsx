@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { LiteCreditCardInput } from "react-native-credit-card-input";
 import { Store } from "../../backend/store/Store";
 
+
 interface IProps {
     store?: Store;
 }

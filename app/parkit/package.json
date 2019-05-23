@@ -16,6 +16,7 @@
     "expo": "32.0.6",
     "expo-core": "2.0.1",
     "lorem-ipsum": "^2.0.2",
+    "lottie-react-native": "^2.6.1",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "moment": "^2.24.0",
@@ -32,6 +33,7 @@
     "react-native-picker-select": "^6.1.0",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "3.3.2",
+    "supercluster": "^6.0.1",
     "ts-jest": "^24.0.2",
     "tslib": "1.9.3",
     "tslint-config-prettier": "^1.18.0"
@@ -49,6 +51,7 @@
     "@types/react-native": "0.57.38",
     "@types/react-native-datepicker": "^1.7.0",
     "@types/react-navigation": "3.0.4",
+    "@types/supercluster": "^5.0.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "jest": "^24.7.1",

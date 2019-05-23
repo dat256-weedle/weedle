@@ -1,11 +1,11 @@
 import { Store } from "backend/store/Store";
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
 import ParkingSpotMap from "../../common/map/ParkingSpotMap";
-import { primarycolor, secondarycolor } from "../../styles";
+import { primarycolor } from "../../styles";
 import { IParkingSpot, IPosition } from "../../types";
 
 const address = "https://nominatim.openstreetmap.org/search/";
@@ -86,21 +86,19 @@ export default class SearchList extends React.Component<IProps, IState> {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: secondarycolor,
+                        backgroundColor: primarycolor
                     }}
                     style={{
                         color: "white"
                     }}
                     inputContainerStyle={{
-                        backgroundColor: "white",
+                        backgroundColor: "white"
                     }}
                     textContentType="addressCity"
                     platform="ios"
-                    cancelButtonProps={
-                        {
-                            color: "white",
-                        }
-                    }
+                    cancelButtonProps={{
+                        color: "white"
+                    }}
                     onSubmitEditing={() => this.loadData()}
                 />
                 {this.ChooseRender()}
@@ -143,10 +141,7 @@ export default class SearchList extends React.Component<IProps, IState> {
 
         return (
             <View style={styles.listElement}>
-                <Image
-                    source={getListLogo(parkingSpot.provider)}
-                    style={styles.icon}
-                />
+                {getListLogo(parkingSpot.provider)}
                 <View style={styles.centerTexts}>
                     <Text numberOfLines={1} style={styles.addressText}>
                         {parkingSpot.name}
@@ -186,11 +181,7 @@ export default class SearchList extends React.Component<IProps, IState> {
      * Render method for the separator between listItems
      */
     private renderSeparator() {
-        return (
-            <View
-                style={styles.seperator}
-            />
-        );
+        return <View style={styles.seperator} />;
     }
 }
 
@@ -204,7 +195,7 @@ const styles = StyleSheet.create({
         width: "72%",
         marginLeft: "14%",
         marginRight: "14%",
-        backgroundColor: primarycolor,
+        backgroundColor: primarycolor
     },
     listElement: {
         height: 60,
