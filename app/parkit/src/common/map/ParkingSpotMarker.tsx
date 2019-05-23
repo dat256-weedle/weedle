@@ -73,10 +73,7 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
                             }
                         ]}
                     >
-                        <Image
-                            source={getLogo(provider)}
-                            style={styles.image}
-                        />
+                        {getLogo(provider)}
                     </Animated.View>
                     <Animated.View
                         style={[styles.arrowBorder, { borderTopColor: border }]}
