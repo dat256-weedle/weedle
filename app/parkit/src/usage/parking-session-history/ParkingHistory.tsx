@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 32,
         fontWeight: "bold",
-        color: "black"
+        color: "white"
     },
 
     addressText: {
