@@ -15,7 +15,8 @@ it("Should show a list with parking-elements ", () => {
             distance: 5,
             provider: Providers.ParkeringGothenburg,
             price: "15kr / h",
-            specialPrice: "150kr / h"
+            specialPrice: "150kr / h",
+            specialDistance: 5
         },
         {
             id: "000002",
@@ -26,7 +27,8 @@ it("Should show a list with parking-elements ", () => {
             distance: 15000,
             provider: Providers.QPark,
             price: "1$ / year",
-            specialPrice: "2$ / year, for americans only!"
+            specialPrice: "2$ / year, for americans only!",
+            specialDistance: 5
         },
         {
             id: "000003",
@@ -37,7 +39,8 @@ it("Should show a list with parking-elements ", () => {
             distance: 150,
             provider: Providers.EasyPark,
             price: "195kr / h",
-            specialPrice: "250kr / h during christmas"
+            specialPrice: "250kr / h during christmas",
+            specialDistance: 5
         }
     );
 
