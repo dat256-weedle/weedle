@@ -3,7 +3,13 @@ import { Image, StyleSheet } from "react-native";
 import { Providers } from "../../types";
 
 const styles = StyleSheet.create({
-    image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" }
+    image: { maxHeight: 30, maxWidth: 40, resizeMode: "contain" },
+    icon: {
+        width: 50,
+        height: 50,
+        marginRight: 10,
+        marginLeft: 10
+    }
 });
 
 /**
@@ -40,6 +46,7 @@ const listLogos = {
     gothenburg: (
         <Image
             source={require("../../../assets/parking-providers/logo/gothenburg-list.png")}
+            style={styles.icon}
         />
     )
 };
