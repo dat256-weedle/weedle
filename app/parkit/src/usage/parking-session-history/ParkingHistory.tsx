@@ -33,7 +33,6 @@ export default class ParkingHistory extends React.Component<IProps, {}> {
 
     private listItem(item: any) {
         const parkingSession = item.item as IParkingSession;
-        const key = item.key;
         return (
             <View style={styles.listElement}>
                 {getListLogo(parkingSession.parkingSpot.provider)}
