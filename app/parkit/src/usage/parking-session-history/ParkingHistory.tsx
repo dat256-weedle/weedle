@@ -1,7 +1,7 @@
 import { Store } from "backend/store/Store";
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
 import { secondarycolor } from "../../styles";
 import { IParkingSession } from "../../types";
@@ -33,13 +33,9 @@ export default class ParkingHistory extends React.Component<IProps, {}> {
 
     private listItem(item: any) {
         const parkingSession = item.item as IParkingSession;
-        const key = item.key;
         return (
-            <View style={styles.listElement} key={key}>
-                <Image
-                    source={getListLogo(parkingSession.parkingSpot.provider)}
-                    style={styles.icon}
-                />
+            <View style={styles.listElement}>
+                {getListLogo(parkingSession.parkingSpot.provider)}
                 <View style={styles.centerTexts}>
                     <Text style={styles.addressText}>
                         {parkingSession.parkingSpot.name}

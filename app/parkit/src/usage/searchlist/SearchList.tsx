@@ -1,11 +1,11 @@
 import { Store } from "backend/store/Store";
 import { inject, observer } from "mobx-react";
 import React from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
 import ParkingSpotMap from "../../common/map/ParkingSpotMap";
-import { primarycolor, secondarycolor } from "../../styles";
+import { primarycolor } from "../../styles";
 import { IParkingSpot, IPosition } from "../../types";
 
 const address = "https://nominatim.openstreetmap.org/search/";
@@ -86,7 +86,7 @@ export default class SearchList extends React.Component<IProps, IState> {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: secondarycolor
+                        backgroundColor: primarycolor
                     }}
                     style={{
                         color: "white"
@@ -141,10 +141,7 @@ export default class SearchList extends React.Component<IProps, IState> {
 
         return (
             <View style={styles.listElement}>
-                <Image
-                    source={getListLogo(parkingSpot.provider)}
-                    style={styles.icon}
-                />
+                {getListLogo(parkingSpot.provider)}
                 <View style={styles.centerTexts}>
                     <Text numberOfLines={1} style={styles.addressText}>
                         {parkingSpot.name}
