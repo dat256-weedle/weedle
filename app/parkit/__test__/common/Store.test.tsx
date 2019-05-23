@@ -17,7 +17,8 @@ parkingSpots.push(
         provider: Providers.ParkeringGothenburg,
         price: "25 kr/h",
         specialPrice: "25 kr/h",
-        parkingSpots: "I don't know"
+        parkingSpots: "I don't know",
+        specialDistance: 5
     },
     {
         id: "1",
@@ -31,7 +32,8 @@ parkingSpots.push(
         provider: Providers.ParkeringGothenburg,
         price: "25 kr/h",
         specialPrice: "25 kr/h",
-        parkingSpots: "I have made you pay for it"
+        parkingSpots: "I have made you pay for it",
+        specialDistance: 5
     },
     {
         id: "2",
@@ -45,7 +47,8 @@ parkingSpots.push(
         provider: Providers.ParkeringGothenburg,
         price: "25 kr/h",
         specialPrice: "25 kr/h",
-        parkingSpots: "I don't know"
+        parkingSpots: "I don't know",
+        specialDistance: 5
     }
 );
 

@@ -67,6 +67,18 @@ export class Store {
     }
 
     /**
+     * Returns the parking history sorted based on the date when they were added
+     */
+    @computed
+    public get sortedParkingHistory(): IParkingSession[] {
+        return this.oldParkingSessions.slice().sort(
+            (a: IParkingSession, b: IParkingSession): number => {
+                return b.endTime.getTime() - a.endTime.getTime();
+            }
+        );
+    }
+
+    /**
      * Initializes the store from previously stored items in AsyncStorage
      */
     @action
@@ -147,7 +159,7 @@ export class Store {
 
     /**
      * Returns an array of parkingspots of max length limit, sorted in order of distance to the given position.
-     * Also sets the distance property of the parkingSpot to the distance to the given position.
+     * Also sets the specialDistance property of the parkingSpot to the distance to the given position.
      */
     public getParkingSpotsByDistance(
         position: IPosition,
@@ -165,7 +177,7 @@ export class Store {
                     parkingSpot.position,
                     position
                 );
-                parkingSpot.distance = Math.trunc(distance as number);
+                parkingSpot.specialDistance = Math.trunc(distance as number);
                 parkingSpotToDistMap.set(parkingSpot, distance);
             }
         );
