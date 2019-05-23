@@ -67,6 +67,18 @@ export class Store {
     }
 
     /**
+     * Returns the parking history sorted based on the date when they were added
+     */
+    @computed
+    public get sortedParkingHistory(): IParkingSession[] {
+        return this.oldParkingSessions.slice().sort(
+            (a: IParkingSession, b: IParkingSession): number => {
+                return b.endTime.getTime() - a.endTime.getTime();
+            }
+        );
+    }
+
+    /**
      * Initializes the store from previously stored items in AsyncStorage
      */
     @action
