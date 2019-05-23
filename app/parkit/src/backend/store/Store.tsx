@@ -5,7 +5,12 @@ import {
     getObjectFromAsyncStorage,
     setObjectInAsyncStorage
 } from "../storage/Asyncstorage";
-import { IParkingSession, IParkingSpot, IPosition } from "./../../types";
+import {
+    ICreditCard,
+    IParkingSession,
+    IParkingSpot,
+    IPosition
+} from "./../../types";
 
 /**
  * Store which contains the state of the whole application
@@ -22,6 +27,12 @@ export class Store {
         string,
         IParkingSpot
     >();
+
+    /**
+     * CreditCard used in Userpage
+     */
+    @observable
+    public creditCard: ICreditCard = { number: "", expiry: "", cvc: "" };
 
     /**
      * List of all cars added in the UserPage
@@ -83,6 +94,10 @@ export class Store {
      */
     @action
     public initializeStoreFromStorage() {
+        getObjectFromAsyncStorage(asyncStorageKeys.CREDITCARD).then(
+            (card: ICreditCard | undefined) =>
+                typeof card === "object" ? this.setCreditCard(card) : {}
+        );
         getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(
             (email: string | undefined) =>
                 typeof email === "string" ? this.setEmail(email) : {}
@@ -96,13 +111,41 @@ export class Store {
         );
     }
 
+    @action
+    public setCreditCard(card: ICreditCard) {
+        this.creditCard = card;
+        setObjectInAsyncStorage(asyncStorageKeys.CREDITCARD, card);
+    }
+
     /**
      * Set email and stores new email in AsyncStorage
      */
     @action
     public setEmail(email: string) {
-        (this.email = email),
-            setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+        this.email = email;
+        setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+    }
+
+    /**
+     * Adds car to this.cars and saves updated list of cars to AsyncStorage
+     * @param value car regnumber to be stored
+     */
+    @action
+    public addCar(value: string) {
+        this.cars.push(value);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+    }
+
+    /**
+     * Removes car from this.cars and saves the updated list of cars to AsyncStorage
+     * @param value car regnumber to be removed
+     */
+    @action
+    public removeCar(value: string) {
+        const index = this.cars.indexOf(value);
+        this.cars.splice(index, 1);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+        // console.log(index, this.cars);
     }
 
     /**
@@ -133,28 +176,6 @@ export class Store {
                 " parkingSpots, total number of parkingSpots now at " +
                 this.allParkingSpots.size
         );
-    }
-
-    /**
-     * Adds car to this.cars and saves updated list of cars to AsyncStorage
-     * @param value car regnumber to be stored
-     */
-    @action
-    public addCar(value: string) {
-        this.cars.push(value);
-        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
-    }
-
-    /**
-     * Removes car from this.cars and saves the updated list of cars to AsyncStorage
-     * @param value car regnumber to be removed
-     */
-    @action
-    public removeCar(value: string) {
-        const index = this.cars.indexOf(value);
-        this.cars.splice(index, 1);
-        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
-        // console.log(index, this.cars);
     }
 
     /**

@@ -1,19 +1,52 @@
-import React from "react";
+import { inject, observer } from "mobx-react";
+import React, { RefObject } from "react";
 import { StyleSheet, View } from "react-native";
-import {
-    CreditCardInput,
-    LiteCreditCardInput
-} from "react-native-credit-card-input";
+import { LiteCreditCardInput } from "react-native-credit-card-input";
+import { Store } from "../../backend/store/Store";
 
-interface IState {
-    enterCardInfo: boolean;
-    cardNumber: string;
-    cardMonth: string;
-    cardYear: string;
-    cardCVC: string;
+
+interface IProps {
+    store?: Store;
 }
 
-const s = StyleSheet.create({
+@inject("store")
+@observer
+export default class PaymentInfo extends React.Component<IProps, {}> {
+    private card: RefObject<LiteCreditCardInput>;
+    private store: Store;
+
+    constructor(props: IProps) {
+        super(props);
+        this.store = this.props.store!; // Since store is injected it should never be undefined
+        this.card = React.createRef<LiteCreditCardInput>();
+    }
+
+    public componentDidMount() {
+        this.card.setValues(this.store.creditCard);
+    }
+
+    public render() {
+        return (
+            <View style={styles.container}>
+                <LiteCreditCardInput
+                    ref={(c: LiteCreditCardInput) => (this.card = c)}
+                    autofocus
+                    inputStyle={styles.input}
+                    validColor={"black"}
+                    invalidColor={"red"}
+                    placeholderColor={"darkgray"}
+                    onChange={this.saveCardDetails}
+                />
+            </View>
+        );
+    }
+
+    private saveCardDetails = (formData: any) => {
+        this.store.setCreditCard(formData.values);
+    };
+}
+
+const styles = StyleSheet.create({
     container: {
         backgroundColor: "#F5F5F5",
         marginTop: 10
@@ -27,47 +60,3 @@ const s = StyleSheet.create({
         color: "black"
     }
 });
-
-// Change to "false" to change visual presentation of credit card inputs
-const USE_LITE_CREDIT_CARD_INPUT = true;
-
-export default class PaymentInfo extends React.Component<any, IState> {
-    public render() {
-        return (
-            <View style={s.container}>
-                {USE_LITE_CREDIT_CARD_INPUT ? (
-                    <LiteCreditCardInput // The compact view
-                        inputStyle={s.input}
-                        validColor={"black"}
-                        invalidColor={"red"}
-                        placeholderColor={"darkgray"}
-                        onFocus={this.onFocus}
-                        onChange={this.onChange}
-                    />
-                ) : (
-                    <CreditCardInput // The big and flashy view
-                        requiresName
-                        requiresCVC
-                        labelStyle={s.label}
-                        inputStyle={s.input}
-                        validColor={"black"}
-                        invalidColor={"red"}
-                        placeholderColor={"darkgray"}
-                        onFocus={this.onFocus}
-                        onChange={this.onChange}
-                    />
-                )}
-            </View>
-        );
-    }
-
-    private onChange = (formData: any) => {
-        /* eslint no-console: 0 */
-        console.log(JSON.stringify(formData, null, " "));
-    };
-
-    private onFocus = (field: any) => {
-        /* eslint no-console: 0 */
-        console.log(field);
-    };
-}
