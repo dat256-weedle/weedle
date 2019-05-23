@@ -3,25 +3,17 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
+import { secondarycolor } from "../../styles";
 import { IParkingSession } from "../../types";
-
 interface IProps {
     store?: Store;
 }
 
-interface IState {
-    store: Store;
-}
-
 @inject("store")
 @observer
-export default class ParkingHistory extends React.Component<IProps, IState> {
+export default class ParkingHistory extends React.Component<IProps, {}> {
     constructor(props: IProps) {
         super(props);
-
-        this.state = {
-            store: props.store!
-        };
     }
 
     public render() {
@@ -31,7 +23,7 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
                     <Text style={styles.titleText}>Parking History</Text>
                 </View>
                 <FlatList
-                    data={this.state.store.oldParkingSessions}
+                    data={this.props.store!.sortedParkingHistory}
                     renderItem={this.listItem}
                     ItemSeparatorComponent={this.renderSeparator}
                 />
@@ -41,6 +33,7 @@ export default class ParkingHistory extends React.Component<IProps, IState> {
 
     private listItem(item: any) {
         const parkingSession = item.item as IParkingSession;
+        const key = item.key;
         return (
             <View style={styles.listElement}>
                 {getListLogo(parkingSession.parkingSpot.provider)}
@@ -119,7 +112,7 @@ const styles = StyleSheet.create({
     },
 
     titleBar: {
-        backgroundColor: "#6200EE",
+        backgroundColor: secondarycolor,
         width: "100%",
         height: 60,
         display: "flex",
@@ -130,7 +123,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 32,
         fontWeight: "bold",
-        color: "#FFFFFF"
+        color: "black"
     },
 
     addressText: {

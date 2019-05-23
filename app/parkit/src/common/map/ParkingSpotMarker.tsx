@@ -9,6 +9,7 @@ import { getLogo } from "../logoloader/LogoLoader";
 interface IProps {
     parkingSpot: IParkingSpot;
     isSelected: boolean;
+    key: any;
 }
 
 class ParkingSpotMarker extends React.Component<IProps, {}> {
@@ -54,6 +55,7 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
         const { position, provider, id } = this.props.parkingSpot;
         return (
             <Marker
+                key={this.props.key}
                 coordinate={position}
                 identifier={id}
                 zIndex={this.props.isSelected ? 1 : 0}
