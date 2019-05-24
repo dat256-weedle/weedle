@@ -4,7 +4,7 @@ import moment from "moment";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-material-ui";
-import { IParkingSpot } from "types";
+import { IParkingSpot, IParkingSession } from "types";
 import { Store } from "../../backend/store/Store";
 import { bigfont, primarycolor } from "../../styles";
 
@@ -19,7 +19,6 @@ interface IProps {
     isParked: boolean;
     parkingSpot: IParkingSpot;
     car?: string;
-    endDate?: Date;
     store?: Store;
     finishAction: () => void;
 }
@@ -36,13 +35,13 @@ export default class RentButton extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const { isParked, endDate, car } = this.props;
+        const { isParked, car } = this.props;
         return (
             <View>
                 <Button
                     raised
                     primary
-                    disabled={!(isParked || !(!car || !endDate))}
+                    disabled={!car && !isParked}
                     text={!isParked ? "rent" : "end parking"}
                     onPress={!isParked ? this.rent : this.finish}
                     style={{
@@ -70,7 +69,7 @@ export default class RentButton extends React.Component<IProps, {}> {
         this.props.store!.currentParkingSessions.push({
             parkingSpot: this.props.parkingSpot,
             car: this.props.car!,
-            endTime: this.props.endDate!,
+            endTime: moment().toDate(),
             startTime: moment().toDate()
         });
     };
@@ -81,14 +80,15 @@ export default class RentButton extends React.Component<IProps, {}> {
     @action
     private finish = () => {
         this.props.store!.currentParkingSessions = this.props.store!.currentParkingSessions.filter(
-            item => {
+            (item: IParkingSession) => {
                 if (this.props.parkingSpot.id === item.parkingSpot.id) {
+                    item.endTime = moment().toDate();
                     this.props.store!.oldParkingSessions.push(item);
                     return false;
                 }
                 return true;
             }
         );
-        this.props.finishAction()
+        this.props.finishAction();
     };
 }

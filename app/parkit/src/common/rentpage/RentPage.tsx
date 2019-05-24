@@ -122,15 +122,16 @@ export default class RentPage extends React.Component<IProps, IState> {
 
                         <Text style={styles.sectionTitleText}>Car</Text>
                         {this.carSelector(!!isParked)}
-                        <Text style={styles.sectionTitleText}>End date</Text>
+
+                        {/*<Text style={styles.sectionTitleText}>End date</Text>
                         {this.endDatePicker(!!isParked)}
+                            */}
                         <Divider />
 
                         <RentButton
                             isParked={!!isParked}
                             parkingSpot={this.props.parkingSpot}
                             car={this.state.selectedCar}
-                            endDate={this.state.endDate}
                             finishAction={() => {
                                 this.setState({
                                     animation: true
