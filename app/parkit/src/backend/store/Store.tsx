@@ -79,6 +79,18 @@ export class Store {
     }
 
     /**
+     * Returns the active parking sessions sorted on the date time were added.
+     */
+    @computed
+    public get sortedActiveSessions(): IParkingSession[] {
+        return this.currentParkingSessions.sort(
+            (a: IParkingSession, b: IParkingSession): number => {
+                return b.startTime.getTime() - a.startTime.getTime();
+            }
+        );
+    }
+
+    /**
      * Initializes the store from previously stored items in AsyncStorage
      */
     @action
