@@ -50,16 +50,12 @@ export default class Email extends Component<IProps, IState> {
                 />
                 {this.state.enterMail ? (
                     <TextInput
-                        style={styles.text}
                         placeholder="Enter E-mail"
                         onChangeText={text => this.store.setEmail(text)}
                         value={this.store.email}
-
                     />
                 ) : (
-                    <Text style={{ color: "rgb(100,210,110)", fontSize: 20 }}>
-                        {this.store.email}
-                    </Text>
+                    <Text>{this.store.email}</Text>
                 )}
                 {this.state.enterMail ? (
                     <TouchableOpacity onPress={this.onPressSave}>
@@ -100,7 +96,8 @@ const styles = StyleSheet.create({
         height: 40
     },
     text: {
-        height: 40
+        height: 30,
+        backgroundColor: "blue"
     },
     smallimage: {
         width: 20,
