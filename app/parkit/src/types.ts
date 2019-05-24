@@ -24,6 +24,12 @@ export interface IParkingSession {
     cost?: number;
 }
 
+export interface ICreditCard {
+    number: string;
+    expiry: string;
+    cvc: string;
+}
+
 export enum Providers {
     ParkeringGothenburg,
     EasyPark,

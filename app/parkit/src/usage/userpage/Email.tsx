@@ -25,8 +25,8 @@ export default class Email extends Component<IProps, IState> {
 
     constructor(props: IProps) {
         super(props);
-        this.state = { enterMail: true };
         this.store = this.props.store!;
+        this.state = { enterMail: this.store.email === "" ? true : false };
     }
 
     public onPressEdit = () => {
@@ -52,12 +52,14 @@ export default class Email extends Component<IProps, IState> {
                     <TextInput
                         style={styles.text}
                         placeholder="Enter E-mail"
-                        onChangeText={text => {
-                            this.store.setEmail(text);
-                        }}
+                        onChangeText={text => this.store.setEmail(text)}
+                        value={this.store.email}
+
                     />
                 ) : (
-                    <Text style={{ fontSize: 20 }}>{this.store.email}</Text>
+                    <Text style={{ color: "rgb(100,210,110)", fontSize: 20 }}>
+                        {this.store.email}
+                    </Text>
                 )}
                 {this.state.enterMail ? (
                     <TouchableOpacity onPress={this.onPressSave}>
