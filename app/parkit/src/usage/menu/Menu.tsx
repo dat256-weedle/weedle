@@ -23,7 +23,7 @@ export default class Menu extends React.Component<any, IState> {
      */
     private renderScene = BottomNavigation.SceneMap({
         showMap: ShowMap,
-        history: History,
+        parkingSessions: History,
         profile: Profile
     });
 
@@ -40,7 +40,11 @@ export default class Menu extends React.Component<any, IState> {
             index: 0,
             routes: [
                 { key: "showMap", title: "Map", icon: "map" },
-                { key: "history", title: "History", icon: "history" },
+                {
+                    key: "parkingSessions",
+                    title: "Parking Sessions",
+                    icon: "history"
+                },
                 { key: "profile", title: "Profile", icon: "person" }
             ]
         };
