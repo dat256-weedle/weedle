@@ -59,20 +59,22 @@ export class Store {
 
     @observable.shallow public currentParkingSessions: IParkingSession[] = new Array();
 
-    constructor() {
+    constructor(enableAutomaticParkingSessionMoving?: boolean) {
         this.initializeStoreFromStorage();
 
-        setInterval(() => runInAction(() => (
-            this.currentParkingSessions = this.currentParkingSessions.filter(item => {
-                if (moment().isAfter(item.endTime)) {
-                    item.endTime = moment().toDate();
-                    this.oldParkingSessions.push(item);
-                    console.log("parking session expired")
-                    return false;
-                }
-                return true;
-            })
-        )), 10000)
+        if (enableAutomaticParkingSessionMoving) {
+            setInterval(() => runInAction(() => (
+                this.currentParkingSessions = this.currentParkingSessions.filter(item => {
+                    if (moment().isAfter(item.endTime)) {
+                        item.endTime = moment().toDate();
+                        this.oldParkingSessions.push(item);
+                        console.log("parking session expired")
+                        return false;
+                    }
+                    return true;
+                })
+            )), 10000)
+        }
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -185,9 +187,9 @@ export class Store {
         this.allParkingSpots = newAllParkingSpots;
         console.log(
             "added/updated " +
-                numNew +
-                " parkingSpots, total number of parkingSpots now at " +
-                this.allParkingSpots.size
+            numNew +
+            " parkingSpots, total number of parkingSpots now at " +
+            this.allParkingSpots.size
         );
     }
 
