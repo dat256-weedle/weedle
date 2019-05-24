@@ -83,6 +83,7 @@ export default class RentButton extends React.Component<IProps, {}> {
         this.props.store!.currentParkingSessions = this.props.store!.currentParkingSessions.filter(
             item => {
                 if (this.props.parkingSpot.id === item.parkingSpot.id) {
+                    item.endTime = moment().toDate();
                     this.props.store!.oldParkingSessions.push(item);
                     return false;
                 }
