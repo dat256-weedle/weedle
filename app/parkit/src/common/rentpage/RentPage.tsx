@@ -37,7 +37,6 @@ interface IProps {
 interface IState {
     selectedCar: string;
     endDate?: Date;
-    isActive: boolean;
     animation: boolean;
 }
 
@@ -59,7 +58,6 @@ export default class RentPage extends React.Component<IProps, IState> {
         this.state = {
             selectedCar: isParked ? isParked.car : "",
             endDate: isParked ? isParked.endTime : undefined,
-            isActive: false,
             animation: false
         };
     }
@@ -75,7 +73,7 @@ export default class RentPage extends React.Component<IProps, IState> {
         } = this.props.parkingSpot;
         const isParked = this.store.currentParkingSessions.find(
             item => item.parkingSpot.id === id
-        );
+            );
         const image = snapshotMap(this.props.parkingSpot);
         return (
             <View
@@ -144,10 +142,7 @@ export default class RentPage extends React.Component<IProps, IState> {
                         ) : (
                             <Text />
                         )}
-                        <Image
-                            source={getLogo(provider)}
-                            style={styles.image}
-                        />
+                        {getLogo(provider)}
                     </View>
                 </ScrollView>
                 <View
