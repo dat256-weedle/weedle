@@ -145,7 +145,6 @@ export default class ParkingSpotMap extends React.Component<IProps, IState> {
         let cluster: any;
         if (allCoords.length) {
             cluster = getCluster(allCoords, this.state.region);
-            console.log(cluster);
         }
 
         return (
