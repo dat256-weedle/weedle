@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
-import { secondarycolor, primarycolor } from "../../styles";
+import { primarycolor, secondarycolor } from "../../styles";
 import { IParkingSession } from "../../types";
 interface IProps {
     store?: Store;
@@ -35,7 +35,7 @@ export default class ParkingHistory extends React.Component<IProps, {}> {
     }
 
     private getList(): any[] {
-        let arr: any[] = new Array<any>();
+        const arr: any[] = new Array<any>();
 
         arr.push({ isTitle: true, name: "active", id: 0 });
         if (this.props.store!.currentParkingSessions.length > 0) {

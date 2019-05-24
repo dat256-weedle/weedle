@@ -4,7 +4,7 @@ import moment from "moment";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-material-ui";
-import { IParkingSpot, IParkingSession } from "types";
+import { IParkingSession, IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 import { bigfont, primarycolor } from "../../styles";
 
