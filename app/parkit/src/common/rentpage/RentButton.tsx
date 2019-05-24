@@ -4,7 +4,7 @@ import moment from "moment";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-material-ui";
-import { IParkingSession, IParkingSpot } from "types";
+import { IParkingSpot } from "types";
 import { Store } from "../../backend/store/Store";
 import { bigfont, primarycolor } from "../../styles";
 
@@ -89,6 +89,6 @@ export default class RentButton extends React.Component<IProps, {}> {
                 return true;
             }
         );
-        this.props.finishAction()
+        this.props.finishAction();
     };
 }
