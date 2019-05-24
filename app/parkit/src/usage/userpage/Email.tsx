@@ -52,12 +52,12 @@ export default class Email extends Component<IProps, IState> {
                     <TextInput
                         style={styles.text}
                         placeholder="Enter E-mail"
-                        onChangeText={text => this.store.setEmail(text)}
+                        onChangeText={text => {
+                            this.store.setEmail(text);
+                        }}
                     />
                 ) : (
-                    <Text style={{ color: "rgb(100,210,110)", fontSize: 20 }}>
-                        {this.state.email}
-                    </Text>
+                    <Text style={{ fontSize: 20 }}>{this.store.email}</Text>
                 )}
                 {this.state.enterMail ? (
                     <TouchableOpacity onPress={this.onPressSave}>
