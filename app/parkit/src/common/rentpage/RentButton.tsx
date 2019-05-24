@@ -19,6 +19,7 @@ interface IProps {
     isParked: boolean;
     parkingSpot: IParkingSpot;
     car?: string;
+    endDate?: Date;
     store?: Store;
     finishAction: () => void;
 }
@@ -35,13 +36,13 @@ export default class RentButton extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const { isParked, car } = this.props;
+        const { isParked, endDate, car } = this.props;
         return (
             <View>
                 <Button
                     raised
                     primary
-                    disabled={!car && !isParked}
+                    disabled={!(isParked || !(!car || !endDate))}
                     text={!isParked ? "rent" : "end parking"}
                     onPress={!isParked ? this.rent : this.finish}
                     style={{
@@ -69,7 +70,7 @@ export default class RentButton extends React.Component<IProps, {}> {
         this.props.store!.currentParkingSessions.push({
             parkingSpot: this.props.parkingSpot,
             car: this.props.car!,
-            endTime: moment().toDate(),
+            endTime: this.props.endDate!,
             startTime: moment().toDate()
         });
     };
@@ -80,15 +81,14 @@ export default class RentButton extends React.Component<IProps, {}> {
     @action
     private finish = () => {
         this.props.store!.currentParkingSessions = this.props.store!.currentParkingSessions.filter(
-            (item: IParkingSession) => {
+            item => {
                 if (this.props.parkingSpot.id === item.parkingSpot.id) {
-                    item.endTime = moment().toDate();
                     this.props.store!.oldParkingSessions.push(item);
                     return false;
                 }
                 return true;
             }
         );
-        this.props.finishAction();
+        this.props.finishAction()
     };
 }
