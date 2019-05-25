@@ -65,7 +65,7 @@ export class Store {
      */
     @computed
     get allParkingSpotsList() {
-        return Array.from(this.allParkingSpots.values());
+        return Array.from(this.allParkingSpots.values()).slice(0,5);
     }
 
     /**
@@ -76,6 +76,11 @@ export class Store {
         getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(
             (email: string | undefined) =>
                 typeof email === "string" ? this.setEmail(email) : {}
+        );
+
+        getObjectFromAsyncStorage(asyncStorageKeys.USERNAME).then(
+            (username: string | undefined) =>
+                typeof username === "string" ? this.setUserName(username) : {}
         );
 
         getObjectFromAsyncStorage(asyncStorageKeys.CARS).then(
@@ -100,6 +105,7 @@ export class Store {
      */
     @action
     public setUserName(userName: string) {
+        console.log("save username");
         (this.userName = userName),
             setObjectInAsyncStorage(asyncStorageKeys.USERNAME, userName);
     }
