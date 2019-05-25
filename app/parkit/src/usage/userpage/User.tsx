@@ -1,3 +1,5 @@
+import { Store } from "backend/store/Store";
+import { inject, observer } from "mobx-react";
 import React, { Component } from "react";
 import {
     Image,
@@ -10,11 +12,21 @@ interface IState {
     hasText: boolean;
 }
 
-export default class User extends Component<IState> {
-    constructor(props: Readonly<IState>) {
+interface IProps {
+    store?: Store;
+}
+
+@inject("store")
+@observer
+export default class User extends Component<IProps,IState> {
+    private store: Store;
+
+    constructor(props: IProps) {
         super(props);
         this.state = {hasText: false}
+        this.store = this.props.store!;
     }
+
 
     public render() {
         return (
@@ -27,7 +39,9 @@ export default class User extends Component<IState> {
                     // If there is any input, use normal style. Otherwise use placeholder-style.
                     style={this.state.hasText ? styles.textstyle : placeholderStyles.textstyle}
                     // Checks if there is any text everytime the text is changed
-                    onChangeText={(text) => this.setState({hasText: text.length !== 0})} />
+                    onChangeText={(text) => this.setState({hasText: text.length !== 0})} 
+                    // onEndEditing={(text) => } 
+                    />
             </View>
         </View>
     )}
