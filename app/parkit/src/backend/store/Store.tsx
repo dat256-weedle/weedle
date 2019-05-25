@@ -47,6 +47,8 @@ export class Store {
 
     @observable public currentParkingSessions: IParkingSession[] = new Array();
 
+    @observable public userName: string = "";
+
     constructor() {
         this.initializeStoreFromStorage();
     }
@@ -91,6 +93,15 @@ export class Store {
     public setEmail(email: string) {
         (this.email = email),
             setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+    }
+
+    /**
+     * Set username and stores new email in AsyncStorage
+     */
+    @action
+    public setUserName(userName: string) {
+        (this.userName = userName),
+            setObjectInAsyncStorage(asyncStorageKeys.USERNAME, userName);
     }
 
     /**

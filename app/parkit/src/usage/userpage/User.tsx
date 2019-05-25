@@ -18,33 +18,38 @@ interface IProps {
 
 @inject("store")
 @observer
-export default class User extends Component<IProps,IState> {
+export default class User extends Component<IProps, IState> {
     private store: Store;
 
     constructor(props: IProps) {
         super(props);
-        this.state = {hasText: false}
+        this.state = { hasText: false }
         this.store = this.props.store!;
     }
 
 
     public render() {
         return (
-        <View style={{ alignItems: "center", backgroundColor: "rgb(100,210,110)" }}>
-            <Image source={require("../../../assets/user.png")} style={{
-                height: 70, width: 70, marginTop: 10, marginBottom: 10}}/>
-            <View style= {{alignItems: "center", marginTop: 10, marginBottom: 10}}>
-                <TextInput
-                    placeholder = "Enter name"
-                    // If there is any input, use normal style. Otherwise use placeholder-style.
-                    style={this.state.hasText ? styles.textstyle : placeholderStyles.textstyle}
-                    // Checks if there is any text everytime the text is changed
-                    onChangeText={(text) => this.setState({hasText: text.length !== 0})} 
-                    // onEndEditing={(text) => } 
+            <View style={{ alignItems: "center", backgroundColor: "rgb(100,210,110)" }}>
+                <Image source={require("../../../assets/user.png")} style={{
+                    height: 70, width: 70, marginTop: 10, marginBottom: 10
+                }} />
+                <View style={{ alignItems: "center", marginTop: 10, marginBottom: 10 }}>
+                    <TextInput
+                        value={this.store.userName}
+                        placeholder="Enter name"
+                        // If there is any input, use normal style. Otherwise use placeholder-style.
+                        style={this.state.hasText ? styles.textstyle : placeholderStyles.textstyle}
+                        // Checks if there is any text everytime the text is changed
+                        onChangeText={(text) => {
+                            this.setState({ hasText: text.length !== 0 })
+                            this.store.setUserName(text);
+                        }}
                     />
+                </View>
             </View>
-        </View>
-    )}
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -80,4 +85,4 @@ const placeholderStyles = StyleSheet.create({
                     </View>
                 </View>
     )}
-*/      
+*/
