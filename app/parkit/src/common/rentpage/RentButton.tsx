@@ -89,6 +89,6 @@ export default class RentButton extends React.Component<IProps, {}> {
                 return true;
             }
         );
-        this.props.finishAction()
+        this.props.finishAction();
     };
 }

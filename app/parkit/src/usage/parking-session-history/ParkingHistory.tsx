@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { getListLogo } from "../../common/logoloader/LogoLoader";
-import { secondarycolor } from "../../styles";
+import { primarycolor, secondarycolor } from "../../styles";
 import { IParkingSession } from "../../types";
 interface IProps {
     store?: Store;
@@ -19,20 +19,96 @@ export default class ParkingHistory extends React.Component<IProps, {}> {
     public render() {
         return (
             <View style={styles.container}>
-                <View style={styles.titleBar}>
-                    <Text style={styles.titleText}>Parking History</Text>
+                <View style={styles.headerContainer}>
+                    <Text style={styles.headerText}>Parking sessions</Text>
                 </View>
+                {/*
+                 */}
                 <FlatList
-                    data={this.props.store!.sortedParkingHistory}
+                    data={this.getList()}
                     renderItem={this.listItem}
                     ItemSeparatorComponent={this.renderSeparator}
+                    keyExtractor={item => item.id}
                 />
             </View>
         );
     }
 
+    private getList(): any[] {
+        const arr: any[] = new Array<any>();
+
+        arr.push({ isTitle: true, name: "active", id: 0 });
+        if (this.props.store!.currentParkingSessions.length > 0) {
+            this.props.store!.sortedActiveSessions.forEach(element => {
+                arr.push({
+                    isTitle: false,
+                    isEmpty: false,
+                    item: element,
+                    isActive: true,
+                    id: arr.length
+                });
+            });
+        } else {
+            arr.push({
+                isTitle: false,
+                isEmpty: true,
+                id: arr.length,
+                text: "No active parking sessions"
+            });
+        }
+
+        arr.push({
+            isTitle: true,
+            isEmpty: false,
+            id: arr.length,
+            name: "history"
+        });
+        if (this.props.store!.oldParkingSessions.length > 0) {
+            this.props.store!.sortedParkingHistory.forEach(element => {
+                arr.push({
+                    isTitle: false,
+                    isEmpty: false,
+                    item: element,
+                    id: arr.length,
+                    isActive: false
+                });
+            });
+        } else {
+            arr.push({
+                isTitle: false,
+                isEmpty: true,
+                text: "No previous parking sessions",
+                id: arr.length
+            });
+        }
+        return arr;
+    }
+
     private listItem(item: any) {
-        const parkingSession = item.item as IParkingSession;
+        if (item.item.isTitle) {
+            return (
+                <View>
+                    <View style={styles.titleBar}>
+                        <Text style={styles.titleText}>
+                            {item.item.name === "history"
+                                ? "Parking Session History"
+                                : "Active Parking Sessions"}
+                        </Text>
+                    </View>
+                </View>
+            );
+        }
+
+        if (item.item.isEmpty) {
+            return (
+                <View>
+                    <Text style={styles.emptyText}>{item.item.text}</Text>
+                </View>
+            );
+        }
+
+        const parkingSession = item.item.item as IParkingSession;
+
         return (
             <View style={styles.listElement}>
                 {getListLogo(parkingSession.parkingSpot.provider)}
@@ -43,13 +119,19 @@ export default class ParkingHistory extends React.Component<IProps, {}> {
                     <Text>
                         {getFormattedTime(parkingSession.startTime) +
                             " - " +
-                            getFormattedTime(parkingSession.endTime)}
+                            (item.item.isActive
+                                ? "> ..."
+                                : getFormattedTime(parkingSession.endTime))}
                     </Text>
                 </View>
                 <Text />
-                <Text style={styles.paidText}>
-                    {getPrice(parkingSession.parkingSpot.price) + " kr Paid"}
-                </Text>
+                {item.item.isActive ? (
+                    <Text style={styles.activeText}>Active</Text>
+                ) : (
+                    <Text style={styles.paidText}>
+                        {getPrice(parkingSession) + " kr Paid"}
+                    </Text>
+                )}
             </View>
         );
     }
@@ -79,8 +161,22 @@ function getFormattedTime(date: Date): string {
     return date.getDay() + "/" + date.getMonth() + " " + hours + ":" + minutes;
 }
 
-function getPrice(text: string): number {
-    return parseFloat(text.substring(0, text.length - 3)) as number;
+function getPrice(parkingSession: IParkingSession): number {
+    const text: string = parkingSession.parkingSpot.price;
+    const pricePerH: number = parseFloat(
+        text.substring(0, text.length - 3)
+    ) as number;
+
+    // One hour represented in milliseconds
+    const hourInMs = 3600000;
+    // Convert the time interval between the start and endtime to hours, rounded up.
+    const time = Math.ceil(
+        (parkingSession.endTime.getTime() -
+            parkingSession.startTime.getTime()) /
+            hourInMs
+    );
+
+    return time * pricePerH;
 }
 
 const styles = StyleSheet.create({
@@ -96,9 +192,16 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
 
+    activeText: {
+        fontWeight: "bold",
+        color: "#00af0e",
+        marginRight: 10,
+        fontSize: 24
+    },
+
     paidText: {
         fontWeight: "bold",
-        color: "#20DD55",
+        color: "#F3C900",
         marginRight: 10,
         fontSize: 24
     },
@@ -110,8 +213,22 @@ const styles = StyleSheet.create({
         fontSize: 32
     },
 
+    headerContainer: {
+        backgroundColor: primarycolor,
+        width: "100%",
+        height: 60,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
+    headerText: {
+        fontSize: 32,
+        fontWeight: "bold",
+        color: "white"
+    },
+
     titleBar: {
-        backgroundColor: secondarycolor,
         width: "100%",
         height: 60,
         display: "flex",
@@ -120,9 +237,9 @@ const styles = StyleSheet.create({
     },
 
     titleText: {
-        fontSize: 32,
+        fontSize: 24,
         fontWeight: "bold",
-        color: "black"
+        color: secondarycolor
     },
 
     addressText: {
@@ -131,10 +248,24 @@ const styles = StyleSheet.create({
         maxWidth: "100%"
     },
 
+    dividerContainer: {
+        height: 30,
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+
     centerTexts: {
         display: "flex",
         flex: 1,
         flexDirection: "column"
+    },
+
+    emptyText: {
+        textAlign: "center",
+        margin: 10
     },
 
     icon: {
@@ -142,5 +273,11 @@ const styles = StyleSheet.create({
         height: 50,
         marginRight: 10,
         marginLeft: 10
+    },
+
+    bigDivider: {
+        height: 3,
+        width: "100%",
+        backgroundColor: "#CED0CE"
     }
 });

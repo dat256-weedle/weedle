@@ -18,7 +18,7 @@ export default class App extends React.Component {
 
     constructor(props: any) {
         super(props);
-        this.store = new Store();
+        this.store = new Store(true);
         navigator.geolocation.getCurrentPosition(position => {
             const pos: IPosition = {
                 latitude: position.coords.latitude,

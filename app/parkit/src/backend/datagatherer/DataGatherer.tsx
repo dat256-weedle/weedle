@@ -111,7 +111,9 @@ function getParkingGothenburgData(
                         if (price.length > 0) {
                             price += " kr/h";
                         } else {
-                            price = "Okänd kostnad";
+                            // We were unable to parse the price, to avoid possible "NaN" values later we set this to 15 kr/h.
+                            // When the system is developed to something more sophisticated, possibly change this value and do some smarter calculations later on instead.
+                            price = "15 kr/h";
                         }
                         newObj.price = price;
                     }
