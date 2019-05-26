@@ -40,15 +40,28 @@ export default class Screen extends React.Component<any, IState> {
         return (
             <View style={{ flex: 2, flexDirection: "column" }}>
                 <View style={styles.primarycontainer}>
-                    <Image
-                        source={require("../../../assets/user.png")}
+                    <View
                         style={{
-                            height: 70,
-                            width: 70,
-                            marginTop: 10,
-                            marginBottom: 10
+                            height: 80,
+                            width: 80,
+                            backgroundColor: "white",
+                            borderRadius: 40,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginTop: 10
                         }}
-                    />
+                    >
+                        <Image
+                            source={require("../../../assets/user.png")}
+                            style={{
+                                height: 70,
+                                width: 70,
+                                marginTop: 10,
+                                marginBottom: 10
+                            }}
+                        />
+                    </View>
                     <View
                         style={{
                             alignItems: "center",
@@ -58,12 +71,12 @@ export default class Screen extends React.Component<any, IState> {
                     >
                         <Text
                             style={{
-                                color: "black",
+                                color: "white",
                                 fontSize: 30,
                                 fontWeight: "bold"
                             }}
                         >
-                            John Doe{" "}
+                            John Doe
                         </Text>
                     </View>
                 </View>
