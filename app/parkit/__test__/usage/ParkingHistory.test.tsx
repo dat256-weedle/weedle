@@ -22,7 +22,8 @@ store.oldParkingSessions.push({
         description: "asdasdasd",
         provider: Providers.ParkeringGothenburg,
         distance: 0,
-        parkingSpots: "0"
+        parkingSpots: "0",
+        specialDistance: 5
     },
     startTime: new Date(2019, 5, 14, 15, 30, 0, 0),
     endTime: new Date(2019, 5, 14, 15, 45, 0, 0),
@@ -43,7 +44,8 @@ store.oldParkingSessions.push({
         description: "asdasdasd",
         provider: Providers.ParkeringGothenburg,
         distance: 0,
-        parkingSpots: "0"
+        parkingSpots: "0",
+        specialDistance: 5
     },
     startTime: new Date(2019, 6, 8, 12, 0, 0, 0),
     endTime: new Date(2019, 6, 10, 15, 0, 0, 0),

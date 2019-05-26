@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Store } from "../../backend/store/Store";
 
-
 interface IState {
     enterMail: boolean;
 }
@@ -22,13 +21,13 @@ interface IProps {
 @inject("store")
 @observer
 export default class Email extends Component<IProps, IState> {
-private store: Store;
+    private store: Store;
 
-constructor(props: IProps) {
-    super(props);
-    this.state = { enterMail: true};
-    this.store = this.props.store!;
-}
+    constructor(props: IProps) {
+        super(props);
+        this.store = this.props.store!;
+        this.state = { enterMail: this.store.email === "" ? true : false };
+    }
 
     public onPressEdit = () => {
         this.setState({
@@ -43,43 +42,36 @@ constructor(props: IProps) {
     };
 
     public render() {
-        if (this.state.enterMail) {
-            return (
-                <View style={styles.maincontainer}>
-                    <Image
-                        source={require("../../../assets/mail.png")}
-                        style={styles.imagemargin}
-                    />
+        return (
+            <View style={styles.maincontainer}>
+                <Image
+                    source={require("../../../assets/mail_black.png")}
+                    style={styles.imagemargin}
+                />
+                {this.state.enterMail ? (
                     <TextInput
-                        style={styles.text}
                         placeholder="Enter E-mail"
-                        onChangeText={(text) => this.store.setEmail(text)}
+                        onChangeText={text => this.store.setEmail(text)}
+                        value={this.store.email}
                     />
+                ) : (
+                    <Text>{this.store.email}</Text>
+                )}
+                {this.state.enterMail ? (
                     <TouchableOpacity onPress={this.onPressSave}>
                         <Image
                             source={require("../../../assets/save.png")}
                             style={styles.smallimage}
                         />
                     </TouchableOpacity>
-                </View>
-            );
-        }
-
-        return (
-            <View style={styles.maincontainer}>
-                <Image
-                    source={require("../../../assets/mail.png")}
-                    style={styles.image}
-                />
-                <Text style={{ color: "rgb(100,210,110)", fontSize: 20 }}>
-                    {this.state.email}
-                </Text>
-                <TouchableOpacity onPress={this.onPressEdit}>
-                    <Image
-                        source={require("../../../assets/edit.png")}
-                        style={styles.smallimage}
-                    />
-                </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity onPress={this.onPressEdit}>
+                        <Image
+                            source={require("../../../assets/edit.png")}
+                            style={styles.smallimage}
+                        />
+                    </TouchableOpacity>
+                )}
             </View>
         );
     }
@@ -87,11 +79,12 @@ constructor(props: IProps) {
 
 const styles = StyleSheet.create({
     maincontainer: {
-        alignItems: "center",
         backgroundColor: "white",
         flexDirection: "row",
-        justifyContent: "space-around",
-        marginTop: 10
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 10,
+        paddingRight: 10
     },
     imagemargin: {
         width: 40,
@@ -103,7 +96,8 @@ const styles = StyleSheet.create({
         height: 40
     },
     text: {
-        height: 40
+        height: 30,
+        backgroundColor: "blue"
     },
     smallimage: {
         width: 20,

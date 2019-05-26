@@ -9,9 +9,6 @@ import Screen from "../userpage/Screen";
  * Decides what will happen when one of the menu buttons are pressed
  */
 const ShowMap = () => <SearchList />;
-const ActiveParking = () => (
-    <Text>Placeholder for the active parking spot page</Text>
-);
 const History = () => <ParkingHistory />;
 const Profile = () => <Screen />;
 
@@ -26,8 +23,7 @@ export default class Menu extends React.Component<any, IState> {
      */
     private renderScene = BottomNavigation.SceneMap({
         showMap: ShowMap,
-        activeParking: ActiveParking,
-        history: History,
+        parkingSessions: History,
         profile: Profile
     });
 
@@ -45,11 +41,10 @@ export default class Menu extends React.Component<any, IState> {
             routes: [
                 { key: "showMap", title: "Map", icon: "map" },
                 {
-                    key: "activeParking",
-                    title: "Active p-spots",
-                    icon: "timelapse"
+                    key: "parkingSessions",
+                    title: "Parking Sessions",
+                    icon: "history"
                 },
-                { key: "history", title: "History", icon: "history" },
                 { key: "profile", title: "Profile", icon: "person" }
             ]
         };

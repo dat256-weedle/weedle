@@ -1,11 +1,17 @@
-import { action, computed, observable } from "mobx";
+import { action, computed, observable, runInAction } from "mobx";
+import moment from "moment";
 import { getDistance } from "../datagatherer/DataGatherer";
 import {
     asyncStorageKeys,
     getObjectFromAsyncStorage,
     setObjectInAsyncStorage
 } from "../storage/Asyncstorage";
-import { IParkingSession, IParkingSpot, IPosition } from "./../../types";
+import {
+    ICreditCard,
+    IParkingSession,
+    IParkingSpot,
+    IPosition
+} from "./../../types";
 
 /**
  * Store which contains the state of the whole application
@@ -22,6 +28,12 @@ export class Store {
         string,
         IParkingSpot
     >();
+
+    /**
+     * CreditCard used in Userpage
+     */
+    @observable
+    public creditCard: ICreditCard = { number: "", expiry: "", cvc: "" };
 
     /**
      * List of all cars added in the UserPage
@@ -43,14 +55,31 @@ export class Store {
     /**
      * List of all parking spots which are being rented by the user
      */
-    @observable public oldParkingSessions: IParkingSession[] = new Array();
+    @observable.shallow public oldParkingSessions: IParkingSession[] = new Array();
 
-    @observable public currentParkingSessions: IParkingSession[] = new Array();
+    @observable.shallow public currentParkingSessions: IParkingSession[] = new Array();
 
+    /**
+     * The username added in the UserPage
+     */
     @observable public userName: string = "";
 
-    constructor() {
+    constructor(enableAutomaticParkingSessionMoving?: boolean) {
         this.initializeStoreFromStorage();
+
+        if (enableAutomaticParkingSessionMoving) {
+            setInterval(() => runInAction(() => (
+                this.currentParkingSessions = this.currentParkingSessions.filter(item => {
+                    if (moment().isAfter(item.endTime)) {
+                        item.endTime = moment().toDate();
+                        this.oldParkingSessions.push(item);
+                        console.log("parking session expired")
+                        return false;
+                    }
+                    return true;
+                })
+            )), 10000)
+        }
     }
     /**
      * @returns the coordinates of the currently selected parking spot
@@ -69,10 +98,38 @@ export class Store {
     }
 
     /**
+     * Returns the parking history sorted based on the date when they were added
+     */
+    @computed
+    public get sortedParkingHistory(): IParkingSession[] {
+        return this.oldParkingSessions.slice().sort(
+            (a: IParkingSession, b: IParkingSession): number => {
+                return b.endTime.getTime() - a.endTime.getTime();
+            }
+        );
+    }
+
+    /**
+     * Returns the active parking sessions sorted on the date time were added.
+     */
+    @computed
+    public get sortedActiveSessions(): IParkingSession[] {
+        return this.currentParkingSessions.sort(
+            (a: IParkingSession, b: IParkingSession): number => {
+                return b.startTime.getTime() - a.startTime.getTime();
+            }
+        );
+    }
+
+    /**
      * Initializes the store from previously stored items in AsyncStorage
      */
     @action
     public initializeStoreFromStorage() {
+        getObjectFromAsyncStorage(asyncStorageKeys.CREDITCARD).then(
+            (card: ICreditCard | undefined) =>
+                typeof card === "object" ? this.setCreditCard(card) : {}
+        );
         getObjectFromAsyncStorage(asyncStorageKeys.EMAIL).then(
             (email: string | undefined) =>
                 typeof email === "string" ? this.setEmail(email) : {}
@@ -91,13 +148,41 @@ export class Store {
         );
     }
 
+    @action
+    public setCreditCard(card: ICreditCard) {
+        this.creditCard = card;
+        setObjectInAsyncStorage(asyncStorageKeys.CREDITCARD, card);
+    }
+
     /**
      * Set email and stores new email in AsyncStorage
      */
     @action
     public setEmail(email: string) {
-        (this.email = email),
-            setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+        this.email = email;
+        setObjectInAsyncStorage(asyncStorageKeys.EMAIL, email);
+    }
+
+    /**
+     * Adds car to this.cars and saves updated list of cars to AsyncStorage
+     * @param value car regnumber to be stored
+     */
+    @action
+    public addCar(value: string) {
+        this.cars.push(value);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+    }
+
+    /**
+     * Removes car from this.cars and saves the updated list of cars to AsyncStorage
+     * @param value car regnumber to be removed
+     */
+    @action
+    public removeCar(value: string) {
+        const index = this.cars.indexOf(value);
+        this.cars.splice(index, 1);
+        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
+        // console.log(index, this.cars);
     }
 
     /**
@@ -134,37 +219,15 @@ export class Store {
         this.allParkingSpots = newAllParkingSpots;
         console.log(
             "added/updated " +
-                numNew +
-                " parkingSpots, total number of parkingSpots now at " +
-                this.allParkingSpots.size
+            numNew +
+            " parkingSpots, total number of parkingSpots now at " +
+            this.allParkingSpots.size
         );
     }
 
     /**
-     * Adds car to this.cars and saves updated list of cars to AsyncStorage
-     * @param value car regnumber to be stored
-     */
-    @action
-    public addCar(value: string) {
-        this.cars.push(value);
-        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
-    }
-
-    /**
-     * Removes car from this.cars and saves the updated list of cars to AsyncStorage
-     * @param value car regnumber to be removed
-     */
-    @action
-    public removeCar(value: string) {
-        const index = this.cars.indexOf(value);
-        this.cars.splice(index, 1);
-        setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
-        // console.log(index, this.cars);
-    }
-
-    /**
      * Returns an array of parkingspots of max length limit, sorted in order of distance to the given position.
-     * Also sets the distance property of the parkingSpot to the distance to the given position.
+     * Also sets the specialDistance property of the parkingSpot to the distance to the given position.
      */
     public getParkingSpotsByDistance(
         position: IPosition,
@@ -182,7 +245,7 @@ export class Store {
                     parkingSpot.position,
                     position
                 );
-                parkingSpot.distance = Math.trunc(distance as number);
+                parkingSpot.specialDistance = Math.trunc(distance as number);
                 parkingSpotToDistMap.set(parkingSpot, distance);
             }
         );

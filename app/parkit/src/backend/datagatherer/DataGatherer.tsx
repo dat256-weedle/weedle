@@ -33,21 +33,13 @@ export function getDistance(pos1: IPosition, pos2: IPosition): number {
     return c * earthRadius;
 }
 
-const defaultPosition: IPosition = {
-    latitude: 57.7078,
-    longitude: 11.9845
-};
-
 /**
  * Gathers parkingspotdata from different sources and adds them to the given store.
  * @param store The programs mobx store.
  * @param currentPosition The current position of the user.
  */
-export function getData(
-    store: Store,
-    currentPosition: IPosition = defaultPosition
-) {
-    assignToStore(getParkingGothenburgData(), store);
+export function getData(store: Store, currentPosition: IPosition) {
+    assignToStore(getParkingGothenburgData(currentPosition), store);
     assignToStore(getQParkData(currentPosition), store);
 }
 
@@ -70,7 +62,9 @@ function assignToStore(data: Promise<IParkingSpot[] | void>, store: Store) {
  * Tries to retrieve parkingspot-data from parkingGothenburg.
  * @returns A promise of either a IParkingSpot[] or void if an error occured.
  */
-function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
+function getParkingGothenburgData(
+    currentPosition: IPosition
+): Promise<IParkingSpot[] | void> {
     console.log("Gathering data from parking gothenburg...");
     return fetch(
         "https://www.parkeringgoteborg.se/api/parkings/besoksomraden?parkingtype=1&vehicletype=1",
@@ -100,7 +94,8 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
                         provider: Providers.ParkeringGothenburg,
                         price: obj.regularPrice,
                         specialPrice: obj.otherPrice,
-                        parkingSpots: obj.amountOfSpots
+                        parkingSpots: obj.amountOfSpots,
+                        specialDistance: -1
                     };
 
                     if (newObj.price) {
@@ -116,10 +111,17 @@ function getParkingGothenburgData(): Promise<IParkingSpot[] | void> {
                         if (price.length > 0) {
                             price += " kr/h";
                         } else {
-                            price = "Okänd kostnad";
+                            // We were unable to parse the price, to avoid possible "NaN" values later we set this to 15 kr/h.
+                            // When the system is developed to something more sophisticated, possibly change this value and do some smarter calculations later on instead.
+                            price = "15 kr/h";
                         }
                         newObj.price = price;
                     }
+
+                    newObj.distance = getDistance(
+                        currentPosition,
+                        newObj.position
+                    );
 
                     arr.push(newObj);
                 });
@@ -181,7 +183,8 @@ function getQParkData(
                         provider: Providers.QPark,
                         price: "unknown",
                         specialPrice: "unknown",
-                        parkingSpots: "unknown"
+                        parkingSpots: "unknown",
+                        specialDistance: -1
                     };
 
                     formattedArray.push(parkingSpot);

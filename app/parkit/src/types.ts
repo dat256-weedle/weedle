@@ -13,6 +13,7 @@ export interface IParkingSpot {
     provider: Providers;
     price: string;
     specialPrice: string;
+    specialDistance: number;
 }
 
 export interface IParkingSession {
@@ -21,6 +22,12 @@ export interface IParkingSession {
     endTime: Date;
     car: string;
     cost?: number;
+}
+
+export interface ICreditCard {
+    number: string;
+    expiry: string;
+    cvc: string;
 }
 
 export enum Providers {
