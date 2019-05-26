@@ -15,7 +15,6 @@ export default class User extends Component<IProps> {
 
     constructor(props: IProps) {
         super(props);
-        this.state = { hasText: false };
         this.store = this.props.store!;
     }
 
@@ -65,6 +64,7 @@ export default class User extends Component<IProps> {
                             fontWeight: "bold",
                             textAlign: "center"
                         }}
+                        // Save the username to the store
                         onChangeText={text => {
                             this.store.setUserName(text);
                         }}
