@@ -28,7 +28,7 @@ export default class ParkingHistory extends React.Component<IProps, {}> {
                     data={this.getList()}
                     renderItem={this.listItem}
                     ItemSeparatorComponent={this.renderSeparator}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id + ""}
                 />
             </View>
         );
