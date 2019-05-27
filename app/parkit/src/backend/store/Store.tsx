@@ -59,6 +59,11 @@ export class Store {
 
     @observable.shallow public currentParkingSessions: IParkingSession[] = new Array();
 
+    /**
+     * The username added in the UserPage
+     */
+    @observable public userName: string = "";
+
     constructor(enableAutomaticParkingSessionMoving?: boolean) {
         this.initializeStoreFromStorage();
 
@@ -130,6 +135,11 @@ export class Store {
                 typeof email === "string" ? this.setEmail(email) : {}
         );
 
+        getObjectFromAsyncStorage(asyncStorageKeys.USERNAME).then(
+            (username: string | undefined) =>
+                typeof username === "string" ? this.setUserName(username) : {}
+        );
+
         getObjectFromAsyncStorage(asyncStorageKeys.CARS).then(
             (cars: string[] | undefined) =>
                 typeof cars === "object"
@@ -173,6 +183,16 @@ export class Store {
         this.cars.splice(index, 1);
         setObjectInAsyncStorage(asyncStorageKeys.CARS, this.cars);
         // console.log(index, this.cars);
+    }
+
+    /**
+     * Set username and stores new email in AsyncStorage
+     */
+    @action
+    public setUserName(userName: string) {
+        console.log("save username");
+        (this.userName = userName),
+            setObjectInAsyncStorage(asyncStorageKeys.USERNAME, userName);
     }
 
     /**

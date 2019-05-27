@@ -6,6 +6,7 @@ import { AsyncStorage } from "react-native";
 export const asyncStorageKeys = {
     EMAIL: "EMAIL",
     CARS: "CARS",
+    USERNAME: "USERNAME",
     CREDITCARD: "CREDITCARD"
 };
 
