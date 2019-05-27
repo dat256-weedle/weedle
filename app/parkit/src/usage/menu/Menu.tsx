@@ -1,5 +1,5 @@
 import React from "react";
-import { BottomNavigation, Text } from "react-native-paper";
+import { BottomNavigation } from "react-native-paper";
 import { primarycolor } from "../../styles";
 import ParkingHistory from "../parking-session-history/ParkingHistory";
 import SearchList from "../searchlist/SearchList";

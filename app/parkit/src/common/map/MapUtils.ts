@@ -1,6 +1,5 @@
 // Thanks to https://github.com/padupuy
 import { Region } from "expo";
-import { Dimensions } from "react-native";
 import supercluster from "supercluster";
 
 function getZoomLevel(longitudeDelta: number) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Animated, Image, StyleSheet } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 import { Marker } from "react-native-maps";
 import { AnimatedValue } from "react-navigation";
 import { primarycolor, secondarycolor } from "../../styles";

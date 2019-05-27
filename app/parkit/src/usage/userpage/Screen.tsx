@@ -1,7 +1,7 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-material-ui";
-import { bigfont, primarycolor, secondarycolor } from "../../styles";
+import { bigfont, secondarycolor } from "../../styles";
 import About from "../aboutpage/About";
 import Email from "./Email";
 import MyCars from "./MyCars";
