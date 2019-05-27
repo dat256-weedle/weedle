@@ -1,5 +1,5 @@
 import React from "react";
-import { Animated, Image, StyleSheet } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 import { Marker } from "react-native-maps";
 import { AnimatedValue } from "react-navigation";
 import { primarycolor, secondarycolor } from "../../styles";
@@ -55,7 +55,6 @@ class ParkingSpotMarker extends React.Component<IProps, {}> {
         const { position, provider, id } = this.props.parkingSpot;
         return (
             <Marker
-                key={this.props.key}
                 coordinate={position}
                 identifier={id}
                 zIndex={this.props.isSelected ? 1 : 0}

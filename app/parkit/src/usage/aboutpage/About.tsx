@@ -52,8 +52,6 @@ export default class About extends React.Component<IProps> {
             </View>
         );
     }
-
-
 }
 
 const styles = StyleSheet.create({

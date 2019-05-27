@@ -68,7 +68,7 @@ export default class NewCars extends React.Component<IProps, IState> {
                 <View style={styles.seperator} />
                 <View style={styles.carsContainer}>
                     {this.store.cars.map((reg: string, index: number) => (
-                        <View style={styles.itemContainer} key={index} s>
+                        <View style={styles.itemContainer} key={index}>
                             <CarElement reg={reg} store={this.store} />
                         </View>
                     ))}
