@@ -114,7 +114,7 @@ export class Store {
      */
     @computed
     public get sortedActiveSessions(): IParkingSession[] {
-        return this.currentParkingSessions.sort(
+        return this.currentParkingSessions.slice().sort(
             (a: IParkingSession, b: IParkingSession): number => {
                 return b.startTime.getTime() - a.startTime.getTime();
             }
