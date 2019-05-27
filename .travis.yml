@@ -1,0 +1,30 @@
+language: node_js
+install: 
+  - cd app/parkit
+  - npm i
+node_js:
+  - "stable"
+cache: 
+  directories:
+    - app/parkit/node_modules
+script:
+  - cd ~/build/dat256-weedle/weedle/app/parkit
+  - npm test
+  - npm run lint
+notifications:
+  email: false
+
+  slack: 
+    on_success: never
+    on_failure: always
+
+    rooms: 
+      - dat256-weedle:JPzdFMBfxuzUxd1dl5ss9Tnj#travis
+
+      
+  slack: 
+    on_success: always
+    on_failure: always
+
+    rooms: 
+      - dat256-weedle:JPzdFMBfxuzUxd1dl5ss9Tnj#travis-v
