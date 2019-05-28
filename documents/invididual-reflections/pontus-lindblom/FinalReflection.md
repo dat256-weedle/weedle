@@ -21,15 +21,15 @@ Jag tog på mig rollen som Scrum master vilket för oss innebar att jag hanterad
 **A->B:** Jag behöver ta tillvara på mina erfarenheter som Scrum master så att det blir går snabbt att sätta sig in i rollen nästa gång jag är det. Jag behöver även bredda mina kunskaper inom olika ramverk och programmeringsspråk så att jag med större sannolikhet har lite bättre koll på grunderna när jag börjar.
 
 ## What is my contribution towards the team’s use of Scrum?
-**A:** 
+**A:** Jag tog med mig tidigare kunskaper av Scrum vilket underlättade starten då jag förstod mycket av det som lärdes ut på föreläsningarna, och då var det enkelt att förmedla användandet av Scrum till gruppen när vi hade möten. Då jag repeterade slidsen såg jag även till att vi inte strävade bort från användandet av Scrum, t.ex. när våra user stories inte höll INVEST-kriterierna när vi planerade inför en sprint. Jag hade även rollen som Scrum master vilket gjorde att gruppmedlemmarna kunde fokusera mer på de praktiska sakerna i kursen medan jag höll koll så att projektet fortskred som det var planerat.
 
-**B:** 
+**B:** I mitt nästa projekt förväntar jag mig att vi tar Scrum ett steg längre än denna kurs, då våra POs var en del av gruppen samt att min roll som Scrum master var begränsad jämfört med hur den ska vara i ett riktigt projekt (kommunikationen mellan gruppen och PO gick exempelvis inte via Scrum master utan alla pratade med alla).
 
-**A->B:** 
+**A->B:** För att kunna hantera rollen som Scrum master mer effektivt i framtiden behöver jag läsa på mer specifikt vad en sådan person förväntas göra och att jag ser till att träna på de koncept som förväntas, t.ex. hur man sköter kommunikationen med POs på ett effektivt sätt. Dessutom hade mer teori kring användandet av scrum varit bra, då denna kursen var praktisk och simplifierad version av en fullskalig Scrum.
 
 ## What is my contribution towards the team’s deliveries?
-**A:** 
+**A:** Under hela kursens gång såg jag till att alla deadline hölls, att jag arbetade av bästa förmåga med de user stories som getts mig, men framför allt att jag dök upp på alla utspikade gruppmöten och var en aktiv del i alla diskussioner så att vi hela tiden finslipade på vår process och kunde leverera mer värde till våra POs.
 
-**B:** 
+**B:** I nästa projekt ska jag fortsätta vara aktiv i gruppmoment och arbeta för ett bättre och effektivare arbete, men framför allt vill jag kunna leverera fler user stories än tidigare så att det jag praktiskt levererar blir mer.
 
-**A->B:** 
+**A->B:** Genom att lära mig fler verktyg och programmeringsspråk kommer hastigheten i vad jag skapar bli högre. Utöver att lära mig detta behöver jag träna på att uppskatta hur mycket jag kan skapa under en sprint så att jag på ett effektivt sätt tar till mig inte mycket mer eller mindre än vad jag klarar av. För att bli bra på detta behöver jag se till att få mer praktisk erfarenhet av att koda olika uppgifter, vilket kan uppnås antingen via framtida projekt eller att koda vid sidan av studierna.
