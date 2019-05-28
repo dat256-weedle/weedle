@@ -33,6 +33,6 @@ Lastly as a sort of continuation of SCRUM I feel that I (and the rest of the gro
 ## What is my contribution towards the team’s deliveries?
 **A:** The last time I checked gitinspector I had more than 20-25% of the lines and whilst this doesn't necessarily reflect the amount of value provided to the product I feel that in this case they match up relatively well, I've spent the amount of time that the course and the group has expected of me (20 hours a week on average) and feel that I can be proud of my part in our final product. Me having some previous knowledge of the language and in general have quite a bit of experience with programming and software development but also thinking it is really fun, having helped me to reach this goal. 
 
-**B:** In the next project I want to keep 
+**B:** In the next project I want to keep doing my best and giving my all to develop a great product, mostly because programming is also a hobby of mine and I think it's fun to develop software of different kinds.
 
-**A->B:** 
+**A->B:** I feel that I already am where I want to be when it comes to help teams I'm deliver what we want to deliver. 
