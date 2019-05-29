@@ -114,7 +114,7 @@ Utöver det finns det mappar som heter group-reflections där de gruppreflektion
 
 ## 6. GitHub Wiki
 
-[https://github.com/dat256-weedle/weedle/wiki](github)
+[github](https://github.com/dat256-weedle/weedle/wiki)
 
 I projektets Wiki har vi sparat samtliga av gruppens mötesprotokoll samt API:er från både parkeringsbolag och kommunala parkeringsplatser i Göteborg.
 
