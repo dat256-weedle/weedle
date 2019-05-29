@@ -105,7 +105,8 @@ Det bör påpekas att vi gjorde en hel del par-programmering under kursens gång
 
 Vi har en documents mapp där alla relevanta dokument finns. I mappen finns följande dokument:
 
-BMC – Buisness model canvas  
+BMC – Buisness model canvas 
+Gitinspector - Där resultatet för gitinspector finns.
 mockup_digital – En första version på mockup  
 mockup_paper – En uppdaterad version på mockup som skapades på grund av upptäckta brister i tidigare mockup.  
 project_description – Beskrivning av projketet som gjordes i början på kursen.  
