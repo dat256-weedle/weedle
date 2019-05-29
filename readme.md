@@ -32,7 +32,7 @@ En websida kommer öppnas och en QR kod kommer visas efter några sekunder. På 
 
 ## 2. Tester (hur? vad? stats?)
 
-Testerna använder jest och har ett färdigt skript redo att köra testerna. Vi kollar coverage, vilka filer vi testar och vi har ett mål med att testa 70% av koden. Testerna är skrivna för att beskriva vad det testar och beskrivs `app\parkit\__test__`. För köra testerna efter att ha laddat ner programmet öppna mappen i en terminal eller ett av windows commandline verktyg
+Testerna använder jest och har ett färdigt skript redo att köra testerna. Vi kollar coverage, vilka filer vi testar och vi har ett mål med att testa 70% av koden. Testerna är skrivna för att beskriva vad det testar och beskrivs `app\parkit\__test__`. För att köra testerna efter att ha laddat ner programmet, öppna mappen i en terminal eller ett av windows commandline verktyg
 
 Skriv in följande kommando för att ändra den aktiva mappen.
 
