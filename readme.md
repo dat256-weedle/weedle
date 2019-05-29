@@ -16,7 +16,9 @@ Text
 Text
 
 ## 6. GitHub Wiki
-Text
+https://github.com/dat256-weedle/weedle/wiki
+
+I projektets Wiki har vi sparat samtliga av gruppens mötesprotokoll samt API:er från både parkeringsbolag och kommunala parkeringsplatser i Göteborg.
 
 ## 7. Prototyp
 Text
