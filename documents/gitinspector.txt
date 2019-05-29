@@ -1,0 +1,116 @@
+Statistical information for the repository 'weedle' was gathered on 2019/05/29.                                                                                                                                                                                                
+The following historical commit information, by author, was found:
+
+Author                     Commits    Insertions      Deletions    % of changes
+Eric Carlsson                   24           402            264            6.81
+Erik Johnsson                  103          2422           1120           36.21
+Midona                          36           852            396           12.76
+Oscar Östberg                    9           429             54            4.94
+Pontus Lindblom                 36           524            359            9.03
+Vidar Magnusson                 73          2072            787           29.23
+teifalsadi                       4            98              3            1.03
+
+Below are the number of rows from each author that have survived and are still intact in the current revision:
+
+Author                     Rows      Stability          Age       % in comments
+Eric Carlsson               218           54.2          1.2                0.00
+Erik Johnsson              1245           51.4          3.3                0.08
+Midona                      463           54.3          1.3                0.00
+Oscar Östberg               185           43.1          2.9                0.00
+Pontus Lindblom             129           24.6          2.1                0.00
+Vidar Magnusson            1463           70.6          2.3                0.00
+teifalsadi                   17           17.3          6.7                0.00
+
+The following history timeline has been gathered from the repository:
+
+Author                  2019W14    2019W15    2019W16    2019W17    2019W18    2019W19    2019W20    2019W21    2019W22 
+Eric Carlsson                                                  .                     .        -++         -+            
+Erik Johnsson                      ---++++   --++++++          .     ---+++  ---++++++     --++++          +            
+Midona                -++++++++         -+          .                                .   --++++++          +            
+Oscar Östberg                           ++                                           +         ++                       
+Pontus Lindblom                          +                         ---+++++          .       -+++          .   -----+++ 
+Vidar Magnusson                   --++++++          +  ---++++++                    ++    -++++++  ---++++++            
+teifalsadi                              ++                                                                              
+Modified Rows:              195       1070       1553        284        317       2286       2039       2017         21 
+
+No metrics violations were found in the repository.
+
+The following responsibilities, by author, were found in the current revision of the repository (comments are excluded from the line count, if possible):
+
+Eric Carlsson is mostly responsible for:
+    66 app/parkit/src/backend/store/Store.tsx
+    39 app/parkit/src/usage/userpage/PaymentInfo.tsx
+    27 app/parkit/src/backend/storage/Asyncstorage.tsx
+    25 app/parkit/src/usage/userpage/MyCars.tsx
+    20 app/parkit/src/usage/searchlist/SearchList.tsx
+    18 app/parkit/App.tsx
+     6 app/parkit/src/types.ts
+     4 app/parkit/src/common/logoloader/LogoLoader.tsx
+     3 app/parkit/src/usage/userpage/Email.tsx
+     3 app/parkit/src/usage/parking-session-history/ParkingHistory.tsx
+
+Erik Johnsson is mostly responsible for:
+   232 app/parkit/src/common/rentpage/RentPage.tsx
+   195 app/parkit/src/common/map/MapStyleNight.json
+   183 app/parkit/src/common/map/ParkingSpotMap.tsx
+   105 app/parkit/src/common/map/ParkingSpotMarker.tsx
+    74 app/parkit/src/backend/store/Store.tsx
+    69 app/parkit/src/usage/aboutpage/About.tsx
+    63 app/parkit/src/common/logoloader/LogoLoader.tsx
+    46 app/parkit/src/common/rentpage/RentButton.tsx
+    40 app/parkit/src/common/map/MapUtils.ts
+    39 app/parkit/src/common/map/ClusterMarker.tsx
+
+Midona is mostly responsible for:
+    48 app/parkit/src/usage/userpage/Email.tsx
+    40 app/parkit/src/common/parkingelement/ParkingElement.tsx
+    36 app/parkit/src/usage/userpage/CarElement.tsx
+    29 app/parkit/src/usage/userpage/MyCars.tsx
+    29 app/parkit/app.json
+    28 app/parkit/App.tsx
+    24 app/parkit/src/usage/userpage/Screen.tsx
+    24 app/parkit/src/common/rentpage/RentPage.tsx
+    24 app/parkit/jest.config.js
+    23 app/parkit/src/common/rentpage/RentButton.tsx
+
+Oscar Östberg is mostly responsible for:
+    45 app/parkit/src/usage/userpage/MyCars.tsx
+    41 app/parkit/src/usage/userpage/Email.tsx
+    31 app/parkit/src/backend/store/Store.tsx
+    24 app/parkit/src/usage/userpage/CarElement.tsx
+    18 app/parkit/src/common/parkingelement/ParkingElement.tsx
+    13 app/parkit/src/usage/userpage/Screen.tsx
+     8 app/parkit/src/backend/storage/Asyncstorage.tsx
+     4 app/parkit/__test__/common/ParkingElement.test.tsx
+     1 app/parkit/src/common/rentpage/RentPage.tsx
+
+Pontus Lindblom is mostly responsible for:
+    46 app/parkit/src/usage/menu/Menu.tsx
+    30 app/parkit/src/usage/userpage/User.tsx
+    22 app/parkit/src/usage/userpage/PaymentInfo.tsx
+    12 app/parkit/src/usage/list-pspots/PSpotsList.tsx
+     6 app/parkit/src/usage/userpage/Screen.tsx
+     5 app/parkit/src/backend/store/Store.tsx
+     2 app/parkit/App.tsx
+     1 app/parkit/src/usage/userpage/MyCars.tsx
+     1 app/parkit/src/usage/searchlist/SearchList.tsx
+     1 app/parkit/src/usage/parking-session-history/ParkingHistory.tsx
+
+Vidar Magnusson is mostly responsible for:
+   276 app/parkit/src/usage/parking-session-history/ParkingHistory.tsx
+   198 app/parkit/src/usage/searchlist/SearchList.tsx
+   180 app/parkit/src/backend/datagatherer/DataGatherer.tsx
+   120 app/parkit/src/common/rentpage/RentPage.tsx
+    95 app/parkit/src/usage/userpage/MyCars.tsx
+    90 app/parkit/src/backend/store/Store.tsx
+    69 app/parkit/__test__/common/Store.test.tsx
+    60 app/parkit/__test__/usage/ParkingHistory.test.tsx
+    43 app/parkit/src/common/map/ParkingSpotMap.tsx
+    43 app/parkit/__test__/common/PSpotsList.test.tsx
+
+teifalsadi is mostly responsible for:
+    11 app/parkit/src/common/rentpage/RentButton.tsx
+     2 app/parkit/src/common/rentpage/RentPage.tsx
+     2 app/parkit/src/common/map/ParkingSpotMap.tsx
+     2 app/parkit/src/backend/store/Store.tsx
+
