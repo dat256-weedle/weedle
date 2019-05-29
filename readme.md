@@ -1,24 +1,28 @@
 # README
 
-## An aggregate app to find parking in gothenburg.
+## 1. Hur man kör programmet
+Text
 
-## Debugging
+## 2. Tester (hur? vad? stats?)
+Text
 
-To run the debugger for the app follow these instructions
+## 3. ZenHub
+Text
 
-```terminal
-$ yarn start
-```
+## 4. gitinspector
+Text
 
-To install react-native with yarn run
+## 5. Documents
+Text
 
-```
-$ yarn global add expo-cli
-```
+## 6. GitHub Wiki
+Text
 
-If tslint is not working with Visual Studio Code a good bet is that tslint has a global yarn install which makes it fail silently.
+## 7. Prototyp
+Text
 
-```terminal
-$ yarn global remove tslint
-```
-=======
+## 8. Who's who
+Text
+
+## 9. Deadlines
+Text
