@@ -30,7 +30,7 @@ npm start
 
 En websida kommer öppnas och en QR kod kommer visas efter några sekunder. På iOS telefoner startar man kamera appen och skannar QR-koden så kommer applikationen starta, på Android startar man Expo och skannar QR-koden.
 
-## 2. Tester (hur? vad? stats?)
+## 2. Tester
 
 Testerna använder jest och har ett färdigt skript redo att köra testerna. Vi kollar coverage, vilka filer vi testar och vi har ett mål med att testa 70% av koden. Testerna är skrivna för att beskriva vad det testar och beskrivs `app\parkit\__test__`. För att köra testerna efter att ha laddat ner programmet, öppna mappen i en terminal eller ett av windows commandline verktyg
 
@@ -45,6 +45,8 @@ Skriv in följande kommando för att köra testerna med coverage.
 ```bash
 npm test --coverage
 ```
+
+Efter att ha skrivit kommondat bör följande resultat printas i terminalen.
 
 ```Jest
  PASS  __test__/backend/AsyncStorage.test.tsx
