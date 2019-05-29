@@ -23,8 +23,17 @@ I projektets Wiki har vi sparat samtliga av gruppens mötesprotokoll samt API:er
 ## 7. Prototyp
 Text
 
-## 8. Who's who
-Text
+## 8. Medlemmar av gruppen
+
+| Namn            | Github användarnamn | E-postadresser                                                               |
+| :-------------- | :------------------ | :--------------------------------------------------------------------------- |
+| Vidar Magnusson | ViddeM              | <vidar.halmstad@hotmail.com> <mvidar@student.chalmers.se>                    |
+| Erik Johnsson   | ChalmersSwexbe      | <erijohns@student.chalmers.se> <erik@erikjohnsson.se> <erijohns@hotmail.com> |
+| Eric Carlsson   | Ericlp              | <cirecirecire3@gmail.com> <caeric@student.chalmers.se>                       |
+| Pontus Lindblom | Praxzy              | <pontus.lindblom@hotmail.com> <ponlind@student.chalmers.se>                  |
+| Oscar Östberg   | Neoncove            | <oscost@student.chalmers.se>                                                 |
+| Adam Haux       | Midona-rhel         | <adam.haux@gmail.com>                                                        |
+| Teif Alsadi     | Teifalsadi          | <teif@student.chalmers.se>                                                   |
 
 ## 9. Deadlines
 Text
