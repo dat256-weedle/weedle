@@ -2,7 +2,7 @@
 
 ## 1. Hur man kör programmet
 
-För att köra programmet så krävs 2 beroenden, [Node.js](https://nodejs.org/en/download/) (med npm installerat) och [Expo på Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=sv) eller [Expo på App Store](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8). Efter att ha installerat följade beroenden kan man köra programmet efter några enkla kommandon. Öppna projekt mappen efter att ha laddat ner programmet i en terminal eller ett av windows commandline verktyg. Skriv in följande kommandon.
+För att köra programmet så krävs 2 beroenden, [Node.js](https://nodejs.org/en/download/) (under installationen behövs det även kryssas i att installera `npm`) och [Expo på Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=sv) eller [Expo på App Store](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8). Efter att ha installerat följade beroenden kan man köra programmet efter några enkla kommandon. Öppna projekt mappen efter att ha laddat ner programmet i en terminal eller ett av windows commandline verktyg. Skriv in följande kommandon.
 
 För att installera expo globalt i Node så behöver man köra följande kommando.
 
@@ -10,13 +10,13 @@ För att installera expo globalt i Node så behöver man köra följande kommand
 npm i -g expo-cli
 ```
 
-Ändra den aktiva mappen shell verktyget arbetar i genom att köra följande kommando.
+Ändra den aktiva mappen, shell verktyget arbetar igenom att köra följande kommando.
 
 ```bash
 cd app/parkit
 ```
 
-För att installera projektets lokala Node beroende behöver följande kommando köras.
+För att installera projektets lokala Node beroenden behöver följande kommando köras.
 
 ```bash
 npm i
@@ -32,7 +32,7 @@ En websida kommer öppnas och en QR kod kommer visas efter några sekunder. På 
 
 ## 2. Tester
 
-Testerna använder jest och har ett färdigt skript redo att köra testerna. Vi kollar coverage, vilka filer vi testar och vi har ett mål med att testa 70% av koden. Testerna är skrivna för att beskriva vad det testar och beskrivs `app\parkit\__test__`. För att köra testerna efter att ha laddat ner programmet, öppna mappen i en terminal eller ett av windows commandline verktyg
+Testerna använder jest och har ett färdigt skript redo att köra testerna. Vi kollar coverage samt vilka filer vi testar. Testerna är skrivna för att beskriva vad de testar och de finns under `app\parkit\__test__`. För köra testerna efter att ha laddat ner programmet öppna mappen i en terminal eller ett av windows commandline verktyg.
 
 Skriv in följande kommando för att ändra den aktiva mappen.
 
@@ -103,16 +103,19 @@ Det bör påpekas att vi gjorde en hel del par-programmering under kursens gång
 
 ## 5. Documents
 
-Vi har en documents mapp där alla relevanta dokument finns. I mappen finns följande dokument:
+- `BMC` – Buisness model canvas  
+- `mockup_digital` – En första version på mockup  
+- `mockup_paper` – En uppdaterad version på mockup som skapades på grund av upptäckta brister i tidigare mockup.   
+- `project_description` – Beskrivning av projketet som gjordes i början på kursen.    
+- `social_contract` – Det sociala kontraktet.  
+- `gitinspector` – Resultatet från gitinspector, se mer under rubriken "Gitinspektor". 
 
-BMC – Buisness model canvas 
-Gitinspector - Där resultatet för gitinspector finns.
-mockup_digital – En första version på mockup  
-mockup_paper – En uppdaterad version på mockup som skapades på grund av upptäckta brister i tidigare mockup.  
-project_description – Beskrivning av projketet som gjordes i början på kursen.  
-social_contract – Det sociala kontraktet.
+Utöver det finns det mappar 
+- `group-reflections` – mappen med alla våra group reflections. 
+- `invididual-reflections` – där de individuella reflektioner finns i mappar för de olika gruppmedlemmarna. 
+- `sprint-retrospective` – är alla sprint retrospectives finns.
+- `images` – finns vissa bilder som används i denna readme bland annat.
 
-Utöver det finns det mappar som heter group-reflections där de gruppreflektionerna för sprintarna finns. En mapp som heter invididual-reflections där de individuella reflektioner finns i mappar för de olika gruppmedlemmarna. En mapp som heter sprint-retrospective där alla sprint retrospecitvea finns samt en mapp som heter images där en bild som använts i read-me använts.
 
 ## 6. GitHub Wiki
 
