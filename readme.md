@@ -23,7 +23,7 @@ I projektets Wiki har vi sparat samtliga av gruppens mötesprotokoll samt API:er
 ## 7. Prototyp
 Text
 
-## 8. Medlemmar av gruppen
+## 8. Medlemmar av Weedle
 
 | Namn            | Github användarnamn | E-postadresser                                                               |
 | :-------------- | :------------------ | :--------------------------------------------------------------------------- |
