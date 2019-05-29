@@ -1,21 +1,21 @@
 ## Summering av sprinten
-Vad var bra med sprinten
-Börjar få en färdig produkt
-Fick bra input på user stories från handledare
-Fick mycket gjort; quality-of-life och features
-Bra tasks på storiesen
+Pga schemakrockar flyttades denna sprints retrospective ut till att genomföras på onsdag istället för ordinarie tid på måndagar.
 
-## Vad kan vi göra bättre i nästa sprint
-mer förbredda till demo, inga buggar och redo att visa
-sitta mer tillsammans, gemensam uteckling för att få en koherent produkt
-komma tid
-mer testing
+## Vad var bra med sprinten
+* Många problem fixades
+* Hög produktivitet
+
+## Vad kan vi göra bättre i en nästkommande sprint
+* Arbeta mer proaktivt för att förhindra buggar
+* Arbeta mer med att ta fram bug-user storiesen
+* Tuffare verifiering under sprint review för att fånga upp funktionella brister
+* Inte mergea in mycket samtidigt utan att mellan säkerställa funktionalitet
+
+
 Jämför estimate och actual velocity
-Estimate var 75, velocity blev 56.
+Estimate var 44, velocity blev 50.
 
 Sekreteraren summerar för gruppen det vi gått igenom
 
-## Vilka saker ska vi primärt fokusera på till nästa sprint
-mer förbredda till demo, inga buggar och redo att visa
-sitta mer tillsammans, gemensam uteckling för att få en koherent produkt
-mer testing
+## Vilka saker ska vi primärt fokusera på i en nästkommande sprint
+Ej applicerbar under omständigheterna
