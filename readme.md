@@ -172,3 +172,11 @@ Sprint 2: 6 Maj
 Sprint 3: 13 Maj  
 Sprint 4: 20 Maj  
 Sprint 5: 7 Juni (avslutande reflektionsrapport för hela kursen)
+
+## 10. Socialt kontrakt
+
+Under projektet har gruppen använt sig av ett socialt kontrakt som definierat hur saker som grupparbetet ska fungera, vilka kodkonventioner som ska följas samt vad vår "definition of done" var. Det sociala kontraktet går att hitta i `documents` mappen.
+
+## 11. Github repository
+
+[Länk](https://github.com/dat256-weedle/weedle) till gruppens github repository.
