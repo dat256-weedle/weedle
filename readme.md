@@ -166,7 +166,7 @@ Sprint 5: 31 Maj (avslutande reflektion för kursen där gruppmedlemmarna fick v
 Inga gruppreflektioner genomfördes för de två inledande veckorna  
 Sprint 1: 12 April
 
-#### Bytte deadline för grupp reflektioner till måndagar (den dag då sprinten avslutas)
+#### Bytte deadline för gruppreflektioner till måndagar (den dag då sprinten avslutas)
 
 Sprint 2: 6 Maj  
 Sprint 3: 13 Maj  
