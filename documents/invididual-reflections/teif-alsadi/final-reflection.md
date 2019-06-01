@@ -43,17 +43,17 @@ Om man upptäcker att någon inte förstår eller har mindre kunskap så är det
 **A->B:** Jag anser inte att det finns något gap mellan där jag är och där jag vill vara och därmed blir frågan inaktuell. 
 
 ## What is my contribution towards the team’s use of Scrum?
-**A:** 
+**A:** Jag har bidragit genom att först lära mig så mycket som möjligt om Scrum och sedan ta med mina kunskaper till gruppen för att kunna delta i diskussioner och processen. Jag har även varit med som utvecklare och vice produktägare och bidragit med att axla de rollerna.
 
-**B:** 
+**B:** I framtiden så kommer jag ha mer erfarenhet från Scrum från start vilket kommer göra att jag kan bidra ännu mer direkt. Jag hoppas även på att kunna bidra i andra roller så som t.ex. Scrum-master. 
 
-**A->B:**
+**A->B:** Genom att visa intresse och engagemang kan jag bidra till en framtida grupp samt eventuellt få rollen som Scrum-master. 
 
 ## What is my contribution towards the team’s deliveries?
 **A:** Jag har ständigt varit med och skrivit samt diskutterat fram olika dokument till inlämningar så som det sociala kontraktet, Business model canvas, team reflektions och slutrapport.
 Utöver det har jag deltagit på uppskattningsvis 95% av alla tillfällen vi som grupp har träffats och arbetat tillsammans för att t.ex. ha gruppmöten, förbereda nästa sprint samt summera tidigare sprint. 
-Jag har försökt vara påläst för att kunna bidra till gruppen. 
+Jag har försökt vara påläst för att kunna bidra till gruppen samt slutligen har jag även bidragit som utvecklare där jag varit med och gjort funktioner till applikationen. 
 
-**B:** 
+**B:** Målet är att bidra lite inom alla delar av projektet samt ta ett stort ansvar över delar där jag har mycket kunskap.
 
-**A->B:** 
+**A->B:** Målet uppnås genom att ständigt visa engagemang och intresse för att lära sig något nytt samt att vilja föra gruppen framåt. Genom att ta på sig ansvarsområden så blir det lättare att säkerställa att man kommer bidra till gruppen. 
