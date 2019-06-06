@@ -159,7 +159,7 @@ Sprint 1: 12 April
 Sprint 2: 6 Maj  
 Sprint 3: 13 Maj  
 Sprint 4: 20 Maj  
-Sprint 5: 31 Maj (avslutande reflektion för kursen där gruppmedlemmarna fick välja mellan att skriva om sista sprinten eller hela projektet)
+Sprint 5: 1 Juni (avslutande reflektion för kursen där gruppmedlemmarna fick välja mellan att skriva om sista sprinten eller hela projektet)
 
 ### Gruppreflektioner
 
